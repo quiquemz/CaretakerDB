@@ -2,10 +2,12 @@ require('dotenv').config();
 require('./server/db-conn');
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 // mount routes
 app.use('/api/contracts/', require('./server/routes/contracts-route'));

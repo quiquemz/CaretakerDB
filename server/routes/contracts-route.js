@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Contract = require('../models/Contract');
 
 router.get('/', (req, res, next) => {
-    Contract.find({}, (err, contracts) => {
+    Contract.find({zipCode: 02539}, (err, contracts) => {
         if (err) next(err);
         else res.json(contracts);
     });
