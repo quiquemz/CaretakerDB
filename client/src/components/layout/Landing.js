@@ -7,16 +7,15 @@ class Landing extends Component {
         <div className="row">
           <div className="col s12 center-align">
             <h4>
-              <b>Build</b> a login/auth app with the{" "}
-              <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
-              scratch
+              <b>Manage</b> all your caretaking needs in one easy to use applcation on {" "}
+              <span style={{ fontFamily: "monospace" }}>CaretakerDB</span>
             </h4>
             <p className="flow-text grey-text text-darken-1">
-              Create a (minimal) full-stack app with user authentication via
-              passport and JWTs
+              Use a simple and clear web app to manage and store your contracts of all your 
+              caretaking clients. Transform how you manage your clients.
             </p>
             <br />
-            <div className="col s6">
+            <div className="col s12">
               <Link
                 to="/register"
                 style={{
@@ -24,22 +23,9 @@ class Landing extends Component {
                   borderRadius: "3px",
                   letterSpacing: "1.5px"
                 }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                className="btn btn-large waves-effect waves-light green teal hoverable"
               >
-                Register
-              </Link>
-            </div>
-            <div className="col s6">
-              <Link
-                to="/login"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px"
-                }}
-                className="btn btn-large btn-flat waves-effect white black-text"
-              >
-                Log In
+                Sign up
               </Link>
             </div>
           </div>
