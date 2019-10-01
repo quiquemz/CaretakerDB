@@ -17,5 +17,9 @@ code {
 
 main {
   flex: 1 0 auto;
-  min-height: 100vh;
+  min-height: 80vh;
+}
+
+.navBarMain {
+  margin-bottom: 50px;
 }

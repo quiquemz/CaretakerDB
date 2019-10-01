@@ -178,7 +178,7 @@ export function Navbar(props) {
   );
 
   return (
-    <div className={classes.grow}>
+    <div className={classes.grow + " navBarMain"}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -207,6 +207,7 @@ export function Navbar(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          {props.auth.isAuthenticated ? <>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
@@ -216,7 +217,8 @@ export function Navbar(props) {
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton></>
+            : <></>}
             <IconButton
               edge="end"
               aria-label="account of current user"
