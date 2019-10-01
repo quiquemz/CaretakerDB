@@ -93,6 +93,7 @@ class Login extends Component {
           Sign in
         </Typography>
         <form className={classes.form} onSubmit={this.onSubmit} noValidate>
+            <span>{errors.password}</span>
           <TextField
             variant="outlined"
             margin="normal"
