@@ -6,6 +6,12 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Link from '@material-ui/core/Link';
 import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
@@ -16,6 +22,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { logoutUser } from "../../actions/authActions";
@@ -80,15 +90,71 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
 }));
 
 export function Navbar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [state, setState] = React.useState({
+    top: false
+  });
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const toggleDrawer = (side, open) => event => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [side]: open });
+  };
+
+  const sideList = side => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      
+      {props.auth.isAuthenticated ? <><List>
+        {['Home', 'Dashboard'].map((text, index) => (
+          <ListItem button key={text}>
+              <ListItemIcon>{text.includes('Home') ? <HomeIcon /> : <ViewModuleIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}</List><Divider /></> : <></>}
+      
+      <List>
+          {props.auth.isAuthenticated ? <>
+          <ListItem button key="Profile">
+            <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+            <ListItemText primary="Profile" />
+          </ListItem>
+          <ListItem button key="Log out" onClick={onLogoutClick}>
+            <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+            <ListItemText primary="Log out" />
+          </ListItem></>
+          :<>
+          <ListItem button key="Log in">
+            <ListItemIcon>{}</ListItemIcon>
+            <ListItemText primary="Log in" />
+          </ListItem>
+          <ListItem button key="Register">
+            <ListItemIcon>{}</ListItemIcon>
+            <ListItemText primary="Register" />
+          </ListItem></>}
+      </List>
+    </div>
+  );
 
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
@@ -179,6 +245,13 @@ export function Navbar(props) {
 
   return (
     <div className={classes.grow + " navBarMain"}>
+        <SwipeableDrawer
+            open={state.left}
+            onClose={toggleDrawer('left', false)}
+            onOpen={toggleDrawer('left', true)}
+        >
+            {sideList('left')}
+        </SwipeableDrawer>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -186,10 +259,11 @@ export function Navbar(props) {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={toggleDrawer('left', true)}
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h6" noWrap to="/">
             CaretakerDB
           </Typography>
           <div className={classes.search}>
