@@ -9,12 +9,15 @@ module.exports = function validateRegisterInput(data) {
     data.password = !isEmpty(data.password) ? data.password : "";
     data.password2 = !isEmpty(data.password2) ? data.password2 : "";
     // Name checks
-    if (Validator.isEmpty(data.name)) {
-        errors.name = "Name field is required";
+    if (Validator.isEmpty(data.firstName)) {
+        errors.firstName = "First name field is required";
+    }
+    if (Validator.isEmpty(data.lastName)) {
+        errors.lastName = "Last name field is required";
     }
     // company checks
     if (Validator.isEmpty(data.companyName)) {
-        errors.companyName = "Name field is required";
+        errors.companyName = "Company field is required";
     }
     // Email checks
     if (Validator.isEmpty(data.email)) {
