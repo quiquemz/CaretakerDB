@@ -103,7 +103,8 @@ export function Navbar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [state, setState] = React.useState({
-    top: false
+    top: false,
+    open: false
   });
 
   const isMenuOpen = Boolean(anchorEl);

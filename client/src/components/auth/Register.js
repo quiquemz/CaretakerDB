@@ -110,7 +110,7 @@ class Register extends Component {
                 <Typography component="h1" variant="h5">
                 Sign up
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} onSubmit={this.onSubmit} noValidate>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                     <TextField
@@ -153,6 +153,20 @@ class Register extends Component {
                         onChange={this.onChange}
                         value={this.state.email}
                         error={errors.email}
+                    />
+                    </Grid>
+                    <Grid item xs={12}>
+                    <TextField
+                        variant="outlined"
+                        required
+                        fullWidth
+                        id="companyName"
+                        label="Company Name"
+                        name="companyName"
+                        autoComplete="companyName"
+                        onChange={this.onChange}
+                        value={this.state.companyName}
+                        error={errors.companyName}
                     />
                     </Grid>
                     <Grid item xs={12}>
