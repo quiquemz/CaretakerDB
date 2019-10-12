@@ -214,6 +214,7 @@ export function Navbar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      {props.auth.isAuthenticated ? <>
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
@@ -241,6 +242,16 @@ export function Navbar(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      </> : <>
+      <MenuItem>
+        <IconButton aria-label="show 11 new notifications" color="inherit">
+          <Badge color="secondary">
+            <AccountCircle />
+          </Badge>
+        </IconButton>
+        <p>Log in</p>
+      </MenuItem>
+      </>}
     </Menu>
   );
 
