@@ -136,20 +136,35 @@ export function Navbar(props) {
       
       <List>
           {props.auth.isAuthenticated ? <>
-          <ListItem button key="Profile">
+          <ListItem 
+            button 
+            key="Profile"
+            component="a"
+            href="/profile">
             <ListItemIcon><AccountCircleIcon /></ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-          <ListItem button key="Log out" onClick={onLogoutClick}>
+          <ListItem 
+          button 
+          key="Log out" 
+          onClick={onLogoutClick}>
             <ListItemIcon><ExitToAppIcon /></ListItemIcon>
             <ListItemText primary="Log out" />
           </ListItem></>
           :<>
-          <ListItem button key="Log in">
+          <ListItem 
+          button 
+          key="Log in"
+          component="a"
+          href="/login">
             <ListItemIcon>{}</ListItemIcon>
             <ListItemText primary="Log in" />
           </ListItem>
-          <ListItem button key="Register">
+          <ListItem 
+          button 
+          key="Register"
+          component="a"
+          href="/register">
             <ListItemIcon>{}</ListItemIcon>
             <ListItemText primary="Register" />
           </ListItem></>}
@@ -193,12 +208,12 @@ export function Navbar(props) {
     >
       {props.auth.isAuthenticated ?
       <>
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} component="a" href="/profile">Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose} component="a" href="/account">My account</MenuItem>
       <MenuItem onClick={onLogoutClick}>Log out</MenuItem>
       </>
       :
-      <MenuItem onClick={handleMenuClose}><Link href="/login">Log in</Link></MenuItem> 
+      <MenuItem onClick={handleMenuClose} component="a" href="/login">Log in</MenuItem> 
       }
     </Menu>
   );
@@ -216,22 +231,22 @@ export function Navbar(props) {
     >
       {props.auth.isAuthenticated ? <>
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+        <IconButton aria-label="show 1 new mails" color="inherit">
+          <Badge badgeContent={1} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+        <IconButton aria-label="show 1 new notifications" color="inherit">
+          <Badge badgeContent={1} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleProfileMenuOpen} component="a" href="/profile">
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -243,8 +258,8 @@ export function Navbar(props) {
         <p>Profile</p>
       </MenuItem>
       </> : <>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+      <MenuItem component="a" href="/login">
+        <IconButton aria-label="show 1 new notifications" color="inherit">
           <Badge color="secondary">
             <AccountCircle />
           </Badge>
@@ -294,13 +309,13 @@ export function Navbar(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
           {props.auth.isAuthenticated ? <>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+            <IconButton aria-label="show 1 new mails" color="inherit">
+              <Badge badgeContent={1} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+            <IconButton aria-label="show 1 new notifications" color="inherit">
+              <Badge badgeContent={1} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton></>
