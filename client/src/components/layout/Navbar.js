@@ -127,13 +127,21 @@ export function Navbar(props) {
     >
       
       {props.auth.isAuthenticated ? <><List>
-        {['Home', 'Dashboard'].map((text, index) => (
-          <ListItem button key={text}>
-              <ListItemIcon>{text.includes('Home') ? <HomeIcon /> : <ViewModuleIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+          <ListItem button
+            key="Home"
+            component="a"
+            href="/">
+              <ListItemIcon><HomeIcon /></ListItemIcon>
+              <ListItemText primary="Home" />
           </ListItem>
-        ))}</List><Divider /></> : <></>}
-      
+          <ListItem button
+            key="Dashboard"
+            component="a"
+            href="/dashboard">
+            <ListItemIcon><ViewModuleIcon /></ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+          </List><Divider /></> : <></>}
       <List>
           {props.auth.isAuthenticated ? <>
           <ListItem 
@@ -160,14 +168,15 @@ export function Navbar(props) {
             <ListItemIcon>{}</ListItemIcon>
             <ListItemText primary="Log in" />
           </ListItem>
-          <ListItem 
+          {/* <ListItem 
           button 
           key="Register"
           component="a"
           href="/register">
             <ListItemIcon>{}</ListItemIcon>
             <ListItemText primary="Register" />
-          </ListItem></>}
+          </ListItem> */}
+          </>}
       </List>
     </div>
   );
