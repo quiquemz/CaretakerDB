@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { Container } from "@material-ui/core";
+import Skeleton from '@material-ui/lab/Skeleton';
+
 class Dashboard extends Component {
     onLogoutClick = e => {
         e.preventDefault();
@@ -10,31 +13,11 @@ class Dashboard extends Component {
     render() {
     const { user } = this.props.auth;
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
-          <div className="col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.firstName}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into the {" "}
-                <span style={{ fontFamily: "monospace" }}>CaretakerDB</span> app 👏
-              </p>
-            </h4>
-            <button
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem"
-              }}
-              onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable green"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
+      <Container>
+          <h1>Welcome, {user.firstName}.</h1>
+          <h4>This is the dashboard, you can find everything related to the management of your caretaking contracts here.</h4>
+          <Skeleton />
+      </Container>
     );
   }
 }
