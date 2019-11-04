@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const ContractSchema = mongoose.Schema({
+    userId: String,
     season: String,
     price: Number,
     additionalCosts: Number,

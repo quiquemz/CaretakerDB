@@ -87,6 +87,10 @@ router.post("/login", (req, res) => {
               });
             }
           );
+          Contract.find({userId: user.id}, (err, contracts) => {
+            if (err) next(err);
+            else res.json(contracts);
+          });
         } else {
           return res
             .status(400)

@@ -2,21 +2,53 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { Container } from "@material-ui/core";
+import Contract from "./Contract";
+import { Container, Grid } from "@material-ui/core";
 import Skeleton from '@material-ui/lab/Skeleton';
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contracts: [],
+    };
+  }
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
     };
+    componentDidMount() {
+      fetch('/contracts/' + this.props.auth.user.id)
+        .then(response => response.json())
+        .then(data => { 
+          this.setState({ contracts: data });
+          console.log(data);
+        });
+    };
     render() {
     const { user } = this.props.auth;
+    const { contracts } = this.state;
     return (
       <Container>
+        { user.firstName ? 
           <h1>Welcome, {user.firstName}.</h1>
+          :
+          <h1>Welcome to the Dashboard!</h1>
+        }
           <h4>This is the dashboard, you can find everything related to the management of your caretaking contracts here.</h4>
-          <Skeleton />
+          { contracts ?
+          <Grid container spacing={3}> {
+          contracts.map((contract) =>
+          <Grid item xs={6} sm={3}>
+            <Contract contract={contract} />
+            </Grid>
+          )
+          }
+          </Grid>
+          :
+          <Contract loading/>
+          }
+          
       </Container>
     );
   }

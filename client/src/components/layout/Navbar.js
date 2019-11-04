@@ -240,16 +240,16 @@ export function Navbar(props) {
     >
       {props.auth.isAuthenticated ? <>
       <MenuItem>
-        <IconButton aria-label="show 1 new mails" color="inherit">
-          <Badge badgeContent={1} color="secondary">
+        <IconButton aria-label="show 0 new mails" color="inherit">
+          <Badge badgeContent={0} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 1 new notifications" color="inherit">
-          <Badge badgeContent={1} color="secondary">
+        <IconButton aria-label="show 0 new notifications" color="inherit">
+          <Badge badgeContent={0} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -268,7 +268,7 @@ export function Navbar(props) {
       </MenuItem>
       </> : <>
       <MenuItem component="a" href="/login">
-        <IconButton aria-label="show 1 new notifications" color="inherit">
+        <IconButton aria-label="show 0 new notifications" color="inherit">
           <Badge color="secondary">
             <AccountCircle />
           </Badge>
@@ -318,13 +318,13 @@ export function Navbar(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
           {props.auth.isAuthenticated ? <>
-            <IconButton aria-label="show 1 new mails" color="inherit">
-              <Badge badgeContent={1} color="secondary">
+            <IconButton aria-label="show 0 new mails" color="inherit">
+              <Badge badgeContent={0} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="show 1 new notifications" color="inherit">
-              <Badge badgeContent={1} color="secondary">
+            <IconButton aria-label="show 0 new notifications" color="inherit">
+              <Badge badgeContent={0} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton></>
