@@ -9,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import AddIcon from '@material-ui/icons/Add';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -133,6 +134,13 @@ export function Navbar(props) {
             href="/">
               <ListItemIcon><HomeIcon /></ListItemIcon>
               <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button
+            key="New contract"
+            component="a"
+            href="/new-contract">
+              <ListItemIcon><AddIcon /></ListItemIcon>
+              <ListItemText primary="New contract" />
           </ListItem>
           <ListItem button
             key="Dashboard"
