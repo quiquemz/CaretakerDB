@@ -15,6 +15,7 @@ import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import NewContract from "./components/dashboard/NewContract";
+import Profile from "./components/account/Profile";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -48,6 +49,7 @@ class App extends Component {
                <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute exact path="/new-contract" component={NewContract} />
+                <PrivateRoute exact path="/profile" component={Profile} />
               </Switch>
             </main>
             <StickyFooter />
