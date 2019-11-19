@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Contract from "./Contract";
 import { Container, Grid } from "@material-ui/core";
-import Skeleton from '@material-ui/lab/Skeleton';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -33,9 +32,9 @@ class Dashboard extends Component {
         { user.firstName ? 
           <h1>Welcome, {user.firstName}.</h1>
           :
-          <h1>Welcome to the Dashboard!</h1>
+          <h1>Welcome to your Dashboard!</h1>
         }
-          <h4>This is the dashboard, you can find everything related to the management of your caretaking contracts here.</h4>
+          <p>This is the dashboard, you can find everything related to the management of your caretaking contracts here.</p>
           { contracts ?
           <Grid container spacing={3}> {
           contracts.map((contract) =>

@@ -23,3 +23,16 @@ main {
 .navBarMain {
   margin-bottom: 50px;
 }
+
+.navBarLogo {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.landingPageLogo {
+  justify-content: center;
+}
+
+.landingPageParagraph {
+  text-align: justify;
+}

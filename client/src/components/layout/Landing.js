@@ -1,37 +1,55 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-class Landing extends Component {
-  render() {
-    return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
-          <div className="col s12 center-align">
-            <h4>
-              <b>Manage</b> all your caretaking needs in one easy to use applcation on {" "}
-              <span style={{ fontFamily: "monospace" }}>CaretakerDB</span>
-            </h4>
-            <p className="flow-text grey-text text-darken-1">
+import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import { Typography, Box, Grid } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import MainLogo from "./main_logo.png";
+import LandingLogo from "./long_logo_landing.png";
+import DashboardSS from "./dashboard_ss.png";
+
+export function Landing(props) {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container fixed>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="flex-start"
+          spacing={3}
+        >
+          <Grid container item xs={6}>
+            <img src={LandingLogo} className="landingPageLogo" width="100%" />
+            <Typography component="div">
+            <p className="landingPageParagraph">
               Use a simple and clear web app to manage and store your contracts of all your 
-              caretaking clients. Transform how you manage your clients.
+              caretaking clients. Transform how you manage your properties and simplify the process, making your and their lives easier.
             </p>
-            <br />
-            <div className="col s12">
-              <Link
-                to="/register"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px"
-                }}
-                className="btn btn-large waves-effect waves-light green teal hoverable"
-              >
-                Sign up
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+            <Button variant="contained" to="/register">
+              Sign up
+            </Button>
+            </Typography>
+          </Grid>
+          <Grid container item xs={6} justify="center">
+            <Box boxShadow={3} width="80%">
+              <img src={DashboardSS} width="100%" />
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+    </React.Fragment>
+  );
 }
-export default Landing;
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+export default connect(
+  mapStateToProps,
+)(withRouter(Landing));
