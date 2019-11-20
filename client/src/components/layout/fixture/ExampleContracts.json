@@ -1,0 +1,260 @@
+[
+    {
+        "userId": "",
+        "season": "",
+        "price": 0,
+        "additionalCosts": 0,
+        "additionalCostsDetails": "",
+        "currentOwed": 0,
+        "dateCreated": "",
+        "location": {
+            "street": "123 Dance St",
+            "city": "New York",
+            "zipCode": "55555",
+            "state": "NY"
+
+        },
+        "owner": {
+            "firstName": "John",
+            "lastName": "Hancock",
+            "plowing": false,
+            "address": {
+                "street": "String",
+                "city": "String",
+                "zipCode": "String",
+                "state": "String"
+            },
+            "homePhone": "String",
+            "officePhone": "String",
+            "otherPhone": "String",
+            "cellPhone": "String",
+            "repToNotify": "String",
+            "repAddress": {
+                "street": "String",
+                "city": "String",
+                "zipCode": "String",
+                "state": "String"
+            },
+            "repPhone": "String",
+            "repSecondPhone": "String",
+            "alarmCode": "String",
+            "additional": "String"
+        },
+        "services": {
+            "irrigation": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "plumber": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "electrician": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "carpenter": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "appliance": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "furnace": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "cleaner": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "boatsAndDocks": {
+                "contact": "String",
+                "phone": "String"
+            }
+        },
+        "special": {
+            "outsideShower": false,
+            "outsideFaucet": false,
+            "outsideSpa": false,
+            "other": "String"
+        },
+        "terms": {
+            "date": "Date",
+            "signed": "String"
+        }
+    },
+    {
+        "userId": "",
+        "season": "",
+        "price": 0,
+        "additionalCosts": 0,
+        "additionalCostsDetails": "",
+        "currentOwed": 0,
+        "dateCreated": "",
+        "location": {
+            "street": "100 Clean St",
+            "city": "Boston",
+            "zipCode": "01234",
+            "state": "MA"
+
+        },
+        "owner": {
+            "firstName": "Desean",
+            "lastName": "Jackson",
+            "plowing": false,
+            "address": {
+                "street": "String",
+                "city": "String",
+                "zipCode": "String",
+                "state": "String"
+            },
+            "homePhone": "String",
+            "officePhone": "String",
+            "otherPhone": "String",
+            "cellPhone": "String",
+            "repToNotify": "String",
+            "repAddress": {
+                "street": "String",
+                "city": "String",
+                "zipCode": "String",
+                "state": "String"
+            },
+            "repPhone": "String",
+            "repSecondPhone": "String",
+            "alarmCode": "String",
+            "additional": "String"
+        },
+        "services": {
+            "irrigation": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "plumber": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "electrician": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "carpenter": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "appliance": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "furnace": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "cleaner": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "boatsAndDocks": {
+                "contact": "String",
+                "phone": "String"
+            }
+        },
+        "special": {
+            "outsideShower": false,
+            "outsideFaucet": false,
+            "outsideSpa": false,
+            "other": "String"
+        },
+        "terms": {
+            "date": "Date",
+            "signed": "String"
+        }
+    },
+    {
+        "userId": "",
+        "season": "",
+        "price": 0,
+        "additionalCosts": 0,
+        "additionalCostsDetails": "",
+        "currentOwed": 0,
+        "dateCreated": "",
+        "location": {
+            "street": "1 Time Ave",
+            "city": "San Francisco",
+            "zipCode": "43210",
+            "state": "CA"
+
+        },
+        "owner": {
+            "firstName": "Jose",
+            "lastName": "Cuervo",
+            "plowing": false,
+            "address": {
+                "street": "String",
+                "city": "String",
+                "zipCode": "String",
+                "state": "String"
+            },
+            "homePhone": "String",
+            "officePhone": "String",
+            "otherPhone": "String",
+            "cellPhone": "String",
+            "repToNotify": "String",
+            "repAddress": {
+                "street": "String",
+                "city": "String",
+                "zipCode": "String",
+                "state": "String"
+            },
+            "repPhone": "String",
+            "repSecondPhone": "String",
+            "alarmCode": "String",
+            "additional": "String"
+        },
+        "services": {
+            "irrigation": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "plumber": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "electrician": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "carpenter": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "appliance": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "furnace": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "cleaner": {
+                "contact": "String",
+                "phone": "String"
+            },
+            "boatsAndDocks": {
+                "contact": "String",
+                "phone": "String"
+            }
+        },
+        "special": {
+            "outsideShower": false,
+            "outsideFaucet": false,
+            "outsideSpa": false,
+            "other": "String"
+        },
+        "terms": {
+            "date": "Date",
+            "signed": "String"
+        }
+    }
+]

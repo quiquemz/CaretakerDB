@@ -6,10 +6,13 @@ import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import MainLogo from "./main_logo.png";
-import LandingLogo from "./long_logo_landing.png";
-import DashboardSS from "./dashboard_ss.png";
+import LandingLogo from "./img/long_logo_landing.png";
+import DashboardSS from "./img/dashboard_ss.png";
 import Contract from "../dashboard/Contract";
+import ExampleContracts from "./fixture/ExampleContracts.json";
+import boston from "./img/boston.jpg";
+import new_york from "./img/new_york.jpg";
+import sf from "./img/sf.jpg";
 
 const exampleContracts = [];
 
@@ -33,14 +36,14 @@ export function Landing(props) {
         justify="center"
         alignItems="flex-start"
         spacing={8}>
-          <Grid item xs={3} sm={3}>
-            <Contract loading/>
+          <Grid item xs={6} sm={3}>
+            <Contract imageUrl={new_york} contract={ExampleContracts[0]} />
           </Grid>
-          <Grid item xs={3} sm={3}>
-            <Contract loading/>
+          <Grid item xs={6} sm={3}>
+            <Contract imageUrl={boston} contract={ExampleContracts[1]} />
           </Grid>
-          <Grid item xs={3} sm={3}>
-            <Contract loading/>
+          <Grid item xs={6} sm={3}>
+            <Contract imageUrl={sf} contract={ExampleContracts[2]} />
           </Grid>
         </Grid>
         <Grid

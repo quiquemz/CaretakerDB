@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 class Contract extends Component {
     render() {
     const { loading = false } = this.props;
+    const { imageUrl } = this.props;
     const { contract } = this.props;     
     return (
         <Card style={{maxWidth: 345}} margin={2}>
@@ -39,12 +40,11 @@ class Contract extends Component {
       {loading ? (
         <Skeleton variant="rect" height={190} />
       ) : (
-        // <CardMedia
-        //   className={classes.media}
-        //   image="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512"
-        //   title="Ted talk"
-        // />
-        <Skeleton variant="rect" height={190} />
+        <CardMedia
+          height={190}
+          image={imageUrl}
+          title={contract.location.city}
+        />
       )}
 
       <CardContent>

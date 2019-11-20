@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Link from '@material-ui/core/Link';
-import Logo from "./long_logo_white.png";
+import Logo from "./img/long_logo_white.png";
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
