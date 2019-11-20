@@ -9,12 +9,40 @@ import PropTypes from "prop-types";
 import MainLogo from "./main_logo.png";
 import LandingLogo from "./long_logo_landing.png";
 import DashboardSS from "./dashboard_ss.png";
+import Contract from "../dashboard/Contract";
+
+const exampleContracts = [];
 
 export function Landing(props) {
   return (
     <React.Fragment>
       <CssBaseline />
       <Container fixed>
+        <Grid 
+        container 
+        direction="column"
+        justify="flex-start"
+        alignItems="center">
+          <Grid item>
+            <img src={LandingLogo} className="landingPageLogo" width="80%" />
+          </Grid>
+        </Grid>
+        <Grid 
+        container 
+        direction="row"
+        justify="center"
+        alignItems="flex-start"
+        spacing={8}>
+          <Grid item xs={3} sm={3}>
+            <Contract loading/>
+          </Grid>
+          <Grid item xs={3} sm={3}>
+            <Contract loading/>
+          </Grid>
+          <Grid item xs={3} sm={3}>
+            <Contract loading/>
+          </Grid>
+        </Grid>
         <Grid
           container
           direction="row"
@@ -22,8 +50,7 @@ export function Landing(props) {
           alignItems="flex-start"
           spacing={3}
         >
-          <Grid container item xs={6}>
-            <img src={LandingLogo} className="landingPageLogo" width="100%" />
+          <Grid item xs={6}>
             <Typography component="div">
             <p className="landingPageParagraph">
               Use a simple and clear web app to manage and store your contracts of all your 
@@ -34,10 +61,8 @@ export function Landing(props) {
             </Button>
             </Typography>
           </Grid>
-          <Grid container item xs={6} justify="center">
-            <Box boxShadow={3} width="80%">
-              <img src={DashboardSS} width="100%" />
-            </Box>
+          <Grid item xs={6} spacing={2}>
+          <img src={DashboardSS} width="100%" />
           </Grid>
         </Grid>
       </Container>

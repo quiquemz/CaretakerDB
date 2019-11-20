@@ -333,7 +333,7 @@ export function Navbar(props) {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap to="/">
-              <img src={Logo} height={50} width={150} className="navBarLogo" />
+              <img src={Logo} height={35} className="navBarLogo" />
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
