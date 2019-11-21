@@ -39,13 +39,13 @@ class Contract extends Component {
       />
       {loading ? (
         <Skeleton variant="rect" height={190} />
-      ) : (
+      ) : ( imageUrl ? (
         <CardMedia
           height={190}
-          image={imageUrl}
-          title={contract.location.city}
-        />
-      )}
+          title={contract.location.city}>
+          <img src={imageUrl} height={190} />
+        </CardMedia>
+      ) : (<Skeleton variant="rect" height={190} />))}
 
       <CardContent>
         {loading ? (
@@ -56,7 +56,7 @@ class Contract extends Component {
         ) : (
           <Typography variant="body2" color="textSecondary" component="p">
             {
-              "Why First Minister of Scotland Nicola Sturgeon thinks GDP is the wrong measure of a country's success:"
+              `${contract.location.street}, ${contract.location.city}, ${contract.location.state} ${contract.location.zipCode}`
             }
           </Typography>
         )}
