@@ -29,31 +29,9 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import LockIcon from '@material-ui/icons/Lock';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { logoutUser } from "../../actions/authActions";
-import red from "@material-ui/core/colors/red";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
-
-// All the following keys are optional, as default values are provided.
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#009688',
-    },
-    secondary: {
-      main: '#263238',
-    },
-    error: red,
-    // Used by `getContrastText()` to maximize the contrast between the background and
-    // the text.
-    contrastThreshold: 3,
-    // Used to shift a color's luminance by approximately
-    // two indexes within its tonal palette.
-    // E.g., shift from Red 500 to Red 300 or Red 700.
-    tonalOffset: 0.2,
-  },
-});
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -153,13 +131,6 @@ export function Navbar(props) {
       
       {props.auth.isAuthenticated ? <><List>
           <ListItem button
-            key="Home"
-            component="a"
-            href="/">
-              <ListItemIcon><HomeIcon /></ListItemIcon>
-              <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem button
             key="New contract"
             component="a"
             href="/new-contract">
@@ -192,12 +163,19 @@ export function Navbar(props) {
             <ListItemText primary="Log out" />
           </ListItem></>
           :<>
+          <ListItem button
+            key="Home"
+            component="a"
+            href="/">
+              <ListItemIcon><HomeIcon /></ListItemIcon>
+              <ListItemText primary="Home" />
+          </ListItem>
           <ListItem 
           button 
           key="Log in"
           component="a"
           href="/login">
-            <ListItemIcon>{}</ListItemIcon>
+            <ListItemIcon><LockIcon /></ListItemIcon>
             <ListItemText primary="Log in" />
           </ListItem>
           {/* <ListItem 
@@ -302,7 +280,7 @@ export function Navbar(props) {
       <MenuItem component="a" href="/login">
         <IconButton aria-label="show 0 new notifications" color="inherit">
           <Badge color="secondary">
-            <AccountCircle />
+            <LockIcon />
           </Badge>
         </IconButton>
         <p>Log in</p>
@@ -312,7 +290,6 @@ export function Navbar(props) {
   );
 
   return (
-    <ThemeProvider theme={theme}>
       <div className={classes.grow + " navBarMain"}>
         <SwipeableDrawer
             open={state.left}
@@ -389,7 +366,6 @@ export function Navbar(props) {
         {renderMobileMenu}
         {renderMenu}
       </div>
-    </ThemeProvider>
   );
 }
 Navbar.propTypes = {

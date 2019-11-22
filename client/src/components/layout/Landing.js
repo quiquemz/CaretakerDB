@@ -2,7 +2,9 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { Typography, Box, Grid } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import SendIcon from '@material-ui/icons/Send';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -10,13 +12,20 @@ import LandingLogo from "./img/long_logo_landing.png";
 import DashboardSS from "./img/dashboard_ss.png";
 import Contract from "../dashboard/Contract";
 import ExampleContracts from "./fixture/ExampleContracts.json";
-import boston from "./img/boston.jpg";
-import new_york from "./img/new_york.jpg";
+import { makeStyles } from '@material-ui/core/styles';
 import sf from "./img/sf.jpg";
 
-const exampleContracts = [];
+const useStyles = makeStyles(theme => ({
+  margin: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginLeft: theme.spacing(1),
+  },
+}));
 
 export function Landing(props) {
+  const classes = useStyles();
   return (
     <React.Fragment>
       <CssBaseline />
@@ -24,27 +33,49 @@ export function Landing(props) {
         <Grid 
         container 
         direction="column"
-        justify="flex-start"
-        alignItems="center">
-          <Grid item>
-            <img src={LandingLogo} className="landingPageLogo" width="80%" />
+        justify="center"
+        alignItems="center"
+        spacing={2}>
+          <Grid item xs={12} sm={6} justify="center">
+            <Typography variant="h1" color="secondary" align="center">
+                <strong>Caretaking</strong>
+            </Typography>
+            <Typography variant="h1" color="secondary" align="center" gutterBottom>
+                <strong>Made Easy</strong>
+            </Typography>
+            <Typography align="center" gutterBottom>
+              Take care of all your caretaking and property management needs without worrying about billing, mailing or managing them.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          direction="column"
+          justify="flex-start"
+          alignItems="center"
+          spacing={0}>
+          <Grid item xs={12} justify="center">
+            <Typography align="center">
+              <Fab variant="contained" color="primary" className={classes.margin} aria-label="add" href="/register">
+                Get started
+                <SendIcon className={classes.extendedIcon} />
+              </Fab>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} justify="flex-start">
+            <Typography variant="caption">
+              (Try free up to 3 properties)
+            </Typography>
           </Grid>
         </Grid>
         <Grid 
         container 
-        direction="row"
-        justify="center"
-        alignItems="flex-start"
-        spacing={8}>
-          <Grid item xs={6} sm={3}>
-            <Contract imageUrl={new_york} contract={ExampleContracts[0]} />
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Contract imageUrl={boston} contract={ExampleContracts[1]} />
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Contract imageUrl={sf} contract={ExampleContracts[2]} />
-          </Grid>
+        direction="column"
+        alignItems="center"
+        spacing={2}>
+          <Box m={18}>
+            <ExpandMoreIcon fontSize="large" color="secondary" />
+          </Box>
         </Grid>
         <Grid
           container
@@ -53,19 +84,10 @@ export function Landing(props) {
           alignItems="flex-start"
           spacing={3}
         >
-          <Grid item xs={6}>
-            <Typography component="div">
-            <p className="landingPageParagraph">
-              Use a simple and clear web app to manage and store your contracts of all your 
-              caretaking clients. Transform how you manage your properties and simplify the process, making your and their lives easier.
-            </p>
-            <Button variant="contained" to="/register">
-              Sign up
-            </Button>
-            </Typography>
-          </Grid>
-          <Grid item xs={6} spacing={2}>
-          <img src={DashboardSS} width="100%" />
+          <Grid item xs={12} spacing={2}>
+            <Box boxShadow={3}>
+              <img src={DashboardSS} width="100%" />
+            </Box>
           </Grid>
         </Grid>
       </Container>

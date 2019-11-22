@@ -41,9 +41,8 @@ class Contract extends Component {
         <Skeleton variant="rect" height={190} />
       ) : ( imageUrl ? (
         <CardMedia
-          height={190}
           title={contract.location.city}>
-          <img src={imageUrl} height={190} />
+          <img src={imageUrl} width="100%" />
         </CardMedia>
       ) : (<Skeleton variant="rect" height={190} />))}
 

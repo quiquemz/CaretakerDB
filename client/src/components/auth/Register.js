@@ -90,12 +90,18 @@ class Register extends Component {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                Sign up
-                </Typography>
+                <Grid container alignContent="center" direction="column">
+                  <Grid item xs={12} sm={6}>
+                    <Avatar className={classes.avatar}>
+                      <LockOutlinedIcon />
+                    </Avatar>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography component="h1" variant="h5" gutterBottom>
+                      Sign up
+                    </Typography>
+                  </Grid>
+                </Grid>
                 <form className={classes.form} onSubmit={this.onSubmit} noValidate>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -186,21 +192,25 @@ class Register extends Component {
                     />
                     </Grid>
                 </Grid>
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                >
-                    Sign Up
-                </Button>
-                <Grid container justify="flex-end">
-                    <Grid item>
+                <Grid container spacing={2} justify="flex-start">
+                  <Grid item xs={12}>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Sign Up
+                    </Button>
+                  </Grid>
+                </Grid>
+                <Grid container spacing={2} justify="flex-end">
+                  <Grid item>
                     <Link href="/login" variant="body2">
                         Already have an account? Sign in
                     </Link>
-                    </Grid>
+                  </Grid>
                 </Grid>
                 </form>
             </div>

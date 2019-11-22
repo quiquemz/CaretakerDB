@@ -16,6 +16,28 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import NewContract from "./components/dashboard/NewContract";
 import Profile from "./components/account/Profile";
+import red from "@material-ui/core/colors/red";
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#009688',
+    },
+    secondary: {
+      main: '#263238',
+    },
+    error: red,
+    // Used by `getContrastText()` to maximize the contrast between the background and
+    // the text.
+    contrastThreshold: 3,
+    // Used to shift a color's luminance by approximately
+    // two indexes within its tonal palette.
+    // E.g., shift from Red 500 to Red 300 or Red 700.
+    tonalOffset: 0.2,
+  },
+});
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -41,6 +63,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
+          <MuiThemeProvider theme={theme}>
             <Navbar />
             <main>
               <Route exact path="/" component={Landing} />
@@ -53,6 +76,7 @@ class App extends Component {
               </Switch>
             </main>
             <StickyFooter />
+          </MuiThemeProvider>
         </Router>
       </Provider>
     );
