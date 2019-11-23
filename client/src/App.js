@@ -18,9 +18,9 @@ import NewContract from "./components/dashboard/NewContract";
 import Profile from "./components/account/Profile";
 import red from "@material-ui/core/colors/red";
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { MuiThemeProvider } from '@material-ui/core';
+import { MuiThemeProvider, responsiveFontSizes } from '@material-ui/core';
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     primary: {
       main: '#009688',
@@ -38,6 +38,8 @@ const theme = createMuiTheme({
     tonalOffset: 0.2,
   },
 });
+
+theme = responsiveFontSizes(theme);
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
