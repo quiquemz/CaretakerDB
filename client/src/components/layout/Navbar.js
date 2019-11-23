@@ -278,11 +278,6 @@ export function Navbar(props) {
       </MenuItem>
       </> : <>
       <MenuItem component="a" href="/login">
-        <IconButton aria-label="show 0 new notifications" color="inherit">
-          <Badge color="secondary">
-            <LockIcon />
-          </Badge>
-        </IconButton>
         <p>Log in</p>
       </MenuItem>
       </>}
@@ -309,8 +304,10 @@ export function Navbar(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography className={classes.title} variant="h6" noWrap to="/">
-              <img src={Logo} height={35} className="navBarLogo" />
+            <Typography className={classes.title} variant="h6" noWrap>
+              <Link href="/">
+                <img src={Logo} height={35} className="navBarLogo" />
+              </Link>
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>

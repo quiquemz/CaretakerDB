@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Contract from "./Contract";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -28,26 +28,30 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
     const { contracts } = this.state;
     return (
-      <Container>
-        { user.firstName ? 
-          <h1>Welcome, {user.firstName}.</h1>
-          :
-          <h1>Welcome to your Dashboard!</h1>
-        }
-          <p>This is the dashboard, you can find everything related to the management of your caretaking contracts here.</p>
-          { contracts ?
-          <Grid container spacing={3}> {
-          contracts.map((contract) =>
-          <Grid item xs={6} sm={3}>
-            <Contract contract={contract} />
-            </Grid>
-          )
-          }
+      <Container fixed>
+        <Grid
+          container
+          direction="column"
+          spacing={3}>
+          <Grid item>
+            { user.firstName ? <Typography variant="h3">Welcome, {user.firstName}.</Typography>
+              : <Typography variant="h3">Welcome to your Dashboard!</Typography> }
+            <Typography variant="body1" gutterBottom>This is the dashboard, you can find everything related to the management of your caretaking contracts here.</Typography>
           </Grid>
-          :
-          <Contract loading/>
-          }
-          
+          <Grid item>
+            { contracts ?
+              <Grid container spacing={3}> {
+              contracts.map((contract) =>
+                <Grid item xs={6} sm={3}>
+                  <Contract contract={contract} />
+                </Grid>
+              )
+            }
+            </Grid> : <Contract loading/>
+            }
+          </Grid>
+            
+        </Grid>
       </Container>
     );
   }

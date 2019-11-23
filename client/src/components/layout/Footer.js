@@ -1,5 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
@@ -8,7 +9,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://caretakerdb.com/">
         CaretakerDB
       </Link>{' '}
       {new Date().getFullYear()}
@@ -38,11 +39,11 @@ export default function StickyFooter() {
   const classes = useStyles();
 
   return (
-      <footer className={classes.footer}>
+      <BottomNavigation className={classes.footer}>
         <Container maxWidth="sm">
-          <Typography variant="body1">Welcome to CaretakerDB, use the menu to find everything you need.</Typography>
+          <Typography variant="body1" align="center">Ready to join? <Link href="/register">Sign up here.</Link></Typography>
           <Copyright />
         </Container>
-      </footer>
+      </BottomNavigation>
   );
 }

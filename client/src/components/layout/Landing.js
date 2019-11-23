@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { Typography, Box, Grid } from '@material-ui/core';
@@ -26,6 +27,9 @@ const useStyles = makeStyles(theme => ({
 
 export function Landing(props) {
   const classes = useStyles();
+  if (props.auth.isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -63,7 +67,7 @@ export function Landing(props) {
             </Typography>
           </Grid>
           <Grid item xs={12} justify="flex-start">
-            <Typography variant="caption">
+            <Typography variant="caption" color="textSecondary">
               (Try free up to 3 properties)
             </Typography>
           </Grid>
@@ -73,7 +77,7 @@ export function Landing(props) {
         direction="column"
         alignItems="center"
         spacing={2}>
-          <Box m={18}>
+          <Box m={15}>
             <ExpandMoreIcon fontSize="large" color="secondary" />
           </Box>
         </Grid>
