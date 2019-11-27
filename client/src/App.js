@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -19,7 +17,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import NewContract from "./components/dashboard/NewContract";
 import Profile from "./components/account/Profile";
 import red from "@material-ui/core/colors/red";
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import { MuiThemeProvider, responsiveFontSizes } from '@material-ui/core';
 
 let theme = createMuiTheme({

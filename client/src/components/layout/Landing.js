@@ -9,12 +9,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import LandingLogo from "./img/long_logo_landing.png";
 import DashboardSS from "./img/dashboard_ss.png";
-import Contract from "../dashboard/Contract";
-import ExampleContracts from "./fixture/ExampleContracts.json";
 import { makeStyles } from '@material-ui/core/styles';
-import sf from "./img/sf.jpg";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -90,7 +86,7 @@ export function Landing(props) {
         >
           <Grid item xs={12} spacing={2}>
             <Box boxShadow={3}>
-              <img src={DashboardSS} width="100%" />
+              <img alt="CaretakerDB Dashboard Layout" src={DashboardSS} width="100%" />
             </Box>
           </Grid>
         </Grid>

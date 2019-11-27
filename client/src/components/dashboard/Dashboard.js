@@ -41,6 +41,7 @@ class Dashboard extends Component {
       justifyContent: 'center',
       height: '100%',
       maxWidth: 345,
+      minHeight: 300,
     }
     return (
       <Container fixed>

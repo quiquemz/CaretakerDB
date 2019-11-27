@@ -306,7 +306,7 @@ export function Navbar(props) {
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
               <Link href="/">
-                <img src={Logo} height={35} className="navBarLogo" />
+                <img src={Logo} height={35} alt="CaretakerDB Logo" className="navBarLogo" />
               </Link>
             </Typography>
             <div className={classes.search}>

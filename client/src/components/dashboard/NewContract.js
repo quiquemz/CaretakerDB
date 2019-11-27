@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import Contract from "./Contract";
-import { Container, Grid } from "@material-ui/core";
-import Skeleton from '@material-ui/lab/Skeleton';
+import { Container, Typography, Divider, Grid, Paper } from "@material-ui/core";
 
 class NewContract extends Component {
     constructor(props) {
@@ -14,14 +12,23 @@ class NewContract extends Component {
       };
     }
     render() {
-    const { user } = this.props.auth;
-    const { contracts } = this.state;
-    return (
-      <Container>
-          <h1>New property</h1>
-          
-      </Container>
-    );
+      return (
+        <Container fixed>
+          <Paper>
+            <Grid 
+              container
+              direction="row"
+              justify="center"
+              spacing={3}
+              style={{minHeight: '70vh'}}>
+              <Typography variant="h4">
+                New property
+              </Typography>
+              <Divider />
+            </Grid>
+          </Paper>
+        </Container>
+      );
   }
 }
 NewContract.propTypes = {

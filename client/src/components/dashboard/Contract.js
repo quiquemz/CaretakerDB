@@ -5,12 +5,10 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { makeStyles } from '@material-ui/core/styles';
 
 class Contract extends Component {
     render() {
@@ -42,7 +40,7 @@ class Contract extends Component {
       ) : ( imageUrl ? (
         <CardMedia
           title={contract.location.city}>
-          <img src={imageUrl} width="100%" />
+          <img src={imageUrl} alt="Apartment or property" width="100%" />
         </CardMedia>
       ) : (<Skeleton variant="rect" height={190} />))}
 

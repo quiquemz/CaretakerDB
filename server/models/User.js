@@ -22,6 +22,10 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  membership: {
+    type: String,
+    default: 'Free'
+  },
   date: {
     type: Date,
     default: Date.now
