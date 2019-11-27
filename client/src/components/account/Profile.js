@@ -2,16 +2,42 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 
 export function Profile(props){
+    const { user } = props.auth;
     return (
-      <Container>
+      <Container fixed>
+        <Grid
+          container
+          direction="column"
+          spacing={3}
+          alignItems="center">
+          <Grid item>
+            <Typography variant="body1">
+              <label>Name: </label> {user.firstName}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="body1">
+              <label>Email: </label>
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="body1">
+              <label>Company Name: </label>
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="body1">
+              <label>Membership: </label>
+            </Typography>
+          </Grid>
+        </Grid>
       </Container>
     );
 }
 Profile.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
@@ -19,5 +45,4 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { logoutUser }
 )(Profile);

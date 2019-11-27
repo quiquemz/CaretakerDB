@@ -18,7 +18,7 @@ class Contract extends Component {
     const { imageUrl } = this.props;
     const { contract } = this.props;     
     return (
-        <Card style={{maxWidth: 345}} margin={2}>
+      <Card style={{maxWidth: 345}} margin={2}>
       <CardHeader
         avatar={
           loading ? (
