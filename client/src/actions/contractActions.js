@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-  GET_CONTRACTS,
+  SET_CONTRACTS,
   ADD_CONTRACT
 } from "./types";
 // Register User
@@ -12,26 +12,30 @@ export const addContract = (contractData, history) => dispatch => {
     .catch(err => console.log("ERRORS!")
     );
 };
-// Login - get user token
+// Get contracts - load contracts from server for this user
 export const getContracts = userData => dispatch => {
   axios
-    .post("/api/contracts/", userData)
+    .get("/contracts/" + userData)
     .then(res => {
       // Save to localStorage
 // Set token to localStorage
-      const { token } = res.data;
-      localStorage.setItem("jwtToken", token);
-      // Set token to Auth header
-      setAuthToken(token);
-      // Decode token to get user data
-      const decoded = jwt_decode(token);
-      // Set current user
-      dispatch(setCurrentUser(decoded));
+      const contracts = res.data;
+      dispatch(setContracts(contracts));
     })
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
+    .catch(err => console.log("FIX ERRORS")
     );
 };
+
+// Set logged in user
+export const setContracts = contracts => {
+    return {
+      type: SET_CONTRACTS,
+      payload: contracts
+    };
+  };
+  // User loading
+  export const setUserLoading = () => {
+    return {
+      type: ADD_CONTRACT
+    };
+  };

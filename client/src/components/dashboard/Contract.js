@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { Container } from "@material-ui/core";
 
 class Contract extends Component {
     render() {
@@ -46,10 +47,10 @@ class Contract extends Component {
 
       <CardContent>
         {loading ? (
-          <React.Fragment>
+          <Container>
             <Skeleton height={6} />
             <Skeleton height={6} width="80%" />
-          </React.Fragment>
+          </Container>
         ) : (
           <Typography variant="body2" color="textSecondary" component="p">
             {

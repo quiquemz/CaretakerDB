@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import { getContracts } from "../../actions/contractActions";
 import Contract from "./Contract";
 import { Container, Grid, Typography, Link } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
@@ -13,7 +13,6 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contracts: [],
       hovered: false,
     };
   };
@@ -25,16 +24,12 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
   componentDidMount() {
-    fetch('/contracts/' + this.props.auth.user.id)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ contracts: data });
-        console.log(data);
-      });
+    this.props.getContracts(this.props.auth.user.id);
   };
   render() {
     const { user } = this.props.auth;
-    const { contracts } = this.state;
+    const { contracts } = this.props.contracts;
+    const contractsLoaded = contracts.length > 0;
     const addCardStyles = {
       display: 'flex',
       flexDirection: 'column',
@@ -73,15 +68,15 @@ class Dashboard extends Component {
                   </Card>
                 </Link>
               </Grid>
-              {contracts ?
-                  contracts.map(contract =>
-                    <Grid item xs={6} sm={3} key={contract.id}>
-                      <Contract contract={contract} key={contract.id} />
-                    </Grid>
-                  )
+              {contractsLoaded ?
+                contracts.map(function(contract, i) {
+                  return (<Grid item xs={6} sm={3} key={i}>
+                    <Contract contract={contract} />
+                  </Grid>);
+                })
                 : <Contract loading />
               }
-            </Grid> 
+            </Grid>
           </Grid>
         </Grid>
       </Container>
@@ -89,13 +84,14 @@ class Dashboard extends Component {
   }
 }
 Dashboard.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
+  getContracts: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  contracts: state.contracts
 });
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { getContracts }
 )(Dashboard);

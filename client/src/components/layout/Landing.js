@@ -27,7 +27,7 @@ export function Landing(props) {
     return <Redirect to='/dashboard' />;
   }
   return (
-    <React.Fragment>
+    <Container>
       <CssBaseline />
       <Container fixed>
         <Grid 
@@ -91,7 +91,7 @@ export function Landing(props) {
           </Grid>
         </Grid>
       </Container>
-    </React.Fragment>
+    </Container>
   );
 }
 Landing.propTypes = {

@@ -101,7 +101,7 @@ class Register extends Component {
                 </Grid>
                 <form className={classes.form} onSubmit={this.onSubmit} noValidate>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                         autoComplete="fname"
                         name="firstName"
@@ -115,8 +115,8 @@ class Register extends Component {
                         value={this.state.firstName}
                         error={errors.firstName}
                     />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                         variant="outlined"
                         required
@@ -129,8 +129,8 @@ class Register extends Component {
                         value={this.state.lastName}
                         error={errors.lastName}
                     />
-                    </Grid>
-                    <Grid item xs={12}>
+                  </Grid>
+                  <Grid item xs={12}>
                     <TextField
                         variant="outlined"
                         required
@@ -143,8 +143,8 @@ class Register extends Component {
                         value={this.state.email}
                         error={errors.email}
                     />
-                    </Grid>
-                    <Grid item xs={12}>
+                  </Grid>
+                  <Grid item xs={12}>
                     <TextField
                         variant="outlined"
                         required
@@ -157,8 +157,8 @@ class Register extends Component {
                         value={this.state.companyName}
                         error={errors.companyName}
                     />
-                    </Grid>
-                    <Grid item xs={12}>
+                  </Grid>
+                  <Grid item xs={12}>
                     <TextField
                         variant="outlined"
                         required
@@ -172,8 +172,8 @@ class Register extends Component {
                         value={this.state.password}
                         error={errors.password}
                     />
-                    </Grid>
-                    <Grid item xs={12}>
+                  </Grid>
+                  <Grid item xs={12}>
                     <TextField
                         variant="outlined"
                         required
@@ -187,7 +187,7 @@ class Register extends Component {
                         value={this.state.password2}
                         error={errors.password2}
                     />
-                    </Grid>
+                  </Grid>
                 </Grid>
                 <Grid container spacing={2} justify="flex-start">
                   <Grid item xs={12}>
