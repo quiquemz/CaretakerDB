@@ -37,13 +37,13 @@ class Contract extends Component {
         subheader={loading ? <Skeleton height={6} width="40%" /> : `${contract.location.city}, ${contract.location.state}`}
       />
       {loading ? (
-        <Skeleton variant="rect" height={190} />
+        <Skeleton variant="rect" height={190} width={345} />
       ) : ( imageUrl ? (
         <CardMedia
           title={contract.location.city}>
           <img src={imageUrl} alt="Apartment or property" width="100%" />
         </CardMedia>
-      ) : (<Skeleton variant="rect" height={190} />))}
+      ) : (<Skeleton variant="rect" height={190} width={345} />))}
 
       <CardContent>
         {loading ? (

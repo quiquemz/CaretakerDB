@@ -74,7 +74,7 @@ class Dashboard extends Component {
                     <Contract contract={contract} />
                   </Grid>);
                 })
-                : <Contract loading />
+                : <></>
               }
             </Grid>
           </Grid>
