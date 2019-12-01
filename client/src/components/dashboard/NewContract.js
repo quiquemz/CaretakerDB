@@ -2,12 +2,24 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { Container, Button, Typography, Divider, Grid, makeStyles, CssBaseline, TextField, Link } from "@material-ui/core";
+import { Container, 
+  Button, 
+  Typography, 
+  Divider, 
+  Grid, 
+  makeStyles, 
+  CssBaseline, 
+  TextField, 
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 class NewContract extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        expanded: false,
         errors: {},
       };
       this.useStyles = makeStyles(theme => ({
@@ -33,6 +45,18 @@ class NewContract extends Component {
         submit: {
           margin: theme.spacing(3, 0, 2),
         },
+        root: {
+          width: '100%',
+        },
+        heading: {
+          fontSize: theme.typography.pxToRem(15),
+          flexBasis: '33.33%',
+          flexShrink: 0,
+        },
+        secondaryHeading: {
+          fontSize: theme.typography.pxToRem(15),
+          color: theme.palette.text.secondary,
+        },
       }));
     }
     onChange = e => {
@@ -42,6 +66,12 @@ class NewContract extends Component {
       e.preventDefault();
       console.log("NO ACTION HERE YET");
     }
+    handleChange(panel) {
+      this.setState((state, props) => {
+        return {isExpanded: panel};
+      });
+    };
+    
     render() {
       const { errors } = this.state;
       const classes = this.useStyles;
@@ -59,10 +89,20 @@ class NewContract extends Component {
                 <Divider width="100%" />
               </Grid>
               <Grid xs={12}>
-                <CssBaseline />
-                <div className={classes.paper}>
-                    <form className={classes.form} onSubmit={this.onSubmit} noValidate>
-                    <Grid container spacing={2}>
+              <CssBaseline />
+              <div className={classes.paper}>
+                  <form className={classes.form} onSubmit={this.onSubmit} noValidate>
+                  <Grid container spacing={2}>
+              <ExpansionPanel expanded={this.state.expanded === 'owner'} onChange={this.handleChange('owner')}>
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1bh-content"
+                  id="panel1bh-header"
+                >
+                  <Typography className={classes.heading}>General settings</Typography>
+                  <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
                       <Grid item xs={12}>
                         <Typography component="h1" variant="h5" gutterBottom>
                           Owner
@@ -125,6 +165,8 @@ class NewContract extends Component {
                             error={errors.email}
                         />
                       </Grid>
+                      </ExpansionPanelDetails>
+                    </ExpansionPanel>
                       <Grid item xs={12}>
                         <Typography component="h1" variant="h5" gutterBottom>
                           Property
