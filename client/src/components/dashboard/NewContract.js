@@ -66,11 +66,6 @@ class NewContract extends Component {
       e.preventDefault();
       console.log("NO ACTION HERE YET");
     }
-    handleChange(panel) {
-      this.setState((state, props) => {
-        return {isExpanded: panel};
-      });
-    };
     
     render() {
       const { errors } = this.state;
@@ -93,16 +88,6 @@ class NewContract extends Component {
               <div className={classes.paper}>
                   <form className={classes.form} onSubmit={this.onSubmit} noValidate>
                   <Grid container spacing={2}>
-              <ExpansionPanel expanded={this.state.expanded === 'owner'} onChange={this.handleChange('owner')}>
-                <ExpansionPanelSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1bh-content"
-                  id="panel1bh-header"
-                >
-                  <Typography className={classes.heading}>General settings</Typography>
-                  <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
                       <Grid item xs={12}>
                         <Typography component="h1" variant="h5" gutterBottom>
                           Owner
@@ -165,8 +150,62 @@ class NewContract extends Component {
                             error={errors.email}
                         />
                       </Grid>
-                      </ExpansionPanelDetails>
-                    </ExpansionPanel>
+                      <Grid item xs={12}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="address"
+                            label="Address"
+                            name="address"
+                            autoComplete="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="City"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="State"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Zipcode"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
                       <Grid item xs={12}>
                         <Typography component="h1" variant="h5" gutterBottom>
                           Property
@@ -184,6 +223,48 @@ class NewContract extends Component {
                             onChange={this.onChange}
                             value={this.state.companyName}
                             error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="City"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="State"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Zipcode"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
                         />
                       </Grid>
                       <Grid item xs={12}>
