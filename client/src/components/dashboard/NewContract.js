@@ -122,7 +122,7 @@ class NewContract extends Component {
                             error={errors.lastName}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12}>
                         <TextField
                             variant="outlined"
                             required
@@ -131,20 +131,6 @@ class NewContract extends Component {
                             label="Email Address"
                             name="email"
                             autoComplete="email"
-                            onChange={this.onChange}
-                            value={this.state.email}
-                            error={errors.email}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="ownerPhone"
-                            label="Phone"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -199,6 +185,193 @@ class NewContract extends Component {
                             fullWidth
                             id="ownerPhone"
                             label="Zipcode"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Cell Phone"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Home Phone"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Office Phone"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Other Phone"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Alarm Code"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={9}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Additional"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography component="h1" variant="h5" gutterBottom>
+                          Representative to Notify
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Name"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Street"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="City"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="State"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Zipcode"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Phone"
+                            name="ownerPhone"
+                            autoComplete="ownerPhone"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="ownerPhone"
+                            label="Alternate Phone"
                             name="ownerPhone"
                             autoComplete="ownerPhone"
                             onChange={this.onChange}
