@@ -10,9 +10,10 @@ import { Container,
   makeStyles, 
   CssBaseline, 
   TextField, 
-  ExpansionPanel,
-  ExpansionPanelDetails,
-  ExpansionPanelSummary } from "@material-ui/core";
+  Checkbox,
+  FormLabel,
+  FormGroup,
+  FormControlLabel } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 class NewContract extends Component {
@@ -98,6 +99,7 @@ class NewContract extends Component {
                             autoComplete="fname"
                             name="firstName"
                             variant="outlined"
+                            margin="dense"
                             required
                             fullWidth
                             id="firstName"
@@ -111,6 +113,7 @@ class NewContract extends Component {
                       <Grid item xs={12} sm={6}>
                         <TextField
                             variant="outlined"
+                            margin="dense"
                             required
                             fullWidth
                             id="lastName"
@@ -125,7 +128,7 @@ class NewContract extends Component {
                       <Grid item xs={12}>
                         <TextField
                             variant="outlined"
-                            required
+                            margin="dense"
                             fullWidth
                             id="email"
                             label="Email Address"
@@ -139,10 +142,11 @@ class NewContract extends Component {
                       <Grid item xs={12}>
                         <TextField
                             variant="outlined"
+                            margin="dense"
                             required
                             fullWidth
                             id="address"
-                            label="Address"
+                            label="Street"
                             name="address"
                             autoComplete="address"
                             onChange={this.onChange}
@@ -152,6 +156,7 @@ class NewContract extends Component {
                       </Grid>
                       <Grid item xs={12} sm={6}>
                         <TextField
+                            margin="dense"
                             variant="outlined"
                             required
                             fullWidth
@@ -169,6 +174,7 @@ class NewContract extends Component {
                             variant="outlined"
                             required
                             fullWidth
+                            margin="dense"
                             id="ownerPhone"
                             label="State"
                             name="ownerPhone"
@@ -182,6 +188,7 @@ class NewContract extends Component {
                         <TextField
                             variant="outlined"
                             required
+                            margin="dense"
                             fullWidth
                             id="ownerPhone"
                             label="Zipcode"
@@ -196,6 +203,7 @@ class NewContract extends Component {
                         <TextField
                             variant="outlined"
                             required
+                            margin="dense"
                             fullWidth
                             id="ownerPhone"
                             label="Cell Phone"
@@ -209,8 +217,8 @@ class NewContract extends Component {
                       <Grid item xs={6} sm={3}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
+                            margin="dense"
                             id="ownerPhone"
                             label="Home Phone"
                             name="ownerPhone"
@@ -220,11 +228,12 @@ class NewContract extends Component {
                             error={errors.email}
                         />
                       </Grid>
+                      <Grid item xs={12} sm={6}></Grid>
                       <Grid item xs={6} sm={3}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
+                            margin="dense"
                             id="ownerPhone"
                             label="Office Phone"
                             name="ownerPhone"
@@ -237,8 +246,8 @@ class NewContract extends Component {
                       <Grid item xs={6} sm={3}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
+                            margin="dense"
                             id="ownerPhone"
                             label="Other Phone"
                             name="ownerPhone"
@@ -248,29 +257,31 @@ class NewContract extends Component {
                             error={errors.email}
                         />
                       </Grid>
+                      <Grid item xs={12} sm={6}></Grid>
                       <Grid item xs={6} sm={3}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
+                            margin="dense"
                             id="ownerPhone"
                             label="Alarm Code"
                             name="ownerPhone"
-                            autoComplete="ownerPhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={9}>
+                      <Grid item xs={12}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
+                            margin="dense"
+                            multiline
+                            rows={3}
+                            rowsMax={6}
                             id="ownerPhone"
                             label="Additional"
                             name="ownerPhone"
-                            autoComplete="ownerPhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -284,9 +295,9 @@ class NewContract extends Component {
                       <Grid item xs={12} sm={6}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
                             id="ownerPhone"
+                            margin="dense"
                             label="Name"
                             name="ownerPhone"
                             autoComplete="ownerPhone"
@@ -295,12 +306,13 @@ class NewContract extends Component {
                             error={errors.email}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12} sm={6}></Grid>
+                      <Grid item xs={12} sm={12}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
                             id="ownerPhone"
+                            margin="dense"
                             label="Street"
                             name="ownerPhone"
                             autoComplete="ownerPhone"
@@ -312,9 +324,9 @@ class NewContract extends Component {
                       <Grid item xs={12} sm={6}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
                             id="ownerPhone"
+                            margin="dense"
                             label="City"
                             name="ownerPhone"
                             autoComplete="ownerPhone"
@@ -326,8 +338,8 @@ class NewContract extends Component {
                       <Grid item xs={6} sm={3}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
+                            margin="dense"
                             id="ownerPhone"
                             label="State"
                             name="ownerPhone"
@@ -340,9 +352,9 @@ class NewContract extends Component {
                       <Grid item xs={6} sm={3}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
                             id="ownerPhone"
+                            margin="dense"
                             label="Zipcode"
                             name="ownerPhone"
                             autoComplete="ownerPhone"
@@ -354,10 +366,10 @@ class NewContract extends Component {
                       <Grid item xs={12} sm={6}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
                             id="ownerPhone"
                             label="Phone"
+                            margin="dense"
                             name="ownerPhone"
                             autoComplete="ownerPhone"
                             onChange={this.onChange}
@@ -368,8 +380,8 @@ class NewContract extends Component {
                       <Grid item xs={12} sm={6}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
+                            margin="dense"
                             id="ownerPhone"
                             label="Alternate Phone"
                             name="ownerPhone"
@@ -388,11 +400,11 @@ class NewContract extends Component {
                         <TextField
                             variant="outlined"
                             required
+                            margin="dense"
                             fullWidth
                             id="address"
                             label="Address"
                             name="address"
-                            autoComplete="address"
                             onChange={this.onChange}
                             value={this.state.companyName}
                             error={errors.companyName}
@@ -401,12 +413,12 @@ class NewContract extends Component {
                       <Grid item xs={12} sm={6}>
                         <TextField
                             variant="outlined"
+                            margin="dense"
                             required
                             fullWidth
                             id="ownerPhone"
                             label="City"
                             name="ownerPhone"
-                            autoComplete="ownerPhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -417,10 +429,10 @@ class NewContract extends Component {
                             variant="outlined"
                             required
                             fullWidth
+                            margin="dense"
                             id="ownerPhone"
                             label="State"
                             name="ownerPhone"
-                            autoComplete="ownerPhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -429,12 +441,12 @@ class NewContract extends Component {
                       <Grid item xs={6} sm={3}>
                         <TextField
                             variant="outlined"
+                            margin="dense"
                             required
                             fullWidth
                             id="ownerPhone"
                             label="Zipcode"
                             name="ownerPhone"
-                            autoComplete="ownerPhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -443,30 +455,267 @@ class NewContract extends Component {
                       <Grid item xs={12}>
                         <TextField
                             variant="outlined"
-                            required
                             fullWidth
+                            margin="dense"
                             name="propertyInfo"
                             label="Property Information"
                             id="propertyInfo"
-                            autoComplete="propertyInfo"
+                            multiline
+                            rows={3}
+                            rowsMax={6}
                             onChange={this.onChange}
                             value={this.state.password}
                             error={errors.password}
                         />
                       </Grid>
                       <Grid item xs={12}>
+                        <Typography component="h1" variant="h5" gutterBottom>
+                          Services
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
                         <TextField
                             variant="outlined"
-                            required
+                            margin="dense"
                             fullWidth
-                            name="password2"
-                            label="Confirm Password"
-                            type="password"
-                            id="password2"
-                            autoComplete="current-password"
+                            id="address"
+                            label="Irrigation Company"
+                            name="address"
                             onChange={this.onChange}
-                            value={this.state.password2}
-                            error={errors.password2}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Irrigation Phone"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Plumbing Company"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Plumbing Phone"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Electrician Company"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Electrician Phone"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Carpentry Company"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Carpentry Phone"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Appliance Company"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Appliance Phone"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Furnance/HVAC Company"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Furnance/HVAC Phone"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Cleaning Company"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Cleaning Phone"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Boats/Docks Company"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Boats/Docks Phone"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography component="h1" variant="h5" gutterBottom>
+                          Special
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} sm={12}>
+                        <FormLabel component="legend">Select all that apply</FormLabel>
+                        <FormGroup row>
+                          <FormControlLabel
+                            control={<Checkbox checked={false} value="gilad" />}
+                            label="Outside Shower"
+                          />
+                          <FormControlLabel
+                            control={<Checkbox checked={false} value="jason" />}
+                            label="Outside Faucet"
+                          />
+                          <FormControlLabel
+                            control={
+                              <Checkbox checked={false} value="antoine" />
+                            }
+                            label="Outside Spa"
+                          />
+                        </FormGroup>
+                      </Grid>
+                      <Grid item xs={12} sm={12}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            fullWidth
+                            id="address"
+                            label="Other"
+                            name="address"
+                            onChange={this.onChange}
+                            value={this.state.companyName}
+                            error={errors.companyName}
                         />
                       </Grid>
                     </Grid>
