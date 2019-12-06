@@ -97,12 +97,12 @@ class NewContract extends Component {
                       <Grid item xs={12} sm={6}>
                         <TextField
                             autoComplete="fname"
-                            name="firstName"
+                            name="ownerFirstName"
                             variant="outlined"
                             margin="dense"
                             required
                             fullWidth
-                            id="firstName"
+                            id="ownerFirstName"
                             label="First Name"
                             autoFocus
                             onChange={this.onChange}
@@ -116,10 +116,9 @@ class NewContract extends Component {
                             margin="dense"
                             required
                             fullWidth
-                            id="lastName"
+                            id="ownerLastName"
                             label="Last Name"
-                            name="lastName"
-                            autoComplete="lname"
+                            name="ownerLastName"
                             onChange={this.onChange}
                             value={this.state.lastName}
                             error={errors.lastName}
@@ -130,10 +129,9 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="email"
+                            id="ownerEmail"
                             label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            name="ownerEmail"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -145,10 +143,9 @@ class NewContract extends Component {
                             margin="dense"
                             required
                             fullWidth
-                            id="address"
+                            id="ownerStreet"
                             label="Street"
-                            name="address"
-                            autoComplete="address"
+                            name="ownerStreet"
                             onChange={this.onChange}
                             value={this.state.companyName}
                             error={errors.companyName}
@@ -160,10 +157,9 @@ class NewContract extends Component {
                             variant="outlined"
                             required
                             fullWidth
-                            id="ownerPhone"
+                            id="ownerCity"
                             label="City"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerCity"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -175,10 +171,9 @@ class NewContract extends Component {
                             required
                             fullWidth
                             margin="dense"
-                            id="ownerPhone"
+                            id="ownerState"
                             label="State"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerState"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -190,10 +185,9 @@ class NewContract extends Component {
                             required
                             margin="dense"
                             fullWidth
-                            id="ownerPhone"
+                            id="ownerZip"
                             label="Zipcode"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerZip"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -205,10 +199,9 @@ class NewContract extends Component {
                             required
                             margin="dense"
                             fullWidth
-                            id="ownerPhone"
+                            id="ownerCellPhone"
                             label="Cell Phone"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerCellPhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -219,10 +212,9 @@ class NewContract extends Component {
                             variant="outlined"
                             fullWidth
                             margin="dense"
-                            id="ownerPhone"
+                            id="ownerHomePhone"
                             label="Home Phone"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerHomePhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -234,10 +226,9 @@ class NewContract extends Component {
                             variant="outlined"
                             fullWidth
                             margin="dense"
-                            id="ownerPhone"
+                            id="ownerOfficePhone"
                             label="Office Phone"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerOfficePhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -248,10 +239,9 @@ class NewContract extends Component {
                             variant="outlined"
                             fullWidth
                             margin="dense"
-                            id="ownerPhone"
+                            id="ownerOtherPhone"
                             label="Other Phone"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerOtherPhone"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -263,9 +253,9 @@ class NewContract extends Component {
                             variant="outlined"
                             fullWidth
                             margin="dense"
-                            id="ownerPhone"
+                            id="ownerAlarm"
                             label="Alarm Code"
-                            name="ownerPhone"
+                            name="ownerAlarm"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
@@ -279,9 +269,9 @@ class NewContract extends Component {
                             multiline
                             rows={3}
                             rowsMax={6}
-                            id="ownerPhone"
+                            id="ownerAdditional"
                             label="Additional"
-                            name="ownerPhone"
+                            name="ownerAdditional"
                             onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email}
