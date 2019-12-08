@@ -5,10 +5,13 @@ import {
 } from "./types";
 // Register User
 
-export const addContract = (contractData, history) => dispatch => {
+export const addNewContract = (contractData, history) => dispatch => {
   axios
-    .post("/api/contracts/add", contractData)
-    .then(res => history.push("/dashboard")) // re-direct to login on successful register
+    .post("/contracts/add", contractData)
+    .then(res => {
+      dispatch(setContracts(contractData))
+      history.push("/dashboard");
+    })
     .catch(err => console.log("ERRORS!")
     );
 };
@@ -17,8 +20,6 @@ export const getContracts = userData => dispatch => {
   axios
     .get("/contracts/" + userData)
     .then(res => {
-      // Save to localStorage
-// Set token to localStorage
       const contracts = res.data;
       dispatch(setContracts(contracts));
     })
@@ -26,16 +27,18 @@ export const getContracts = userData => dispatch => {
     );
 };
 
-// Set logged in user
+// set contracts
 export const setContracts = contracts => {
-    return {
-      type: SET_CONTRACTS,
-      payload: contracts
-    };
+  return {
+    type: SET_CONTRACTS,
+    payload: contracts
   };
-  // User loading
-  export const setUserLoading = () => {
-    return {
-      type: ADD_CONTRACT
-    };
+};
+
+// Add a contract
+export const addContract = contract => {
+  return {
+    type: ADD_CONTRACT,
+    payload: contract
   };
+};

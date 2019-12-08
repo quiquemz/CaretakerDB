@@ -14,7 +14,6 @@ import { Container,
   FormLabel,
   FormGroup,
   FormControlLabel } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 class NewContract extends Component {
     constructor(props) {
