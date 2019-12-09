@@ -36,7 +36,6 @@ class Dashboard extends Component {
       justifyContent: 'center',
       height: '100%',
       maxWidth: 345,
-      minHeight: 300,
     }
     return (
       <Container fixed>
@@ -51,9 +50,9 @@ class Dashboard extends Component {
           </Grid>
           <Grid item>
             <Grid container spacing={3}>
-              <Grid item xs={6} sm={3}>
+              <Grid item xs={12} sm={4} height="100%">
                 <Link href="/new-property" underline="none">
-                  <Card style={addCardStyles} margin={2} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                  <Card style={addCardStyles} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                     <CardContent>
                       <Typography color="textSecondary" align="center">
                         <HomeWorkIcon fontSize="large" />
@@ -70,11 +69,11 @@ class Dashboard extends Component {
               </Grid>
               {propertiesLoaded ?
                 properties.map(function(property, i) {
-                  return (<Grid item xs={6} sm={3} key={i}>
+                  return (<Grid item xs={12} sm={4} key={i}>
                     <Property property={property} />
                   </Grid>);
                 })
-                : <></>
+                : <Property loading />
               }
             </Grid>
           </Grid>

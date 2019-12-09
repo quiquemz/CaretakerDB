@@ -1,9 +1,14 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import { 
+  Container,
+  Link
+  } from '@material-ui/core';
 
 function Copyright() {
   return (
@@ -35,15 +40,32 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function StickyFooter() {
+function StickyFooter(props) {
   const classes = useStyles();
+  const loggedIn = props.auth.isAuthenticated;
 
   return (
       <BottomNavigation className={classes.footer}>
         <Container maxWidth="sm">
+          {loggedIn ? 
+          <Typography variant="body1" align="center">Welcome back, <Link href="/profile">{props.auth.user.firstName}</Link></Typography>
+          :
           <Typography variant="body1" align="center">Ready to join? <Link href="/register">Sign up here.</Link></Typography>
+          }
           <Copyright />
         </Container>
       </BottomNavigation>
   );
 }
+
+StickyFooter.propTypes = {
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+export default connect(
+  mapStateToProps,
+)(withRouter(StickyFooter));

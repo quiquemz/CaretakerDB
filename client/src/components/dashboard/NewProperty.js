@@ -151,6 +151,67 @@ class NewProperty extends Component {
               <div className={classes.paper}>
                   <form className={classes.form} onSubmit={this.onSubmit} noValidate>
                   <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                        <Typography component="h1" variant="h5" gutterBottom>
+                          Property
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            margin="dense"
+                            fullWidth
+                            id="locationStreet"
+                            label="Street"
+                            name="locationStreet"
+                            onChange={this.onChange}
+                            value={this.state.locationStreet}
+                            error={errors.companyName}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            required
+                            fullWidth
+                            id="locationCity"
+                            label="City"
+                            name="locationCity"
+                            onChange={this.onChange}
+                            value={this.state.locationCity}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            margin="dense"
+                            id="locationState"
+                            label="State"
+                            name="locationState"
+                            onChange={this.onChange}
+                            value={this.state.locationState}
+                            error={errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            required
+                            fullWidth
+                            id="locationZipCode"
+                            label="Zipcode"
+                            name="locationZipCode"
+                            onChange={this.onChange}
+                            value={this.state.locationZipCode}
+                            error={errors.email}
+                        />
+                      </Grid>
                       <Grid item xs={12}>
                         <Typography component="h1" variant="h5" gutterBottom>
                           Owner
@@ -433,67 +494,6 @@ class NewProperty extends Component {
                             name="ownerRepSecondPhone"
                             onChange={this.onChange}
                             value={this.state.ownerRepSecondPhone}
-                            error={errors.email}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Typography component="h1" variant="h5" gutterBottom>
-                          Property
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            margin="dense"
-                            fullWidth
-                            id="locationStreet"
-                            label="Street"
-                            name="locationStreet"
-                            onChange={this.onChange}
-                            value={this.state.locationStreet}
-                            error={errors.companyName}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <TextField
-                            variant="outlined"
-                            margin="dense"
-                            required
-                            fullWidth
-                            id="locationCity"
-                            label="City"
-                            name="locationCity"
-                            onChange={this.onChange}
-                            value={this.state.locationCity}
-                            error={errors.email}
-                        />
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            margin="dense"
-                            id="locationState"
-                            label="State"
-                            name="locationState"
-                            onChange={this.onChange}
-                            value={this.state.locationState}
-                            error={errors.email}
-                        />
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <TextField
-                            variant="outlined"
-                            margin="dense"
-                            required
-                            fullWidth
-                            id="locationZipCode"
-                            label="Zipcode"
-                            name="locationZipCode"
-                            onChange={this.onChange}
-                            value={this.state.locationZipCode}
                             error={errors.email}
                         />
                       </Grid>
