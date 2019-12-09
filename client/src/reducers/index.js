@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import authReducer from "./authReducers";
-import contractReducer from "./contractReducers";
+import propertyReducer from "./propertyReducers";
 import errorReducer from "./errorReducers";
 export default combineReducers({
   auth: authReducer,
-  contracts: contractReducer,
+  properties: propertyReducer,
   errors: errorReducer
 });

@@ -17,6 +17,7 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
+import Container from '@material-ui/core/Container';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -131,11 +132,11 @@ export function Navbar(props) {
       
       {props.auth.isAuthenticated ? <><List>
           <ListItem button
-            key="New contract"
+            key="New property"
             component="a"
-            href="/new-contract">
+            href="/new-property">
               <ListItemIcon><AddIcon /></ListItemIcon>
-              <ListItemText primary="New contract" />
+              <ListItemText primary="New property" />
           </ListItem>
           <ListItem button
             key="Dashboard"
@@ -226,11 +227,9 @@ export function Navbar(props) {
       onClose={handleMenuClose}
     >
       {props.auth.isAuthenticated ?
-      <>
-      <MenuItem onClick={handleMenuClose} component="a" href="/profile">Profile</MenuItem>
+      <Container><MenuItem onClick={handleMenuClose} component="a" href="/profile">Profile</MenuItem>
       <MenuItem onClick={handleMenuClose} component="a" href="/account">My account</MenuItem>
-      <MenuItem onClick={onLogoutClick}>Log out</MenuItem>
-      </>
+      <MenuItem onClick={onLogoutClick}>Log out</MenuItem></Container>
       :
       <MenuItem onClick={handleMenuClose} component="a" href="/login">Log in</MenuItem> 
       }
@@ -248,7 +247,7 @@ export function Navbar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {props.auth.isAuthenticated ? <>
+      {props.auth.isAuthenticated ? <Container>
       <MenuItem>
         <IconButton aria-label="show 0 new mails" color="inherit">
           <Badge badgeContent={0} color="secondary">
@@ -276,11 +275,11 @@ export function Navbar(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-      </> : <>
+      </Container> : <Container>
       <MenuItem component="a" href="/login">
         <p>Log in</p>
       </MenuItem>
-      </>}
+      </Container>}
     </Menu>
   );
 
@@ -324,7 +323,7 @@ export function Navbar(props) {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-            {props.auth.isAuthenticated ? <>
+            {props.auth.isAuthenticated ? <Container>
               <IconButton aria-label="show 0 new mails" color="inherit">
                 <Badge badgeContent={0} color="secondary">
                   <MailIcon />
@@ -334,8 +333,8 @@ export function Navbar(props) {
                 <Badge badgeContent={0} color="secondary">
                   <NotificationsIcon />
                 </Badge>
-              </IconButton></>
-              : <></>}
+              </IconButton></Container>
+              : <Container></Container>}
               <IconButton
                 edge="end"
                 aria-label="account of current user"

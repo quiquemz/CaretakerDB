@@ -13,38 +13,38 @@ const User = require("../../models/User");
 // @desc Register user
 // @access Public
 router.post("/register", (req, res) => {
-    // Form validation
+  // Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
   User.findOne({ email: req.body.email }).then(user => {
-      if (user) {
-        return res.status(400).json({ email: "Email already exists" });
-      } else {
-        const newUser = new User({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          companyName: req.body.companyName,
-          email: req.body.email,
-          password: req.body.password,
-          membership: req.body.membership
-        });
+    if (user) {
+      return res.status(400).json({ email: "Email already exists" });
+    } else {
+      const newUser = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        companyName: req.body.companyName,
+        email: req.body.email,
+        password: req.body.password,
+        membership: req.body.membership
+      });
   // Hash password before saving in database
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then(user => res.json(user))
-              .catch(err => console.log(err));
-          });
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => res.json(user))
+            .catch(err => console.log(err));
         });
-      }
-    });
+      });
+    }
   });
+});
 
   // @route POST api/users/login
 // @desc Login user and return JWT token
@@ -92,10 +92,6 @@ router.post("/login", (req, res) => {
               });
             }
           );
-          Contract.find({userId: user.id}, (err, contracts) => {
-            if (err) next(err);
-            else res.json(contracts);
-          });
         } else {
           return res
             .status(400)

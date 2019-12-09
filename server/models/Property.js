@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ContractSchema = mongoose.Schema({
+const PropertySchema = mongoose.Schema({
     userId: String,
     season: String,
     price: Number,
@@ -19,6 +19,7 @@ const ContractSchema = mongoose.Schema({
         firstName: String,
         lastName: String,
         plowing: Boolean,
+        email: String,
         address: {
             street: String,
             city: String,
@@ -87,6 +88,6 @@ const ContractSchema = mongoose.Schema({
     },
 });
 
-const Contract = mongoose.model('Contract', ContractSchema);
+const Property = mongoose.model('Property', PropertySchema);
 
-module.exports = Contract;
+module.exports = Property;

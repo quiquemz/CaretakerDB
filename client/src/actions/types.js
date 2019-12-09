@@ -1,5 +1,5 @@
 export const GET_ERRORS = "GET_ERRORS";
 export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
-export const SET_CONTRACTS = "SET_CONTRACTS";
-export const ADD_CONTRACT = "ADD_CONTRACT";
+export const SET_PROPERTIES = "SET_PROPERTIES";
+export const ADD_PROPERTY = "ADD_PROPERTY";

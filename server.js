@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const passport = require("passport");
 const users = require("./server/routes/api/users");
-const contracts = require("./server/routes/contracts-route");
+const properties = require("./server/routes/api/properties");
 const db = require("./config/keys").mongoURI;
 
 const port = process.env.PORT || 5000;
@@ -34,6 +34,6 @@ mongoose
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
-app.use("/contracts", contracts);
+app.use("/api/properties", properties);
 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));

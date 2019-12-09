@@ -1,21 +1,21 @@
 import {
-    ADD_CONTRACT,
-    SET_CONTRACTS
+    ADD_PROPERTY,
+    SET_PROPERTIES
 } from "../actions/types";
 const initialState = {
-    contracts: {}
+    properties: {}
 };
 export default function(state = initialState, action) {
     switch (action.type) {
-        case SET_CONTRACTS:
+        case SET_PROPERTIES:
         return {
             ...state,
-            contracts: action.payload
+            properties: action.payload
         };
-        case ADD_CONTRACT:
+        case ADD_PROPERTY:
         return {
             ...state,
-            contracts: state.contracts + action.payload
+            properties: state.properties + action.payload
         };
         default:
         return state;

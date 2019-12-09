@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { addNewProperty } from "../../actions/propertyActions";
 import { Container, 
   Button, 
   Typography, 
@@ -15,11 +16,65 @@ import { Container,
   FormGroup,
   FormControlLabel } from "@material-ui/core";
 
-class NewContract extends Component {
+class NewProperty extends Component {
     constructor(props) {
       super(props);
       this.state = {
         expanded: false,
+        property: {
+          userId: this.props.auth.user.id,
+          season: '',
+          price: 0,
+          additionalCosts: 0,
+          additionalCostsDetails: '',
+          currentOwed: 0,
+          dateCreated: Date.now(),
+          locationStreet: '',
+          locationCity: '',
+          locationZipCode: '',
+          locationState: '',
+          ownerFirstName: '',
+          ownerLastName: '',
+          ownerPlowing: false,
+          ownerEmail: '',
+          ownerStreet: '',
+          ownerCity: '',
+          ownerZipCode: '',
+          ownerState: '',
+          ownerHomePhone: '',
+          ownerOfficePhone: '',
+          ownerOtherPhone: '',
+          ownerCellPhone: '',
+          ownerRepToNotify: '',
+          ownerRepStreet: '',
+          ownerRepCity: '',
+          ownerRepZipCode: '',
+          ownerRepState: '',
+          ownerRepPhone: '',
+          ownerRepSecondPhone: '',
+          ownerAlarmCode: '',
+          ownerAdditional: '',
+          servicesIrrigationContact: '',
+          servicesIrrigationPhone: '',
+          servicesPlumberContact: '',
+          servicesPlumberPhone: '',
+          servicesElectricianContact: '',
+          servicesElectricianPhone: '',
+          servicesCarpenterContact: '',
+          servicesCarpenterPhone: '',
+          servicesApplianceContact: '',
+          servicesAppliancePhone: '',
+          servicesFurnaceContact: '',
+          servicesFurnacePhone: '',
+          servicesCleanerContact: '',
+          servicesCleanerPhone: '',
+          servicesBoatsAndDocksContact: '',
+          servicesBoatsAndDocksPhone: '',
+          specialOutsideShower: false,
+          specialOutsideFaucet: false,
+          specialOutsideSpa: false,
+          specialOther: '',
+        },
         errors: {},
       };
       this.useStyles = makeStyles(theme => ({
@@ -58,13 +113,21 @@ class NewContract extends Component {
           color: theme.palette.text.secondary,
         },
       }));
+      this.onChange = this.onChange.bind(this);
     }
-    onChange = e => {
-      this.setState({ [e.target.id]: e.target.value });
+    onChange (event) {
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      const property = {...this.state.property};
+      property[name] = value;
+  
+      this.setState({property});
     }
     onSubmit = e => {
       e.preventDefault();
-      console.log("NO ACTION HERE YET");
+
+      this.props.addNewProperty(this.state.property, this.props.auth.user.id, this.props.history);
     }
     
     render() {
@@ -83,7 +146,7 @@ class NewContract extends Component {
                 </Typography>
                 <Divider width="100%" />
               </Grid>
-              <Grid xs={12}>
+              <Grid item xs={12}>
               <CssBaseline />
               <div className={classes.paper}>
                   <form className={classes.form} onSubmit={this.onSubmit} noValidate>
@@ -105,7 +168,7 @@ class NewContract extends Component {
                             label="First Name"
                             autoFocus
                             onChange={this.onChange}
-                            value={this.state.firstName}
+                            value={this.state.ownerFirstName}
                             error={errors.firstName}
                         />
                       </Grid>
@@ -119,7 +182,7 @@ class NewContract extends Component {
                             label="Last Name"
                             name="ownerLastName"
                             onChange={this.onChange}
-                            value={this.state.lastName}
+                            value={this.state.ownerLastName}
                             error={errors.lastName}
                         />
                       </Grid>
@@ -132,7 +195,7 @@ class NewContract extends Component {
                             label="Email Address"
                             name="ownerEmail"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerEmail}
                             error={errors.email}
                         />
                       </Grid>
@@ -146,7 +209,7 @@ class NewContract extends Component {
                             label="Street"
                             name="ownerStreet"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.ownerStreet}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -160,7 +223,7 @@ class NewContract extends Component {
                             label="City"
                             name="ownerCity"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerCity}
                             error={errors.email}
                         />
                       </Grid>
@@ -174,7 +237,7 @@ class NewContract extends Component {
                             label="State"
                             name="ownerState"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerState}
                             error={errors.email}
                         />
                       </Grid>
@@ -184,11 +247,11 @@ class NewContract extends Component {
                             required
                             margin="dense"
                             fullWidth
-                            id="ownerZip"
+                            id="ownerZipCode"
                             label="Zipcode"
-                            name="ownerZip"
+                            name="ownerZipCode"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerZipCode}
                             error={errors.email}
                         />
                       </Grid>
@@ -202,7 +265,7 @@ class NewContract extends Component {
                             label="Cell Phone"
                             name="ownerCellPhone"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerCellPhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -215,7 +278,7 @@ class NewContract extends Component {
                             label="Home Phone"
                             name="ownerHomePhone"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerHomePhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -229,7 +292,7 @@ class NewContract extends Component {
                             label="Office Phone"
                             name="ownerOfficePhone"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerOfficePhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -242,7 +305,7 @@ class NewContract extends Component {
                             label="Other Phone"
                             name="ownerOtherPhone"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerOtherPhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -252,11 +315,11 @@ class NewContract extends Component {
                             variant="outlined"
                             fullWidth
                             margin="dense"
-                            id="ownerAlarm"
+                            id="ownerAlarmCode"
                             label="Alarm Code"
-                            name="ownerAlarm"
+                            name="ownerAlarmCode"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerAlarmCode}
                             error={errors.email}
                         />
                       </Grid>
@@ -272,7 +335,7 @@ class NewContract extends Component {
                             label="Additional"
                             name="ownerAdditional"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerAdditional}
                             error={errors.email}
                         />
                       </Grid>
@@ -285,13 +348,12 @@ class NewContract extends Component {
                         <TextField
                             variant="outlined"
                             fullWidth
-                            id="ownerPhone"
+                            id="ownerRepToNotify"
                             margin="dense"
                             label="Name"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerRepToNotify"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerRepToNotify}
                             error={errors.email}
                         />
                       </Grid>
@@ -300,13 +362,12 @@ class NewContract extends Component {
                         <TextField
                             variant="outlined"
                             fullWidth
-                            id="ownerPhone"
+                            id="ownerRepStreet"
                             margin="dense"
                             label="Street"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerRepStreet"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerRepStreet}
                             error={errors.email}
                         />
                       </Grid>
@@ -314,13 +375,12 @@ class NewContract extends Component {
                         <TextField
                             variant="outlined"
                             fullWidth
-                            id="ownerPhone"
+                            id="ownerRepCity"
                             margin="dense"
                             label="City"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerRepCity"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerRepCity}
                             error={errors.email}
                         />
                       </Grid>
@@ -329,12 +389,11 @@ class NewContract extends Component {
                             variant="outlined"
                             fullWidth
                             margin="dense"
-                            id="ownerPhone"
+                            id="ownerRepState"
                             label="State"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerRepState"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerRepState}
                             error={errors.email}
                         />
                       </Grid>
@@ -342,13 +401,12 @@ class NewContract extends Component {
                         <TextField
                             variant="outlined"
                             fullWidth
-                            id="ownerPhone"
+                            id="ownerownerRepZipCode"
                             margin="dense"
                             label="Zipcode"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerownerRepZipCode"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerownerRepZipCode}
                             error={errors.email}
                         />
                       </Grid>
@@ -356,13 +414,12 @@ class NewContract extends Component {
                         <TextField
                             variant="outlined"
                             fullWidth
-                            id="ownerPhone"
+                            id="ownerRepPhone"
                             label="Phone"
                             margin="dense"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerRepPhone"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerRepPhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -371,12 +428,11 @@ class NewContract extends Component {
                             variant="outlined"
                             fullWidth
                             margin="dense"
-                            id="ownerPhone"
+                            id="ownerRepSecondPhone"
                             label="Alternate Phone"
-                            name="ownerPhone"
-                            autoComplete="ownerPhone"
+                            name="ownerRepSecondPhone"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.ownerRepSecondPhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -391,11 +447,11 @@ class NewContract extends Component {
                             required
                             margin="dense"
                             fullWidth
-                            id="address"
-                            label="Address"
-                            name="address"
+                            id="locationStreet"
+                            label="Street"
+                            name="locationStreet"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.locationStreet}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -405,11 +461,11 @@ class NewContract extends Component {
                             margin="dense"
                             required
                             fullWidth
-                            id="ownerPhone"
+                            id="locationCity"
                             label="City"
-                            name="ownerPhone"
+                            name="locationCity"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.locationCity}
                             error={errors.email}
                         />
                       </Grid>
@@ -419,11 +475,11 @@ class NewContract extends Component {
                             required
                             fullWidth
                             margin="dense"
-                            id="ownerPhone"
+                            id="locationState"
                             label="State"
-                            name="ownerPhone"
+                            name="locationState"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.locationState}
                             error={errors.email}
                         />
                       </Grid>
@@ -433,28 +489,12 @@ class NewContract extends Component {
                             margin="dense"
                             required
                             fullWidth
-                            id="ownerPhone"
+                            id="locationZipCode"
                             label="Zipcode"
-                            name="ownerPhone"
+                            name="locationZipCode"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.state.locationZipCode}
                             error={errors.email}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            margin="dense"
-                            name="propertyInfo"
-                            label="Property Information"
-                            id="propertyInfo"
-                            multiline
-                            rows={3}
-                            rowsMax={6}
-                            onChange={this.onChange}
-                            value={this.state.password}
-                            error={errors.password}
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -467,11 +507,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesIrrigationContact"
                             label="Irrigation Company"
-                            name="address"
+                            name="servicesIrrigationContact"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesIrrigationContact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -480,11 +520,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesIrrigationPhone"
                             label="Irrigation Phone"
-                            name="address"
+                            name="servicesIrrigationPhone"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesIrrigationPhone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -493,11 +533,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesPlumberContact"
                             label="Plumbing Company"
-                            name="address"
+                            name="servicesPlumberContact"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesPlumberContact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -506,11 +546,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesPlumberPhone"
                             label="Plumbing Phone"
-                            name="address"
+                            name="servicesPlumberPhone"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesPlumberPhone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -519,11 +559,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesElectricianContact"
                             label="Electrician Company"
-                            name="address"
+                            name="servicesElectricianContact"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesElectricianContact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -532,11 +572,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesElectricianPhone"
                             label="Electrician Phone"
-                            name="address"
+                            name="servicesElectricianPhone"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesElectricianPhone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -545,11 +585,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesCarpenterContact"
                             label="Carpentry Company"
-                            name="address"
+                            name="servicesCarpenterContact"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesCarpenterContact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -558,11 +598,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesCarpenterPhone"
                             label="Carpentry Phone"
-                            name="address"
+                            name="servicesCarpenterPhone"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesCarpenterPhone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -571,11 +611,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesApplianceContact"
                             label="Appliance Company"
-                            name="address"
+                            name="servicesApplianceContact"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesApplianceContact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -584,11 +624,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesAppliancePhone"
                             label="Appliance Phone"
-                            name="address"
+                            name="servicesAppliancePhone"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesAppliancePhone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -597,11 +637,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesFurnanceContact"
                             label="Furnance/HVAC Company"
-                            name="address"
+                            name="servicesFurnanceContact"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesFurnanceContact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -610,11 +650,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesFurnancePhone"
                             label="Furnance/HVAC Phone"
-                            name="address"
+                            name="servicesFurnancePhone"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesFurnancePhone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -623,11 +663,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesCleanerContact"
                             label="Cleaning Company"
-                            name="address"
+                            name="servicesCleanerContact"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesCleanerContact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -636,11 +676,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesCleanerPhone"
                             label="Cleaning Phone"
-                            name="address"
+                            name="servicesCleanerPhone"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesCleanerPhone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -649,11 +689,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesBoatsAndDocksContact"
                             label="Boats/Docks Company"
-                            name="address"
+                            name="servicesBoatsAndDocksContact"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesBoatsAndDocksContact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -662,11 +702,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="servicesBoatsAndDocksPhone"
                             label="Boats/Docks Phone"
-                            name="address"
+                            name="servicesBoatsAndDocksPhone"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.servicesBoatsAndDocksPhone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -679,16 +719,22 @@ class NewContract extends Component {
                         <FormLabel component="legend">Select all that apply</FormLabel>
                         <FormGroup row>
                           <FormControlLabel
-                            control={<Checkbox checked={false} value="gilad" />}
+                            control={<Checkbox value={this.state.specialOutsideShower} 
+                            name="specialOutsideShower"
+                            id="specialOutsideShower" />}
                             label="Outside Shower"
                           />
                           <FormControlLabel
-                            control={<Checkbox checked={false} value="jason" />}
+                            control={<Checkbox value={this.state.specialOutsideFaucet} 
+                            name="specialOutsideFaucet"
+                            id="specialOutsideFaucet" />}
                             label="Outside Faucet"
                           />
                           <FormControlLabel
                             control={
-                              <Checkbox checked={false} value="antoine" />
+                              <Checkbox value={this.state.specialOutsideSpa} 
+                              name="specialOutsideSpa"
+                              id="specialOutsideSpa" />
                             }
                             label="Outside Spa"
                           />
@@ -699,11 +745,11 @@ class NewContract extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="address"
+                            id="specialOther"
                             label="Other"
-                            name="address"
+                            name="specialOther"
                             onChange={this.onChange}
-                            value={this.state.companyName}
+                            value={this.state.specialOther}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -729,14 +775,16 @@ class NewContract extends Component {
       );
   }
 }
-NewContract.propTypes = {
+NewProperty.propTypes = {
   logoutUser: PropTypes.func.isRequired,
+  addNewProperty: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  properties: state.properties
 });
 export default connect(
   mapStateToProps,
-  { logoutUser }
-)(NewContract);
+  { logoutUser, addNewProperty }
+)(NewProperty);

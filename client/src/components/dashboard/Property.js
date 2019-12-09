@@ -11,11 +11,11 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Container } from "@material-ui/core";
 
-class Contract extends Component {
+class Property extends Component {
     render() {
     const { loading = false } = this.props;
     const { imageUrl } = this.props;
-    const { contract } = this.props;     
+    const { property } = this.props;     
     return (
       <Card style={{maxWidth: 345}} margin={2}>
       <CardHeader
@@ -33,14 +33,14 @@ class Contract extends Component {
             </IconButton>
           )
         }
-        title={loading ? <Skeleton height={6} width="80%" /> : contract.location.street}
-        subheader={loading ? <Skeleton height={6} width="40%" /> : `${contract.location.city}, ${contract.location.state}`}
+        title={loading ? <Skeleton height={6} width="80%" /> : property.location.street}
+        subheader={loading ? <Skeleton height={6} width="40%" /> : `${property.location.city}, ${property.location.state}`}
       />
       {loading ? (
         <Skeleton variant="rect" height={190} width={345} />
       ) : ( imageUrl ? (
         <CardMedia
-          title={contract.location.city}>
+          title={property.location.city}>
           <img src={imageUrl} alt="Apartment or property" width="100%" />
         </CardMedia>
       ) : (<Skeleton variant="rect" height={190} width={345} />))}
@@ -54,7 +54,7 @@ class Contract extends Component {
         ) : (
           <Typography variant="body2" color="textSecondary" component="p">
             {
-              `${contract.location.street}, ${contract.location.city}, ${contract.location.state} ${contract.location.zipCode}`
+              `${property.owner.firstName} ${property.owner.lastName}`
             }
           </Typography>
         )}
@@ -63,8 +63,8 @@ class Contract extends Component {
     );
   }
 }
-Contract.propTypes = {
+Property.propTypes = {
   loading: PropTypes.bool,
 };
 export default connect(
-)(Contract);
+)(Property);

@@ -14,7 +14,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
-import NewContract from "./components/dashboard/NewContract";
+import NewProperty from "./components/dashboard/NewProperty";
 import Profile from "./components/account/Profile";
 import red from "@material-ui/core/colors/red";
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -73,7 +73,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                <PrivateRoute exact path="/new-contract" component={NewContract} />
+                <PrivateRoute exact path="/new-property" component={NewProperty} />
                 <PrivateRoute exact path="/profile" component={Profile} />
               </Switch>
             </main>
