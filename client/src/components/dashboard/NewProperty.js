@@ -126,7 +126,6 @@ class NewProperty extends Component {
     }
     onSubmit = e => {
       e.preventDefault();
-
       this.props.addNewProperty(this.state.property, this.props.auth.user.id, this.props.history);
     }
     
