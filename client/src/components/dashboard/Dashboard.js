@@ -73,7 +73,7 @@ class Dashboard extends Component {
                     <Property property={property} />
                   </Grid>);
                 })
-                : <Property loading />
+                : <Grid item xs={12} sm={4}><Property loading /></Grid>
               }
             </Grid>
           </Grid>
