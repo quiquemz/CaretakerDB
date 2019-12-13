@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Card from '@material-ui/core/Card';
-import PropertyView from "./PropertyView";
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -20,12 +19,7 @@ class Property extends Component {
     this.state = {
       hovered: false,
     };
-    this.goToProperty = this.goToProperty.bind(this);
   };
-
-  goToProperty() {
-    this.props.history.push('/property/' + this.props.property._id);
-  }
 
   onMouseOver = () => this.setState({ hovered: true });
   onMouseOut = () => this.setState({ hovered: false });
@@ -34,7 +28,7 @@ class Property extends Component {
     const { imageUrl } = this.props;
     const { property } = this.props;     
     return (
-      <Link onClick={this.goToProperty} underline="none">
+      <Link href={"/property/1"  } underline="none">
         <Card style={{maxWidth: 345}} margin={2} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
         <CardHeader
           avatar={

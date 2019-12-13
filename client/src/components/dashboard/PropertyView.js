@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Container, Grid, Typography, Link } from "@material-ui/core";
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import HomeWorkIcon from '@material-ui/icons/HomeWork';
-import AddIcon from '@material-ui/icons/Add';
+import { 
+    Container, 
+    Grid, 
+    Typography,
+    Paper, } from "@material-ui/core";
 
 class PropertyView extends Component {
   constructor(props) {
@@ -25,37 +25,25 @@ class PropertyView extends Component {
     }
     return (
       <Container fixed>
+          <Paper>
         <Grid
           container
           direction="column"
           spacing={3}>
           <Grid item>
-            {user.firstName ? <Typography variant="h3">Welcome, {user.firstName}.</Typography>
-              : <Typography variant="h3">Welcome to your Dashboard!</Typography>}
-            <Typography variant="body1" gutterBottom>This is the dashboard, you can find everything related to the management of your caretaking properties here.</Typography>
-          </Grid>
-          <Grid item>
             <Grid container spacing={3}>
-              <Grid item xs={12} sm={4} height="100%">
-                <Link href="/new-property" underline="none">
-                  <Card style={addCardStyles}>
-                    <CardContent>
-                      <Typography color="textSecondary" align="center">
-                        <HomeWorkIcon fontSize="large" />
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary" component="p" align="center">
-                        Add a new property
-                      </Typography>
-                      <Typography color="textSecondary" align="center">
-                        <AddIcon fontSize="large" />
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Link>
+              <Grid item xs={12} sm={12} height="100%">
+                <Typography variant="h5" component="h3">
+                    This is a property.
+                </Typography>
+                <Typography component="p">
+                    Welcome to the property view page where you can see all the information for a specific property!
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+        </Paper>
       </Container>
     );
   }
