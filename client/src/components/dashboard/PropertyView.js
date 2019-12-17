@@ -24,8 +24,8 @@ class PropertyView extends Component {
       maxWidth: 345,
     }
     return (
+      <Paper>
       <Container fixed>
-          <Paper>
         <Grid
           container
           direction="column"
@@ -43,8 +43,8 @@ class PropertyView extends Component {
             </Grid>
           </Grid>
         </Grid>
-        </Paper>
       </Container>
+      </Paper>
     );
   }
 }

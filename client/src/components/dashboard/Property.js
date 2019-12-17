@@ -28,7 +28,7 @@ class Property extends Component {
     const { imageUrl } = this.props;
     const { property } = this.props;     
     return (
-      <Link href={"/property/1"  } underline="none">
+      <Link href={"/property/1"} underline="none">
         <Card style={{maxWidth: 345}} margin={2} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
         <CardHeader
           avatar={
