@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Card from '@material-ui/core/Card';
@@ -10,7 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { Link } from "@material-ui/core";
 import Location from "./img/find_house.svg";
 
 class Property extends Component {
@@ -28,7 +28,10 @@ class Property extends Component {
     const { imageUrl } = this.props;
     const { property } = this.props;     
     return (
-      <Link href={"/property/1"} underline="none">
+      <Link to={{
+        pathname: property ? ("/property/" + property._id) : "#",
+        property: property
+        }} underline="none">
         <Card style={{maxWidth: 345}} margin={2} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
         <CardHeader
           avatar={

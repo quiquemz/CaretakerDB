@@ -35,6 +35,9 @@ class PropertyView extends Component {
               <Grid item xs={12} sm={12} height="100%">
                 <Typography variant="h5" component="h3">
                     This is a property.
+                    {this.props.property ? 
+                      <h1>{this.props.property.location.street}</h1>
+                    : <></>}
                 </Typography>
                 <Typography component="p">
                     Welcome to the property view page where you can see all the information for a specific property!
