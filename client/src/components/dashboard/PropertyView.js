@@ -22,22 +22,24 @@ class PropertyView extends Component {
       justifyContent: 'center',
       height: '100%',
       maxWidth: 345,
-    }
+    };
+    const propertyId = this.props.location.pathname.replace('/property/', '');
+    const property = this.props.properties.properties.length > 0 ? this.props.properties.properties.find(prty => propertyId === prty._id) : null;
     return (
-      <Paper>
       <Container fixed>
-        <Grid
+        {property ?
+          <Grid
           container
           direction="column"
           spacing={3}>
           <Grid item>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12} height="100%">
-                <Typography variant="h5" component="h3">
-                    This is a property.
-                    {this.props.property ? 
-                      <h1>{this.props.property.location.street}</h1>
-                    : <></>}
+                <Typography variant="h5" component="h5">
+                    {property.location.street}, {property.location.state} {property.location.zipCode}
+                </Typography>
+                <Typography variant="h6" component="h6">
+                    {property.owner.firstName} {property.owner.lastName}
                 </Typography>
                 <Typography component="p">
                     Welcome to the property view page where you can see all the information for a specific property!
@@ -46,8 +48,26 @@ class PropertyView extends Component {
             </Grid>
           </Grid>
         </Grid>
+        :
+        <Grid
+          container
+          direction="column"
+          spacing={3}>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={12} height="100%">
+                <Typography variant="h5" component="h3">
+                    This property is unavailable.
+                </Typography>
+                <Typography component="p">
+                    Welcome to the property view page where you can see all the information for a specific property!
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        }
       </Container>
-      </Paper>
     );
   }
 }

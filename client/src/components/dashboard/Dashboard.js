@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getProperties } from "../../actions/propertyActions";
 import Property from "./Property";
-import { Container, Grid, Typography, Link } from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
@@ -51,7 +52,7 @@ class Dashboard extends Component {
           <Grid item>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={4} height="100%">
-                <Link href="/new-property" underline="none">
+                <Link to="/new-property" style={{textDecoration: "none"}}>
                   <Card style={addCardStyles} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                     <CardContent>
                       <Typography color="textSecondary" align="center">

@@ -31,7 +31,7 @@ class Property extends Component {
       <Link to={{
         pathname: property ? ("/property/" + property._id) : "#",
         property: property
-        }} underline="none">
+        }} underline="none" style={{textDecoration: 'none'}}>
         <Card style={{maxWidth: 345}} margin={2} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
         <CardHeader
           avatar={
