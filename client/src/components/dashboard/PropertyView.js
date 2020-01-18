@@ -36,7 +36,7 @@ class PropertyView extends Component {
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12} height="100%">
                 <Typography variant="h5" component="h5">
-                    {property.location.street}, {property.location.state} {property.location.zipCode}
+                    {property.location.street}, {property.location.city}, {property.location.state} {property.location.zipCode}
                 </Typography>
                 <Typography variant="h6" component="h6">
                     {property.owner.firstName} {property.owner.lastName}
