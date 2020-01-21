@@ -1,13 +1,12 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
-  Container,
-  Link
+  Container
   } from '@material-ui/core';
 
 function Copyright() {
@@ -48,9 +47,9 @@ function StickyFooter(props) {
       <BottomNavigation className={classes.footer}>
         <Container maxWidth="sm">
           {loggedIn ? 
-          <Typography variant="body1" align="center">Welcome back, <Link href="/profile">{props.auth.user.firstName}</Link></Typography>
+          <Typography variant="body1" align="center">Welcome back, <Link to="/profile" style={{ textDecoration: 'none' }}>{props.auth.user.firstName}</Link></Typography>
           :
-          <Typography variant="body1" align="center">Ready to join? <Link href="/register">Sign up here.</Link></Typography>
+          <Typography variant="body1" align="center">Ready to join? <Link to="/register" style={{ textDecoration: 'none' }}>Sign up here.</Link></Typography>
           }
           <Copyright />
         </Container>
