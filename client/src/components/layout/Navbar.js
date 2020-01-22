@@ -133,15 +133,15 @@ export function Navbar(props) {
       {props.auth.isAuthenticated ? <><List>
           <ListItem button
             key="New property"
-            component="a"
-            href="/new-property">
+            component={Link}
+            to="/new-property">
               <ListItemIcon><AddIcon /></ListItemIcon>
               <ListItemText primary="New property" />
           </ListItem>
           <ListItem button
             key="Dashboard"
-            component="a"
-            href="/dashboard">
+            component={Link}
+            to="/dashboard">
             <ListItemIcon><ViewModuleIcon /></ListItemIcon>
             <ListItemText primary="Dashboard" />
           </ListItem>
@@ -151,8 +151,8 @@ export function Navbar(props) {
           <ListItem 
             button 
             key="Profile"
-            component="a"
-            href="/profile">
+            component={Link}
+            to="/profile">
             <ListItemIcon><AccountCircleIcon /></ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
@@ -166,27 +166,27 @@ export function Navbar(props) {
           :<>
           <ListItem button
             key="Home"
-            component="a"
-            href="/">
+            component={Link}
+            to="/">
               <ListItemIcon><HomeIcon /></ListItemIcon>
               <ListItemText primary="Home" />
           </ListItem>
           <ListItem 
           button 
           key="Log in"
-          component="a"
-          href="/login">
+          component={Link}
+          to="/login">
             <ListItemIcon><LockIcon /></ListItemIcon>
             <ListItemText primary="Log in" />
           </ListItem>
-          {/* <ListItem 
+          <ListItem 
           button 
           key="Register"
-          component="a"
-          href="/register">
+          component={Link}
+          to="/register">
             <ListItemIcon>{}</ListItemIcon>
             <ListItemText primary="Register" />
-          </ListItem> */}
+          </ListItem>
           </>}
       </List>
     </div>
@@ -227,11 +227,11 @@ export function Navbar(props) {
       onClose={handleMenuClose}
     >
       {props.auth.isAuthenticated ?
-      <Container><MenuItem onClick={handleMenuClose} component="a" href="/profile">Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose} component="a" href="/account">My account</MenuItem>
+      <Container><MenuItem onClick={handleMenuClose} component={Link} to="/profile">Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose} component={Link} to="/account">My account</MenuItem>
       <MenuItem onClick={onLogoutClick}>Log out</MenuItem></Container>
       :
-      <MenuItem onClick={handleMenuClose} component="a" href="/login">Log in</MenuItem> 
+      <MenuItem onClick={handleMenuClose} component={Link} to="/login">Log in</MenuItem> 
       }
     </Menu>
   );
@@ -264,7 +264,7 @@ export function Navbar(props) {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen} component="a" href="/profile">
+      <MenuItem onClick={handleProfileMenuOpen} component={Link} to="/profile">
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -276,7 +276,7 @@ export function Navbar(props) {
         <p>Profile</p>
       </MenuItem>
       </Container> : <Container>
-      <MenuItem component="a" href="/login">
+      <MenuItem component={Link} to="/login">
         <p>Log in</p>
       </MenuItem>
       </Container>}

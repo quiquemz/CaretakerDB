@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { 
     Container, 
     Grid, 
     Typography,
-    Paper, } from "@material-ui/core";
+    Fab } from "@material-ui/core";
+import EditIcon from '@material-ui/icons/Edit';
 
 class PropertyView extends Component {
   constructor(props) {
@@ -15,14 +17,16 @@ class PropertyView extends Component {
     };
   };
   render() {
-    const { user } = this.props.auth;
-    const addCardStyles = {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      height: '100%',
-      maxWidth: 345,
-    };
+    const fab = {
+        color: 'secondary',
+        className: {
+          position: 'absolute',
+          bottom: '2rem',
+          right: '2rem',
+        },
+        icon: <EditIcon />,
+        label: 'Edit',
+      };
     const propertyId = this.props.location.pathname.replace('/property/', '');
     const property = this.props.properties.properties.length > 0 ? this.props.properties.properties.find(prty => propertyId === prty._id) : null;
     return (
@@ -47,6 +51,9 @@ class PropertyView extends Component {
               </Grid>
             </Grid>
           </Grid>
+          <Fab aria-label={fab.label} className={fab.className} color={fab.color}>
+            {fab.icon}
+          </Fab>
         </Grid>
         :
         <Grid
