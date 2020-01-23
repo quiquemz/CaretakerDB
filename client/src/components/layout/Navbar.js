@@ -323,7 +323,7 @@ export function Navbar(props) {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-            {props.auth.isAuthenticated ? <Container>
+            {props.auth.isAuthenticated ? <div>
               <IconButton aria-label="show 0 new mails" color="inherit">
                 <Badge badgeContent={0} color="secondary">
                   <MailIcon />
@@ -333,7 +333,7 @@ export function Navbar(props) {
                 <Badge badgeContent={0} color="secondary">
                   <NotificationsIcon />
                 </Badge>
-              </IconButton></Container>
+              </IconButton></div>
               : <Container></Container>}
               <IconButton
                 edge="end"

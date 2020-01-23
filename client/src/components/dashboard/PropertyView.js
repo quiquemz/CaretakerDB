@@ -18,7 +18,7 @@ class PropertyView extends Component {
   };
   render() {
     const fab = {
-        color: 'secondary',
+        color: 'primary',
         className: {
           position: 'absolute',
           bottom: '2rem',
