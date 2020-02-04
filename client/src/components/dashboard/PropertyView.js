@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { 
     Container, 
@@ -51,7 +52,7 @@ class PropertyView extends Component {
               </Grid>
             </Grid>
           </Grid>
-          <Fab aria-label={fab.label} className={fab.className} color={fab.color}>
+          <Fab aria-label={fab.label} className={fab.className} color={fab.color} component={Link} to={"/edit/" + property._id}>
             {fab.icon}
           </Fab>
         </Grid>

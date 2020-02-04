@@ -16,6 +16,7 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import NewProperty from "./components/dashboard/NewProperty";
 import PropertyView from "./components/dashboard/PropertyView";
+import EditView from "./components/dashboard/EditView";
 import Profile from "./components/account/Profile";
 import red from "@material-ui/core/colors/red";
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -75,6 +76,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute path="/property/:id" component={PropertyView} />
+                <PrivateRoute path="/edit/:id" component={EditView} />
                 <PrivateRoute exact path="/new-property" component={NewProperty} />
                 <PrivateRoute exact path="/profile" component={Profile} />
               </Switch>

@@ -29,7 +29,7 @@ class Property extends Component {
     const { property } = this.props;     
     return (
       <Link to={{
-        pathname: property ? ("/property/" + property._id) : "#",
+        pathname: property ? ("/property/" + property._id) : "/dashboard",
         property: property
         }} underline="none" style={{textDecoration: 'none'}}>
         <Card style={{maxWidth: 345}} margin={2} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>

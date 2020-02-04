@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import { Link } from 'react-router-dom';
 import { 
   Typography, 
   Box,
@@ -76,7 +77,7 @@ export function Landing(props) {
           spacing={0}>
           <Grid item xs={12} justify="center">
             <Typography align="center">
-              <Fab variant="contained" color="primary" className={classes.margin} aria-label="add" href="/register">
+              <Fab variant="contained" color="primary" className={classes.margin} aria-label="add" to="/register" component={Link}>
                 Get started
                 <SendIcon className={classes.extendedIcon} />
               </Fab>
