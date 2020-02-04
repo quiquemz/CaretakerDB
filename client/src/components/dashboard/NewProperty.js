@@ -74,6 +74,8 @@ class NewProperty extends Component {
           specialOutsideFaucet: false,
           specialOutsideSpa: false,
           specialOther: '',
+          termsDate: Date.now(),
+          termsSigned: ''
         },
         errors: {},
       };
@@ -159,6 +161,7 @@ class NewProperty extends Component {
                         <TextField
                             variant="outlined"
                             required
+                            autoFocus
                             margin="dense"
                             fullWidth
                             id="locationStreet"
@@ -226,7 +229,6 @@ class NewProperty extends Component {
                             fullWidth
                             id="ownerFirstName"
                             label="First Name"
-                            autoFocus
                             onChange={this.onChange}
                             value={this.state.ownerFirstName}
                             error={errors.firstName}
@@ -718,22 +720,25 @@ class NewProperty extends Component {
                         <FormLabel component="legend">Select all that apply</FormLabel>
                         <FormGroup row>
                           <FormControlLabel
-                            control={<Checkbox value={this.state.specialOutsideShower} 
+                            control={<Checkbox checked={this.state.specialOutsideShower} 
                             name="specialOutsideShower"
-                            id="specialOutsideShower" />}
+                            id="specialOutsideShower"
+                            onChange={this.onChange} />}
                             label="Outside Shower"
                           />
                           <FormControlLabel
-                            control={<Checkbox value={this.state.specialOutsideFaucet} 
+                            control={<Checkbox checked={this.state.specialOutsideFaucet} 
                             name="specialOutsideFaucet"
-                            id="specialOutsideFaucet" />}
+                            id="specialOutsideFaucet"
+                            onChange={this.onChange} />}
                             label="Outside Faucet"
                           />
                           <FormControlLabel
                             control={
-                              <Checkbox value={this.state.specialOutsideSpa} 
+                              <Checkbox checked={this.state.specialOutsideSpa} 
                               name="specialOutsideSpa"
-                              id="specialOutsideSpa" />
+                              id="specialOutsideSpa"
+                              onChange={this.onChange} />
                             }
                             label="Outside Spa"
                           />

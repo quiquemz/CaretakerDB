@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
+import { getProperties } from "../../actions/propertyActions";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -62,6 +63,7 @@ class Login extends Component {
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
+      this.props.getProperties(this.props.auth.user.id);
       this.props.history.push("/dashboard");
     }
   }
@@ -153,13 +155,15 @@ class Login extends Component {
 Login.propTypes = {
     loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
+    getProperties: PropTypes.isRequired,
     errors: PropTypes.object.isRequired
   };
 const mapStateToProps = state => ({
     auth: state.auth,
+    properties: state.properties,
     errors: state.errors
 });
 export default connect(
     mapStateToProps,
-    { loginUser }
+    { loginUser, getProperties }
 )(Login);

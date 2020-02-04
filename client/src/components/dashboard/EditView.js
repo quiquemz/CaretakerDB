@@ -21,60 +21,6 @@ class EditView extends Component {
       super(props);
       this.state = {
         expanded: false,
-        property: {
-          userId: this.props.auth.user.id,
-          season: '',
-          price: 0,
-          additionalCosts: 0,
-          additionalCostsDetails: '',
-          currentOwed: 0,
-          dateCreated: Date.now(),
-          locationStreet: '',
-          locationCity: '',
-          locationZipCode: '',
-          locationState: '',
-          ownerFirstName: '',
-          ownerLastName: '',
-          ownerPlowing: false,
-          ownerEmail: '',
-          ownerStreet: '',
-          ownerCity: '',
-          ownerZipCode: '',
-          ownerState: '',
-          ownerHomePhone: '',
-          ownerOfficePhone: '',
-          ownerOtherPhone: '',
-          ownerCellPhone: '',
-          ownerRepToNotify: '',
-          ownerRepStreet: '',
-          ownerRepCity: '',
-          ownerRepZipCode: '',
-          ownerRepState: '',
-          ownerRepPhone: '',
-          ownerRepSecondPhone: '',
-          ownerAlarmCode: '',
-          ownerAdditional: '',
-          servicesIrrigationContact: '',
-          servicesIrrigationPhone: '',
-          servicesPlumberContact: '',
-          servicesPlumberPhone: '',
-          servicesElectricianContact: '',
-          servicesElectricianPhone: '',
-          servicesCarpenterContact: '',
-          servicesCarpenterPhone: '',
-          servicesApplianceContact: '',
-          servicesAppliancePhone: '',
-          servicesFurnaceContact: '',
-          servicesFurnacePhone: '',
-          servicesCleanerContact: '',
-          servicesCleanerPhone: '',
-          servicesBoatsAndDocksContact: '',
-          servicesBoatsAndDocksPhone: '',
-          specialOutsideShower: false,
-          specialOutsideFaucet: false,
-          specialOutsideSpa: false,
-          specialOther: '',
-        },
         errors: {},
       };
       this.useStyles = makeStyles(theme => ({
@@ -117,16 +63,10 @@ class EditView extends Component {
     }
     onChange (event) {
       const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      const name = target.name;
-      const property = {...this.state.property};
-      property[name] = value;
-  
-      this.setState({property});
     }
     onSubmit = e => {
       e.preventDefault();
-      this.props.addNewProperty(this.state.property, this.props.auth.user.id, this.props.history);
+    //   this.props.addNewProperty(this.state.property, this.props.auth.user.id, this.props.history);
     }
     
     render() {
@@ -162,12 +102,13 @@ class EditView extends Component {
                             variant="outlined"
                             required
                             margin="dense"
+                            autoFocus
                             fullWidth
                             id="locationStreet"
                             label="Street"
                             name="locationStreet"
                             onChange={this.onChange}
-                            value={this.state.locationStreet}
+                            value={property.location.street}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -181,7 +122,7 @@ class EditView extends Component {
                             label="City"
                             name="locationCity"
                             onChange={this.onChange}
-                            value={this.state.locationCity}
+                            value={property.location.city}
                             error={errors.email}
                         />
                       </Grid>
@@ -195,7 +136,7 @@ class EditView extends Component {
                             label="State"
                             name="locationState"
                             onChange={this.onChange}
-                            value={this.state.locationState}
+                            value={property.location.state}
                             error={errors.email}
                         />
                       </Grid>
@@ -209,7 +150,7 @@ class EditView extends Component {
                             label="Zipcode"
                             name="locationZipCode"
                             onChange={this.onChange}
-                            value={this.state.locationZipCode}
+                            value={property.location.zipCode}
                             error={errors.email}
                         />
                       </Grid>
@@ -228,9 +169,8 @@ class EditView extends Component {
                             fullWidth
                             id="ownerFirstName"
                             label="First Name"
-                            autoFocus
                             onChange={this.onChange}
-                            value={this.state.ownerFirstName}
+                            value={property.owner.firstName}
                             error={errors.firstName}
                         />
                       </Grid>
@@ -244,7 +184,7 @@ class EditView extends Component {
                             label="Last Name"
                             name="ownerLastName"
                             onChange={this.onChange}
-                            value={this.state.ownerLastName}
+                            value={property.owner.lastName}
                             error={errors.lastName}
                         />
                       </Grid>
@@ -257,7 +197,7 @@ class EditView extends Component {
                             label="Email Address"
                             name="ownerEmail"
                             onChange={this.onChange}
-                            value={this.state.ownerEmail}
+                            value={property.owner.email}
                             error={errors.email}
                         />
                       </Grid>
@@ -271,7 +211,7 @@ class EditView extends Component {
                             label="Street"
                             name="ownerStreet"
                             onChange={this.onChange}
-                            value={this.state.ownerStreet}
+                            value={property.owner.address.street}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -285,7 +225,7 @@ class EditView extends Component {
                             label="City"
                             name="ownerCity"
                             onChange={this.onChange}
-                            value={this.state.ownerCity}
+                            value={property.owner.address.city}
                             error={errors.email}
                         />
                       </Grid>
@@ -299,7 +239,7 @@ class EditView extends Component {
                             label="State"
                             name="ownerState"
                             onChange={this.onChange}
-                            value={this.state.ownerState}
+                            value={property.owner.address.state}
                             error={errors.email}
                         />
                       </Grid>
@@ -313,7 +253,7 @@ class EditView extends Component {
                             label="Zipcode"
                             name="ownerZipCode"
                             onChange={this.onChange}
-                            value={this.state.ownerZipCode}
+                            value={property.owner.address.zipCode}
                             error={errors.email}
                         />
                       </Grid>
@@ -327,7 +267,7 @@ class EditView extends Component {
                             label="Cell Phone"
                             name="ownerCellPhone"
                             onChange={this.onChange}
-                            value={this.state.ownerCellPhone}
+                            value={property.owner.cellPhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -340,7 +280,7 @@ class EditView extends Component {
                             label="Home Phone"
                             name="ownerHomePhone"
                             onChange={this.onChange}
-                            value={this.state.ownerHomePhone}
+                            value={property.owner.homePhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -354,7 +294,7 @@ class EditView extends Component {
                             label="Office Phone"
                             name="ownerOfficePhone"
                             onChange={this.onChange}
-                            value={this.state.ownerOfficePhone}
+                            value={property.owner.officePhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -367,7 +307,7 @@ class EditView extends Component {
                             label="Other Phone"
                             name="ownerOtherPhone"
                             onChange={this.onChange}
-                            value={this.state.ownerOtherPhone}
+                            value={property.owner.otherPhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -381,7 +321,7 @@ class EditView extends Component {
                             label="Alarm Code"
                             name="ownerAlarmCode"
                             onChange={this.onChange}
-                            value={this.state.ownerAlarmCode}
+                            value={property.owner.alarmCode}
                             error={errors.email}
                         />
                       </Grid>
@@ -397,7 +337,7 @@ class EditView extends Component {
                             label="Additional"
                             name="ownerAdditional"
                             onChange={this.onChange}
-                            value={this.state.ownerAdditional}
+                            value={property.owner.additional}
                             error={errors.email}
                         />
                       </Grid>
@@ -415,7 +355,7 @@ class EditView extends Component {
                             label="Name"
                             name="ownerRepToNotify"
                             onChange={this.onChange}
-                            value={this.state.ownerRepToNotify}
+                            value={property.owner.repToNotify}
                             error={errors.email}
                         />
                       </Grid>
@@ -429,7 +369,7 @@ class EditView extends Component {
                             label="Street"
                             name="ownerRepStreet"
                             onChange={this.onChange}
-                            value={this.state.ownerRepStreet}
+                            value={property.owner.repAddress.street}
                             error={errors.email}
                         />
                       </Grid>
@@ -442,7 +382,7 @@ class EditView extends Component {
                             label="City"
                             name="ownerRepCity"
                             onChange={this.onChange}
-                            value={this.state.ownerRepCity}
+                            value={property.owner.repAddress.city}
                             error={errors.email}
                         />
                       </Grid>
@@ -455,7 +395,7 @@ class EditView extends Component {
                             label="State"
                             name="ownerRepState"
                             onChange={this.onChange}
-                            value={this.state.ownerRepState}
+                            value={property.owner.repAddress.state}
                             error={errors.email}
                         />
                       </Grid>
@@ -468,7 +408,7 @@ class EditView extends Component {
                             label="Zipcode"
                             name="ownerownerRepZipCode"
                             onChange={this.onChange}
-                            value={this.state.ownerownerRepZipCode}
+                            value={property.owner.repAddress.zipCode}
                             error={errors.email}
                         />
                       </Grid>
@@ -481,7 +421,7 @@ class EditView extends Component {
                             margin="dense"
                             name="ownerRepPhone"
                             onChange={this.onChange}
-                            value={this.state.ownerRepPhone}
+                            value={property.owner.repPhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -494,7 +434,7 @@ class EditView extends Component {
                             label="Alternate Phone"
                             name="ownerRepSecondPhone"
                             onChange={this.onChange}
-                            value={this.state.ownerRepSecondPhone}
+                            value={property.owner.repSecondPhone}
                             error={errors.email}
                         />
                       </Grid>
@@ -512,7 +452,7 @@ class EditView extends Component {
                             label="Irrigation Company"
                             name="servicesIrrigationContact"
                             onChange={this.onChange}
-                            value={this.state.servicesIrrigationContact}
+                            value={property.services.irrigation.contact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -525,7 +465,7 @@ class EditView extends Component {
                             label="Irrigation Phone"
                             name="servicesIrrigationPhone"
                             onChange={this.onChange}
-                            value={this.state.servicesIrrigationPhone}
+                            value={property.services.irrigation.phone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -538,7 +478,7 @@ class EditView extends Component {
                             label="Plumbing Company"
                             name="servicesPlumberContact"
                             onChange={this.onChange}
-                            value={this.state.servicesPlumberContact}
+                            value={property.services.plumber.contact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -551,7 +491,7 @@ class EditView extends Component {
                             label="Plumbing Phone"
                             name="servicesPlumberPhone"
                             onChange={this.onChange}
-                            value={this.state.servicesPlumberPhone}
+                            value={property.services.plumber.phone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -564,7 +504,7 @@ class EditView extends Component {
                             label="Electrician Company"
                             name="servicesElectricianContact"
                             onChange={this.onChange}
-                            value={this.state.servicesElectricianContact}
+                            value={property.services.electrician.contact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -577,7 +517,7 @@ class EditView extends Component {
                             label="Electrician Phone"
                             name="servicesElectricianPhone"
                             onChange={this.onChange}
-                            value={this.state.servicesElectricianPhone}
+                            value={property.services.electrician.phone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -590,7 +530,7 @@ class EditView extends Component {
                             label="Carpentry Company"
                             name="servicesCarpenterContact"
                             onChange={this.onChange}
-                            value={this.state.servicesCarpenterContact}
+                            value={property.services.carpenter.contact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -603,7 +543,7 @@ class EditView extends Component {
                             label="Carpentry Phone"
                             name="servicesCarpenterPhone"
                             onChange={this.onChange}
-                            value={this.state.servicesCarpenterPhone}
+                            value={property.services.carpenter.phone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -616,7 +556,7 @@ class EditView extends Component {
                             label="Appliance Company"
                             name="servicesApplianceContact"
                             onChange={this.onChange}
-                            value={this.state.servicesApplianceContact}
+                            value={property.services.appliance.contact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -629,7 +569,7 @@ class EditView extends Component {
                             label="Appliance Phone"
                             name="servicesAppliancePhone"
                             onChange={this.onChange}
-                            value={this.state.servicesAppliancePhone}
+                            value={property.services.appliance.phone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -638,11 +578,11 @@ class EditView extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="servicesFurnanceContact"
-                            label="Furnance/HVAC Company"
-                            name="servicesFurnanceContact"
+                            id="servicesFurnaceContact"
+                            label="Furnace/HVAC Company"
+                            name="servicesFurnaceContact"
                             onChange={this.onChange}
-                            value={this.state.servicesFurnanceContact}
+                            value={property.services.furnace.contact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -651,11 +591,11 @@ class EditView extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="servicesFurnancePhone"
-                            label="Furnance/HVAC Phone"
-                            name="servicesFurnancePhone"
+                            id="servicesFurnacePhone"
+                            label="Furnace/HVAC Phone"
+                            name="servicesFurnacePhone"
                             onChange={this.onChange}
-                            value={this.state.servicesFurnancePhone}
+                            value={property.services.furnace.phone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -668,7 +608,7 @@ class EditView extends Component {
                             label="Cleaning Company"
                             name="servicesCleanerContact"
                             onChange={this.onChange}
-                            value={this.state.servicesCleanerContact}
+                            value={property.services.cleaner.contact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -681,7 +621,7 @@ class EditView extends Component {
                             label="Cleaning Phone"
                             name="servicesCleanerPhone"
                             onChange={this.onChange}
-                            value={this.state.servicesCleanerPhone}
+                            value={property.services.cleaner.phone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -694,7 +634,7 @@ class EditView extends Component {
                             label="Boats/Docks Company"
                             name="servicesBoatsAndDocksContact"
                             onChange={this.onChange}
-                            value={this.state.servicesBoatsAndDocksContact}
+                            value={property.services.boatsAndDocks.contact}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -707,7 +647,7 @@ class EditView extends Component {
                             label="Boats/Docks Phone"
                             name="servicesBoatsAndDocksPhone"
                             onChange={this.onChange}
-                            value={this.state.servicesBoatsAndDocksPhone}
+                            value={property.services.boatsAndDocks.phone}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -720,22 +660,25 @@ class EditView extends Component {
                         <FormLabel component="legend">Select all that apply</FormLabel>
                         <FormGroup row>
                           <FormControlLabel
-                            control={<Checkbox value={this.state.specialOutsideShower} 
+                            control={<Checkbox checked={property.special.outsideShower} 
                             name="specialOutsideShower"
-                            id="specialOutsideShower" />}
+                            id="specialOutsideShower"
+                            onChange={this.onChange} />}
                             label="Outside Shower"
                           />
                           <FormControlLabel
-                            control={<Checkbox value={this.state.specialOutsideFaucet} 
+                            control={<Checkbox checked={property.special.outsideFaucet} 
                             name="specialOutsideFaucet"
-                            id="specialOutsideFaucet" />}
+                            id="specialOutsideFaucet"
+                            onChange={this.onChange} />}
                             label="Outside Faucet"
                           />
                           <FormControlLabel
                             control={
-                              <Checkbox value={this.state.specialOutsideSpa} 
+                              <Checkbox checked={property.special.outsideSpa} 
                               name="specialOutsideSpa"
-                              id="specialOutsideSpa" />
+                              id="specialOutsideSpa"
+                              onChange={this.onChange} />
                             }
                             label="Outside Spa"
                           />
@@ -750,7 +693,7 @@ class EditView extends Component {
                             label="Other"
                             name="specialOther"
                             onChange={this.onChange}
-                            value={this.state.specialOther}
+                            value={property.special.other}
                             error={errors.companyName}
                         />
                       </Grid>

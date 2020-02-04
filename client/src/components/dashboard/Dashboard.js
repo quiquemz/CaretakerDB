@@ -17,7 +17,6 @@ class Dashboard extends Component {
       hovered: false,
     };
   };
-
   onMouseOver = () => this.setState({ hovered: true });
   onMouseOut = () => this.setState({ hovered: false });
   onLogoutClick = e => {
@@ -25,7 +24,9 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
   componentDidMount() {
-    this.props.getProperties(this.props.auth.user.id);
+    if (!this.properties) {
+      this.props.getProperties(this.props.auth.user.id);
+    }
   };
   render() {
     const { user } = this.props.auth;

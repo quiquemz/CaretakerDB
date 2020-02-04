@@ -25,7 +25,7 @@ export const getProperties = userData => dispatch => {
       const properties = res.data;
       dispatch(setProperties(properties));
     })
-    .catch(err => console.log("FIX ERRORS")
+    .catch(err => console.log("Error, get properties failed with: " + err)
     );
 };
 

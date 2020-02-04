@@ -7,6 +7,8 @@ const passport = require("passport");
 const users = require("./server/routes/api/users");
 const properties = require("./server/routes/api/properties");
 const db = require("./config/keys").mongoURI;
+const dbLocal = require("./config/keys").localMongoURI;
+
 
 const port = process.env.PORT || 5000;
 
@@ -23,7 +25,7 @@ app.use(passport.initialize());
 // Connect to MongoDB
 mongoose
   .connect(
-    db,
+    dbLocal,
     { useNewUrlParser: true }
   )
   .then(() => console.log("MongoDB successfully connected"))
