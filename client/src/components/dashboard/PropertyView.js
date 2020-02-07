@@ -52,7 +52,7 @@ class PropertyView extends Component {
               </Grid>
             </Grid>
           </Grid>
-          <Fab aria-label={fab.label} className={fab.className} color={fab.color} component={Link} to={"/edit/" + property._id}>
+          <Fab aria-label={fab.label} style={{position: 'fixed', right: 50, bottom: 50}} color={fab.color} component={Link} to={"/edit/" + property._id}>
             {fab.icon}
           </Fab>
         </Grid>

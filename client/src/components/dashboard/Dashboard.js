@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getProperties } from "../../actions/propertyActions";
 import Property from "./Property";
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Container, Grid, Typography, Fab } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -78,6 +78,9 @@ class Dashboard extends Component {
                 : <Grid item xs={12} sm={4}><Property loading /></Grid>
               }
             </Grid>
+            <Fab aria-label="Add" style={{position: 'fixed', right: 50, bottom: 50}} color="primary" to="/new-property" component={Link}>
+              <AddIcon />
+            </Fab>
           </Grid>
         </Grid>
       </Container>

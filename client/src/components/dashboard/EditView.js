@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { addNewProperty } from "../../actions/propertyActions";
+import SaveIcon from "@material-ui/icons/Save";
 import { Container, 
   Button, 
   Typography, 
@@ -14,7 +15,8 @@ import { Container,
   Checkbox,
   FormLabel,
   FormGroup,
-  FormControlLabel } from "@material-ui/core";
+  FormControlLabel,
+  Fab } from "@material-ui/core";
 
 class EditView extends Component {
     constructor(props) {
@@ -27,6 +29,11 @@ class EditView extends Component {
         '@global': {
           body: {
             backgroundColor: theme.palette.common.white,
+          },
+          fab: {
+            position: 'fixed',
+            bottom: theme.spacing(2),
+            right: theme.spacing(2),
           },
         },
         paper: {
@@ -88,6 +95,7 @@ class EditView extends Component {
                 <Divider width="100%" />
               </Grid>
               <Grid item xs={12}>
+              { property ? <div>
               <CssBaseline />
               <div className={classes.paper}>
                   <form className={classes.form} onSubmit={this.onSubmit} noValidate>
@@ -699,7 +707,7 @@ class EditView extends Component {
                       </Grid>
                     </Grid>
                     <Grid container spacing={2} justify="flex-start">
-                      <Grid item xs={12}>
+                      <Grid item xs={12} s={6} lg={3}>
                         <Button
                             type="submit"
                             fullWidth
@@ -707,12 +715,16 @@ class EditView extends Component {
                             color="primary"
                             className={classes.submit}
                         >
-                            Add property
+                            Save property
                         </Button>
                       </Grid>
                     </Grid>
+                    <Fab aria-label="Save" style={{position: 'fixed', right: 50, bottom: 50}} color="primary" type="submit">
+                      <SaveIcon />
+                    </Fab>
                     </form>
                 </div>
+              </div>: <div></div> }
               </Grid>
             </Grid>
         </Container>
