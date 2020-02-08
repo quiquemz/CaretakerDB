@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
         case ADD_PROPERTY:
         return {
             ...state,
-            properties: state.properties + action.payload
+            properties: state.properties.concat(action.payload)
         };
         default:
         return state;

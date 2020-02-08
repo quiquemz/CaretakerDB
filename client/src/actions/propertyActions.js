@@ -11,7 +11,7 @@ export const addNewProperty = (propertyData, userData, history) => dispatch => {
   axios
     .post("/api/properties/add/" + userData, propertyData)
     .then(res => {
-      dispatch(addProperty(propertyData))
+      dispatch(addProperty(propertyData));
       history.push("/dashboard");
     })
     .catch(err => console.log("ERRORS: " + err)
@@ -39,8 +39,94 @@ export const setProperties = properties => {
 
 // Add a property
 export const addProperty = property => {
+  const newProperty = {
+    userId: property.userId,
+    season: property.season,
+    price: property.price,
+    additionalCosts: property.additionalCosts,
+    additionalCostsDetails: property.additionalCostsDetails,
+    currentOwed: property.currentOwed,
+    dateCreated: property.dateCreated,
+    owner: {
+        firstName: property.ownerFirstName,
+        lastName: property.ownerLastName,
+        plowing: property.plowing,
+        email: property.email,
+        address: {
+            street: property.ownerAddress,
+            city: property.ownerCity,
+            state: property.ownerState,
+            zipCode: property.ownerZipCode
+        },
+        homePhone: property.ownerHomePhone,
+        officePhone: property.ownerOfficePhone,
+        otherPhone: property.ownerOtherPhone,
+        cellPhone: property.ownerCellPhone,
+        repToNotify: property.ownerRepToNotify,
+        repAddress: {
+            street: property.ownerRepStreet,
+            city: property.ownerRepCity,
+            state: property.ownerRepState,
+            zipCode: property.ownerRepZipCode
+        },
+        repPhone: property.ownerRepPhone,
+        repSecondPhone: property.ownerRepSecondPhone,
+        alarmCode: property.ownerAlarmCode,
+        additional: property.ownerAdditional
+    },
+    services: {
+        irrigation: {
+            contact: property.servicesIrrigationContact,
+            phone: property.servicesIrrigationPhone
+        },
+        plumber: {
+            contact: property.servicesPlumberContact,
+            phone: property.servicesPlumberPhone
+        },
+        electrician: {
+            contact: property.servicesElectricianContact,
+            phone: property.servicesElectricianPhone
+        },
+        carpenter: {
+            contact: property.servicesCarpenterContact,
+            phone: property.servicesCarpenterPhone
+        },
+        appliance: {
+            contact: property.servicesApplianceContact,
+            phone: property.servicesAppliancePhone
+        },
+        furnace: {
+            contact: property.servicesFurnaceContact,
+            phone: property.servicesFurnacePhone
+        },
+        cleaner: {
+            contact: property.servicesCleanerContact,
+            phone: property.servicesCleanerPhone
+        },
+        boatsAndDocks: {
+            contact: property.servicesBoatsAndDocksContact,
+            phone: property.servicesBoatsAndDocksPhone
+        },
+    },
+    special: {
+        outsideShower: property.specialOutsideShower,
+        outsideFaucet: property.specialOutsideFaucet,
+        outsideSpa: property.specialOutsideSpa,
+        other: property.specialOther
+    },
+    terms: {
+        date: property.termsDate,
+        signed: property.termsSigned
+    },
+    location: {
+        street: property.locationStreet,
+        city: property.locationCity,
+        zipCode: property.locationZipCode,
+        state: property.locationState
+    }
+  };
   return {
     type: ADD_PROPERTY,
-    payload: property
+    payload: newProperty
   };
 };
