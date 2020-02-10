@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { withStyles, useTheme } from '@material-ui/core/styles';
 import { 
     Container, 
     Grid, 
@@ -11,26 +11,27 @@ import {
     Paper } from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 
+const styles = theme => ({
+  chip: {
+    margin: theme.spacing(0.5),
+  },
+  section1: {
+    margin: theme.spacing(3, 2),
+  },
+  section2: {
+    margin: theme.spacing(2),
+  },
+  section3: {
+    margin: theme.spacing(3, 1, 1),
+  },
+});
+
 class PropertyView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       hovered: false,
     };
-    this.useStyles = makeStyles(theme => ({
-      chip: {
-        margin: theme.spacing(0.5),
-      },
-      section1: {
-        margin: theme.spacing(3, 2),
-      },
-      section2: {
-        margin: theme.spacing(2),
-      },
-      section3: {
-        margin: theme.spacing(3, 1, 1),
-      },
-    }));
   };
   render() {
     const fab = {
@@ -43,7 +44,7 @@ class PropertyView extends Component {
         icon: <EditIcon />,
         label: 'Edit',
       };
-    const classes = this.useStyles;
+    const { classes } = this.props;
     const propertyId = this.props.location.pathname.replace('/property/', '');
     const property = this.props.properties.properties.length > 0 ? this.props.properties.properties.find(prty => propertyId === prty._id) : null;
     return (
@@ -101,7 +102,8 @@ class PropertyView extends Component {
 }
 PropertyView.propTypes = {
   auth: PropTypes.object.isRequired,
-  properties: PropTypes.object.isRequired
+  properties: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -109,4 +111,4 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-)(PropertyView);
+)(withStyles(styles)(PropertyView));

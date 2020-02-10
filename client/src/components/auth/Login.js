@@ -1,20 +1,47 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import { loginUser } from "../../actions/authActions";
 import { getProperties } from "../../actions/propertyActions";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+const styles = theme => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    padding: theme.spacing(3),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+});
 
 class Login extends Component {
   constructor() {
@@ -24,30 +51,6 @@ class Login extends Component {
       password: "",
       errors: {}
     };
-    this.useStyles = makeStyles(theme => ({
-        '@global': {
-          body: {
-            backgroundColor: theme.palette.common.white,
-          },
-        },
-        paper: {
-          marginTop: theme.spacing(8),
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        },
-        avatar: {
-          margin: theme.spacing(1),
-          backgroundColor: theme.palette.secondary.main,
-        },
-        form: {
-          width: '100%', // Fix IE 11 issue.
-          marginTop: theme.spacing(1),
-        },
-        submit: {
-          margin: theme.spacing(3, 0, 2),
-        },
-      }));
   }
   
   componentWillReceiveProps(nextProps) {
@@ -80,12 +83,11 @@ class Login extends Component {
   };
   render() {
     const { errors } = this.state;
-    const classes = this.useStyles;
+    const { classes } = this.props;
     return (
-        <>
         <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
+      <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -137,7 +139,7 @@ class Login extends Component {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link to="/" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
@@ -145,9 +147,8 @@ class Login extends Component {
             </Grid>
           </Grid>
         </form>
-      </div>
+      </Paper>
     </Container>
-      </>
     );
   }
 }
@@ -166,4 +167,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { loginUser, getProperties }
-)(Login);
+)(withStyles(styles)(Login));

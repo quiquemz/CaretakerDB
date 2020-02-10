@@ -30,6 +30,7 @@ MERN stack defining and powering the CaretakerDB property management web applica
 - [ ] Add contact page
 ### Private Pages
 - [x] Fix redirect after added contract
+- [x] Add delete button for contract
 - [ ] Show added badge after success
 - [ ] Expand property view page
 - [ ] Show complete profile/settings page
