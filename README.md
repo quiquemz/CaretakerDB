@@ -4,8 +4,15 @@
 ---
 
 ## About
+CaretakerDB is an all-in-one solution for caretakers and property managers anywhere in the USA. This web application supports however many properties you need with key features from contract creation and contract sending with electronic signature support to map based display and image support. 
 
-MERN stack defining and powering the 
+The key points of CaretakerDB is to simplify the caretaking and property managing process and eliminate any unnecessary waste. Easily manage your properties without the hassle of paper or outdated technologies.
+
+If you're interested in being a test user please contact Gavin at [gavin@caretakerdb.com](mailto:gavin@caretakerdb.com)
+
+## Tech
+
+MERN stack defining and powering the CaretakerDB property management web application. All front-end and back-end code hosted here with documentation.
 
 ## Todos
 ### General
