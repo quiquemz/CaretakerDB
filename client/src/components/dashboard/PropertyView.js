@@ -7,7 +7,8 @@ import {
     Container, 
     Grid, 
     Typography,
-    Fab } from "@material-ui/core";
+    Fab,
+    Paper } from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 
 class PropertyView extends Component {
@@ -16,6 +17,20 @@ class PropertyView extends Component {
     this.state = {
       hovered: false,
     };
+    this.useStyles = makeStyles(theme => ({
+      chip: {
+        margin: theme.spacing(0.5),
+      },
+      section1: {
+        margin: theme.spacing(3, 2),
+      },
+      section2: {
+        margin: theme.spacing(2),
+      },
+      section3: {
+        margin: theme.spacing(3, 1, 1),
+      },
+    }));
   };
   render() {
     const fab = {
@@ -28,34 +43,39 @@ class PropertyView extends Component {
         icon: <EditIcon />,
         label: 'Edit',
       };
+    const classes = this.useStyles;
     const propertyId = this.props.location.pathname.replace('/property/', '');
     const property = this.props.properties.properties.length > 0 ? this.props.properties.properties.find(prty => propertyId === prty._id) : null;
     return (
       <Container fixed>
         {property ?
-          <Grid
-          container
-          direction="column"
-          spacing={3}>
-          <Grid item>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={12} height="100%">
-                <Typography variant="h5" component="h5">
-                    {property.location.street}, {property.location.city}, {property.location.state} {property.location.zipCode}
-                </Typography>
-                <Typography variant="h6" component="h6">
-                    {property.owner.firstName} {property.owner.lastName}
-                </Typography>
-                <Typography component="p">
-                    Welcome to the property view page where you can see all the information for a specific property!
-                </Typography>
+        <Paper elevation={3}>
+          <div className={classes.section1}>
+            <Grid
+            container
+            direction="column"
+            spacing={3}>
+            <Grid item>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={12} height="100%">
+                  <Typography variant="h5" component="h5">
+                      {property.location.street}, {property.location.city}, {property.location.state} {property.location.zipCode}
+                  </Typography>
+                  <Typography variant="h6" component="h6">
+                      {property.owner.firstName} {property.owner.lastName}
+                  </Typography>
+                  <Typography component="p">
+                      Welcome to the property view page where you can see all the information for a specific property!
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
+            <Fab aria-label={fab.label} style={{position: 'fixed', right: 50, bottom: 50}} color={fab.color} component={Link} to={"/edit/" + property._id}>
+              {fab.icon}
+            </Fab>
           </Grid>
-          <Fab aria-label={fab.label} style={{position: 'fixed', right: 50, bottom: 50}} color={fab.color} component={Link} to={"/edit/" + property._id}>
-            {fab.icon}
-          </Fab>
-        </Grid>
+        </div>
+        </Paper>
         :
         <Grid
           container
