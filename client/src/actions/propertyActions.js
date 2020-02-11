@@ -1,13 +1,12 @@
 import axios from "axios";
 import {
   SET_PROPERTIES,
-  ADD_PROPERTY
+  ADD_PROPERTY,
+  DELETE_PROPERTY
 } from "./types";
 // Register User
 
 export const addNewProperty = (propertyData, userData, history) => dispatch => {
-  console.log(propertyData);
-  console.log(userData);
   axios
     .post("/api/properties/add/" + userData, propertyData)
     .then(res => {
@@ -29,11 +28,30 @@ export const getProperties = userData => dispatch => {
     );
 };
 
+export const deleteExistingProperty = (propertyId, userData, history) => dispatch => {
+  axios
+    .delete("/api/properties/delete/" + propertyId)
+    .then(res => {
+      dispatch(deleteProperty(propertyId));
+      history.push("/dashboard");
+    })
+    .catch(err => console.log("ERRORS: " + err)
+    );
+};
+
 // set properties
 export const setProperties = properties => {
   return {
     type: SET_PROPERTIES,
     payload: properties
+  };
+};
+
+// set properties
+export const deleteProperty = property => {
+  return {
+    type: DELETE_PROPERTY,
+    payload: property._id
   };
 };
 

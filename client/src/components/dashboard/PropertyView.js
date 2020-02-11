@@ -2,27 +2,30 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { withStyles, useTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import { deleteExistingProperty } from "../../actions/propertyActions";
 import { 
     Container, 
     Grid, 
     Typography,
     Fab,
-    Paper } from "@material-ui/core";
+    Paper,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions } from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
+import TrashIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
-  chip: {
-    margin: theme.spacing(0.5),
-  },
-  section1: {
-    margin: theme.spacing(3, 2),
-  },
-  section2: {
-    margin: theme.spacing(2),
-  },
-  section3: {
-    margin: theme.spacing(3, 1, 1),
+  paper: {
+    marginTop: theme.spacing(8),
+    padding: theme.spacing(3),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 });
 
@@ -31,33 +34,61 @@ class PropertyView extends Component {
     super(props);
     this.state = {
       hovered: false,
+      opened: false,
+      propertyId: this.props.location.pathname.replace('/property/', ''),
     };
+    this.deleteOnClick = this.deleteOnClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleCloseDelete = this.handleCloseDelete.bind(this);
+  };
+  deleteOnClick() {
+    this.setState({opened: true});
+  };
+  handleClose() {
+    this.setState({opened: false});
+  };
+  handleCloseDelete() {
+    this.props.deleteExistingProperty(this.state.propertyId, this.props.auth.user.id, this.props.history);
   };
   render() {
-    const fab = {
-        color: 'primary',
-        className: {
-          position: 'absolute',
-          bottom: '2rem',
-          right: '2rem',
-        },
-        icon: <EditIcon />,
-        label: 'Edit',
-      };
+    const fabEdit = {
+      color: 'primary',
+      className: {
+        position: 'absolute',
+        bottom: '50px',
+        right: '50px',
+      },
+      icon: <EditIcon />,
+      label: 'Edit',
+    };
+    const fabDelete = {
+      color: 'secondary',
+      className: {
+        position: 'absolute',
+        bottom: '50px',
+        left: '50px',
+      },
+      icon: <TrashIcon />,
+      label: 'Delete',
+    };
     const { classes } = this.props;
     const propertyId = this.props.location.pathname.replace('/property/', '');
     const property = this.props.properties.properties.length > 0 ? this.props.properties.properties.find(prty => propertyId === prty._id) : null;
     return (
-      <Container fixed>
+      <Container component="main" maxWidth="md">
         {property ?
-        <Paper elevation={3}>
-          <div className={classes.section1}>
+        <Paper className={classes.paper} elevation={3}>
             <Grid
             container
             direction="column"
             spacing={3}>
             <Grid item>
               <Grid container spacing={3}>
+                <Grid item xs={12} sm={12} height="100%">
+                  <Typography variant="h2" component="h2">
+                    {property.location.street}
+                  </Typography>
+                </Grid>
                 <Grid item xs={12} sm={12} height="100%">
                   <Typography variant="h5" component="h5">
                       {property.location.street}, {property.location.city}, {property.location.state} {property.location.zipCode}
@@ -71,11 +102,35 @@ class PropertyView extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Fab aria-label={fab.label} style={{position: 'fixed', right: 50, bottom: 50}} color={fab.color} component={Link} to={"/edit/" + property._id}>
-              {fab.icon}
-            </Fab>
           </Grid>
-        </div>
+          <Fab aria-label={fabEdit.label} style={fabEdit.className} color={fabEdit.color} component={Link} to={"/edit/" + property._id}>
+            {fabEdit.icon}
+          </Fab>
+          <Fab aria-label={fabDelete.label} style={fabDelete.className} color={fabDelete.color} onClick={this.deleteOnClick}>
+            {fabDelete.icon}
+          </Fab>
+          <Dialog
+            open={this.state.opened}
+            keepMounted
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle id="alert-dialog-slide-title">{"Delete this property?"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                Are you sure you want to delete {property.location.street}, {property.location.city}?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={this.handleCloseDelete} color="secondary">
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Paper>
         :
         <Grid
@@ -111,4 +166,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
+  { deleteExistingProperty }
 )(withStyles(styles)(PropertyView));

@@ -7,6 +7,8 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import { SnackbarProvider } from 'notistack';
+
 import Navbar from "./components/layout/Navbar";
 import StickyFooter from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
@@ -66,24 +68,26 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
-          <MuiThemeProvider theme={theme}>
-            <Navbar />
-            <main>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Switch>
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                <PrivateRoute path="/property/:id" component={PropertyView} />
-                <PrivateRoute path="/edit/:id" component={EditView} />
-                <PrivateRoute exact path="/new-property" component={NewProperty} />
-                <PrivateRoute exact path="/profile" component={Profile} />
-              </Switch>
-            </main>
-            <StickyFooter />
-          </MuiThemeProvider>
-        </Router>
+        <SnackbarProvider maxSnack={3}>
+          <Router>
+            <MuiThemeProvider theme={theme}>
+              <Navbar />
+              <main>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+                <Switch>
+                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                  <PrivateRoute path="/property/:id" component={PropertyView} />
+                  <PrivateRoute path="/edit/:id" component={EditView} />
+                  <PrivateRoute exact path="/new-property" component={NewProperty} />
+                  <PrivateRoute exact path="/profile" component={Profile} />
+                </Switch>
+              </main>
+              <StickyFooter />
+            </MuiThemeProvider>
+          </Router>
+        </SnackbarProvider>
       </Provider>
     );
   }

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Property = require('../../models/Property');
+const mongodb = require('mongodb');
 
 router.get('/:userId', (req, res, next) => {
     console.log("Accessing properties with user id: " + req.params.userId);
@@ -126,10 +127,12 @@ router.post('/add/:userId', (req, res, next) => {
     });
 });
 
-router.delete('/', (req, res, next) => {
-    Property.deleteMany({}, err => {
+router.delete('/delete/:propertyId', (req, res, next) => {
+    const propertyId = req.params.propertyId;
+    console.log(propertyId);
+    Property.deleteOne({_id: new mongodb.ObjectID(propertyId)}, err => {
         if (err) next(err);
-        else res.send('Successfully deleted all properties.');
+        else res.send(`Successfully deleted property: ${propertyId}.`);
     });
 });
 

@@ -3,12 +3,47 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getProperties } from "../../actions/propertyActions";
 import Property from "./Property";
-import { Container, Grid, Typography, Fab } from "@material-ui/core";
+import { Container, Grid, Typography, Fab, Paper } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import MLink from '@material-ui/core/Link';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import AddIcon from '@material-ui/icons/Add';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
+  link: {
+    '&:hover': {
+      textDecoration: 'none',
+    },
+    textDecoration: 'none',
+  },
+  paper: {
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(3),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+});
 
 class Dashboard extends Component {
   constructor(props) {
@@ -32,6 +67,7 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
     const { properties } = this.props.properties;
     const propertiesLoaded = properties.length > 0;
+    const { classes } = this.props;
     const addCardStyles = {
       display: 'flex',
       flexDirection: 'column',
@@ -40,49 +76,44 @@ class Dashboard extends Component {
       maxWidth: 345,
     }
     return (
-      <Container fixed>
-        <Grid
-          container
-          direction="column"
-          spacing={3}>
-          <Grid item>
-            {user.firstName ? <Typography variant="h3">Welcome, {user.firstName}.</Typography>
-              : <Typography variant="h3">Welcome to your Dashboard!</Typography>}
-            <Typography variant="body1" gutterBottom>This is the dashboard, you can find everything related to the management of your caretaking properties here.</Typography>
-          </Grid>
-          <Grid item>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={4} height="100%">
-                <Link to="/new-property" style={{textDecoration: "none"}}>
-                  <Card style={addCardStyles} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
-                    <CardContent>
-                      <Typography color="textSecondary" align="center">
-                        <HomeWorkIcon fontSize="large" />
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary" component="p" align="center">
-                        Add a new property
-                      </Typography>
-                      <Typography color="textSecondary" align="center">
-                        <AddIcon fontSize="large" />
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Link>
+      <Container component="main" maxWidth="lg">
+        <Paper className={classes.paper} elevation={2}>
+        {user.firstName ? <Typography variant="h3">Welcome, {user.firstName}.</Typography>
+                : <Typography variant="h3">Welcome to your Dashboard!</Typography>}
+              <Typography variant="body1" gutterBottom>This is the dashboard, you can find everything related to the management of your caretaking properties here.</Typography>
+        </Paper>
+          <Grid
+            container
+            spacing={3}>
+                <Grid item xs={12} sm={4} height="100%">
+                  <MLink to="/new-property" className={classes.link} component={Link}>
+                    <Card style={addCardStyles} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                      <CardContent>
+                        <Typography color="textSecondary" align="center">
+                          <HomeWorkIcon fontSize="large" />
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p" align="center">
+                          Add a new property
+                        </Typography>
+                        <Typography color="textSecondary" align="center">
+                          <AddIcon fontSize="large" />
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </MLink>
+                </Grid>
+                {propertiesLoaded ?
+                  properties.map(function(property, i) {
+                    return (<Grid item xs={12} sm={4} key={i}>
+                      <Property property={property} />
+                    </Grid>);
+                  })
+                  : <Grid item xs={12} sm={4}><Property loading /></Grid>
+                }
               </Grid>
-              {propertiesLoaded ?
-                properties.map(function(property, i) {
-                  return (<Grid item xs={12} sm={4} key={i}>
-                    <Property property={property} />
-                  </Grid>);
-                })
-                : <Grid item xs={12} sm={4}><Property loading /></Grid>
-              }
-            </Grid>
-            <Fab aria-label="Add" style={{position: 'fixed', right: 50, bottom: 50}} color="primary" to="/new-property" component={Link}>
-              <AddIcon />
-            </Fab>
-          </Grid>
-        </Grid>
+              <Fab aria-label="Add" style={{position: 'fixed', right: 50, bottom: 50}} color="primary" to="/new-property" component={Link}>
+                <AddIcon />
+              </Fab>
       </Container>
     );
   }
@@ -98,4 +129,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getProperties }
-)(Dashboard);
+)(withStyles(styles)(Dashboard));

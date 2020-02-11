@@ -3,18 +3,56 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { addNewProperty } from "../../actions/propertyActions";
+import { withStyles } from "@material-ui/core/styles"
+import { withSnackbar } from 'notistack';
 import { Container, 
   Button, 
   Typography, 
   Divider, 
   Grid, 
-  makeStyles, 
   CssBaseline, 
   TextField, 
   Checkbox,
   FormLabel,
   FormGroup,
   FormControlLabel } from "@material-ui/core";
+
+const styles = theme => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0,
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+});
 
 class NewProperty extends Component {
     constructor(props) {
@@ -79,42 +117,6 @@ class NewProperty extends Component {
         },
         errors: {},
       };
-      this.useStyles = makeStyles(theme => ({
-        '@global': {
-          body: {
-            backgroundColor: theme.palette.common.white,
-          },
-        },
-        paper: {
-          marginTop: theme.spacing(8),
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        },
-        avatar: {
-          margin: theme.spacing(1),
-          backgroundColor: theme.palette.secondary.main,
-        },
-        form: {
-          width: '100%', // Fix IE 11 issue.
-          marginTop: theme.spacing(3),
-        },
-        submit: {
-          margin: theme.spacing(3, 0, 2),
-        },
-        root: {
-          width: '100%',
-        },
-        heading: {
-          fontSize: theme.typography.pxToRem(15),
-          flexBasis: '33.33%',
-          flexShrink: 0,
-        },
-        secondaryHeading: {
-          fontSize: theme.typography.pxToRem(15),
-          color: theme.palette.text.secondary,
-        },
-      }));
       this.onChange = this.onChange.bind(this);
     }
     onChange (event) {
@@ -133,7 +135,7 @@ class NewProperty extends Component {
     
     render() {
       const { errors } = this.state;
-      const classes = this.useStyles;
+      const { classes } = this.props;
       return (
         <Container fixed>
             <Grid 
@@ -791,4 +793,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { logoutUser, addNewProperty }
-)(NewProperty);
+)(withSnackbar(withStyles(styles)(NewProperty)));
