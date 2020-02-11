@@ -1,7 +1,8 @@
 import {
     ADD_PROPERTY,
     SET_PROPERTIES,
-    DELETE_PROPERTY
+    DELETE_PROPERTY,
+    UPDATE_PROPERTY
 } from "../actions/types";
 const initialState = {
     properties: {}
@@ -19,6 +20,11 @@ export default function(state = initialState, action) {
             properties: state.properties.concat(action.payload)
         };
         case DELETE_PROPERTY:
+        return {
+            ...state,
+            properties: state.properties.filter(prop => prop._id !== action.payload)
+        };
+        case UPDATE_PROPERTY:
         return {
             ...state,
             properties: state.properties.filter(prop => prop._id !== action.payload)

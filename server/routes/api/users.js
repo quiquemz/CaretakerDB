@@ -12,9 +12,14 @@ const User = require("../../models/User");
 // @route POST api/users/register
 // @desc Register user
 // @access Public
-router.post("/register", (req, res) => {
+// 
+// *******************************************************************************************************
+// DISABLED TEMPORARILY TO PREVENT SIGNUPS ON CARETAKERDB. CURRENTLY ONLY CREATING ACCOUNTS FOR TEST USERS.
+// *******************************************************************************************************
+// 
+router.post("/register/:customPass", (req, res) => {
   // Form validation
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const { errors, isValid } = validateRegisterInput(req.body, req.params.customPass);
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);

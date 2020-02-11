@@ -11,8 +11,7 @@ import {
   ListItem,
   ListItemAvatar,
   Avatar,
-  ListItemText,
-  Button } from '@material-ui/core';
+  ListItemText } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
