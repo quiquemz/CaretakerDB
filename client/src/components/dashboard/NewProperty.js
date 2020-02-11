@@ -5,6 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 import { addNewProperty } from "../../actions/propertyActions";
 import { withStyles } from "@material-ui/core/styles"
 import { withSnackbar } from 'notistack';
+import SaveIcon from '@material-ui/icons/Save';
 import { Container, 
   Button, 
   Typography, 
@@ -15,7 +16,8 @@ import { Container,
   Checkbox,
   FormLabel,
   FormGroup,
-  FormControlLabel } from "@material-ui/core";
+  FormControlLabel,
+  Fab } from "@material-ui/core";
 
 const styles = theme => ({
   '@global': {
@@ -24,7 +26,7 @@ const styles = theme => ({
     },
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -67,53 +69,85 @@ class NewProperty extends Component {
           additionalCostsDetails: '',
           currentOwed: 0,
           dateCreated: Date.now(),
-          locationStreet: '',
-          locationCity: '',
-          locationZipCode: '',
-          locationState: '',
-          ownerFirstName: '',
-          ownerLastName: '',
-          ownerPlowing: false,
-          ownerEmail: '',
-          ownerStreet: '',
-          ownerCity: '',
-          ownerZipCode: '',
-          ownerState: '',
-          ownerHomePhone: '',
-          ownerOfficePhone: '',
-          ownerOtherPhone: '',
-          ownerCellPhone: '',
-          ownerRepToNotify: '',
-          ownerRepStreet: '',
-          ownerRepCity: '',
-          ownerRepZipCode: '',
-          ownerRepState: '',
-          ownerRepPhone: '',
-          ownerRepSecondPhone: '',
-          ownerAlarmCode: '',
-          ownerAdditional: '',
-          servicesIrrigationContact: '',
-          servicesIrrigationPhone: '',
-          servicesPlumberContact: '',
-          servicesPlumberPhone: '',
-          servicesElectricianContact: '',
-          servicesElectricianPhone: '',
-          servicesCarpenterContact: '',
-          servicesCarpenterPhone: '',
-          servicesApplianceContact: '',
-          servicesAppliancePhone: '',
-          servicesFurnaceContact: '',
-          servicesFurnacePhone: '',
-          servicesCleanerContact: '',
-          servicesCleanerPhone: '',
-          servicesBoatsAndDocksContact: '',
-          servicesBoatsAndDocksPhone: '',
-          specialOutsideShower: false,
-          specialOutsideFaucet: false,
-          specialOutsideSpa: false,
-          specialOther: '',
-          termsDate: Date.now(),
-          termsSigned: ''
+          location: {
+              street: '',
+              city: '',
+              zipCode: '',
+              state: '',
+              lat: '-1',
+              lon: '-1'
+          },
+          owner: {
+              firstName: '',
+              lastName: '',
+              plowing: false,
+              email: '',
+              address: {
+                  street: '',
+                  city: '',
+                  zipCode: '',
+                  state: ''
+              },
+              homePhone: '',
+              officePhone: '',
+              otherPhone: '',
+              cellPhone: '',
+              repToNotify: '',
+              repAddress: {
+                  street: '',
+                  city: '',
+                  zipCode: '',
+                  state: ''
+              },
+              repPhone: '',
+              repSecondPhone: '',
+              alarmCode: '',
+              additional: ''
+          },
+          services: {
+              irrigation: {
+                  contact: '',
+                  phone: ''
+              },
+              plumber: {
+                  contact: '',
+                  phone: ''
+              },
+              electrician: {
+                  contact: '',
+                  phone: ''
+              },
+              carpenter: {
+                  contact: '',
+                  phone: ''
+              },
+              appliance: {
+                  contact: '',
+                  phone: ''
+              },
+              furnace: {
+                  contact: '',
+                  phone: ''
+              },
+              cleaner: {
+                  contact: '',
+                  phone: ''
+              },
+              boatsAndDocks: {
+                  contact: '',
+                  phone: ''
+              },
+          },
+          special: {
+              outsideShower: false,
+              outsideFaucet: false,
+              outsideSpa: false,
+              other: ''
+          },
+          terms: {
+              date: Date.now(),
+              signed: ''
+          },
         },
         errors: {},
       };
@@ -123,10 +157,41 @@ class NewProperty extends Component {
       const target = event.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
       const name = target.name;
-      const property = {...this.state.property};
-      property[name] = value;
-  
-      this.setState({property});
+      let vals = name.split('.');
+      if (vals.length === 1) {
+        this.setState(prevState => ({
+          ...prevState,
+          property: {
+            ...prevState.property,
+            [vals[0]]: value
+          }
+        }));
+      } else if (vals.length === 2) {
+        this.setState(prevState => ({
+          ...prevState,
+          property: {
+            ...prevState.property,
+            [vals[0]]: {
+              ...prevState.property[vals[0]],
+              [vals[1]]: value
+            }
+          }
+        }));
+      } else if (vals.length === 3) {
+        this.setState(prevState => ({
+          ...prevState,
+          property: {
+            ...prevState.property,
+            [vals[0]]: {
+              ...prevState.property[vals[0]],
+              [vals[1]]: {
+                ...prevState.property[vals[0]][vals[1]],
+                [vals[2]]: value
+              }
+            }
+          }
+        }));
+      }
     }
     onSubmit = e => {
       e.preventDefault();
@@ -152,8 +217,8 @@ class NewProperty extends Component {
               <Grid item xs={12}>
               <CssBaseline />
               <div className={classes.paper}>
-                  <form className={classes.form} onSubmit={this.onSubmit} noValidate>
-                  <Grid container spacing={2}>
+              <form className={classes.form} onSubmit={this.onSubmit} noValidate>
+                <Grid container spacing={2}>
                   <Grid item xs={12}>
                         <Typography component="h1" variant="h5" gutterBottom>
                           Property
@@ -163,14 +228,14 @@ class NewProperty extends Component {
                         <TextField
                             variant="outlined"
                             required
-                            autoFocus
                             margin="dense"
+                            autoFocus
                             fullWidth
                             id="locationStreet"
                             label="Street"
-                            name="locationStreet"
+                            name="location.street"
                             onChange={this.onChange}
-                            value={this.state.locationStreet}
+                            value={this.state.property.location.street || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -182,9 +247,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="locationCity"
                             label="City"
-                            name="locationCity"
+                            name="location.city"
                             onChange={this.onChange}
-                            value={this.state.locationCity}
+                            value={this.state.property.location.city || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -196,9 +261,9 @@ class NewProperty extends Component {
                             margin="dense"
                             id="locationState"
                             label="State"
-                            name="locationState"
+                            name="location.state"
                             onChange={this.onChange}
-                            value={this.state.locationState}
+                            value={this.state.property.location.state || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -210,9 +275,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="locationZipCode"
                             label="Zipcode"
-                            name="locationZipCode"
+                            name="location.zipCode"
                             onChange={this.onChange}
-                            value={this.state.locationZipCode}
+                            value={this.state.property.location.zipCode || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -224,15 +289,15 @@ class NewProperty extends Component {
                       <Grid item xs={12} sm={6}>
                         <TextField
                             autoComplete="fname"
-                            name="ownerFirstName"
+                            name="owner.firstName"
                             variant="outlined"
                             margin="dense"
                             required
                             fullWidth
-                            id="ownerFirstName"
+                            id="owner.firstName"
                             label="First Name"
                             onChange={this.onChange}
-                            value={this.state.ownerFirstName}
+                            value={this.state.property.owner.firstName || ''}
                             error={errors.firstName}
                         />
                       </Grid>
@@ -242,11 +307,11 @@ class NewProperty extends Component {
                             margin="dense"
                             required
                             fullWidth
-                            id="ownerLastName"
+                            id="owner.lastName"
                             label="Last Name"
-                            name="ownerLastName"
+                            name="owner.lastName"
                             onChange={this.onChange}
-                            value={this.state.ownerLastName}
+                            value={this.state.property.owner.lastName || ''}
                             error={errors.lastName}
                         />
                       </Grid>
@@ -255,11 +320,11 @@ class NewProperty extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="ownerEmail"
+                            id="owner.email"
                             label="Email Address"
-                            name="ownerEmail"
+                            name="owner.email"
                             onChange={this.onChange}
-                            value={this.state.ownerEmail}
+                            value={this.state.property.owner.email || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -271,9 +336,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="ownerStreet"
                             label="Street"
-                            name="ownerStreet"
+                            name="owner.address.street"
                             onChange={this.onChange}
-                            value={this.state.ownerStreet}
+                            value={this.state.property.owner.address.street || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -285,9 +350,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="ownerCity"
                             label="City"
-                            name="ownerCity"
+                            name="owner.address.city"
                             onChange={this.onChange}
-                            value={this.state.ownerCity}
+                            value={this.state.property.owner.address.city || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -299,9 +364,9 @@ class NewProperty extends Component {
                             margin="dense"
                             id="ownerState"
                             label="State"
-                            name="ownerState"
+                            name="owner.address.state"
                             onChange={this.onChange}
-                            value={this.state.ownerState}
+                            value={this.state.property.owner.address.state || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -313,9 +378,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="ownerZipCode"
                             label="Zipcode"
-                            name="ownerZipCode"
+                            name="owner.address.zipCode"
                             onChange={this.onChange}
-                            value={this.state.ownerZipCode}
+                            value={this.state.property.owner.address.zipCode || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -327,9 +392,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="ownerCellPhone"
                             label="Cell Phone"
-                            name="ownerCellPhone"
+                            name="owner.cellPhone"
                             onChange={this.onChange}
-                            value={this.state.ownerCellPhone}
+                            value={this.state.property.owner.cellPhone || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -340,9 +405,9 @@ class NewProperty extends Component {
                             margin="dense"
                             id="ownerHomePhone"
                             label="Home Phone"
-                            name="ownerHomePhone"
+                            name="owner.homePhone"
                             onChange={this.onChange}
-                            value={this.state.ownerHomePhone}
+                            value={this.state.property.owner.homePhone || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -354,9 +419,9 @@ class NewProperty extends Component {
                             margin="dense"
                             id="ownerOfficePhone"
                             label="Office Phone"
-                            name="ownerOfficePhone"
+                            name="owner.officePhone"
                             onChange={this.onChange}
-                            value={this.state.ownerOfficePhone}
+                            value={this.state.property.owner.officePhone || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -367,9 +432,9 @@ class NewProperty extends Component {
                             margin="dense"
                             id="ownerOtherPhone"
                             label="Other Phone"
-                            name="ownerOtherPhone"
+                            name="owner.otherPhone"
                             onChange={this.onChange}
-                            value={this.state.ownerOtherPhone}
+                            value={this.state.property.owner.otherPhone || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -381,9 +446,9 @@ class NewProperty extends Component {
                             margin="dense"
                             id="ownerAlarmCode"
                             label="Alarm Code"
-                            name="ownerAlarmCode"
+                            name="owner.alarmCode"
                             onChange={this.onChange}
-                            value={this.state.ownerAlarmCode}
+                            value={this.state.property.owner.alarmCode || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -397,9 +462,9 @@ class NewProperty extends Component {
                             rowsMax={6}
                             id="ownerAdditional"
                             label="Additional"
-                            name="ownerAdditional"
+                            name="owner.additional"
                             onChange={this.onChange}
-                            value={this.state.ownerAdditional}
+                            value={this.state.property.owner.additional || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -415,9 +480,9 @@ class NewProperty extends Component {
                             id="ownerRepToNotify"
                             margin="dense"
                             label="Name"
-                            name="ownerRepToNotify"
+                            name="owner.repToNotify"
                             onChange={this.onChange}
-                            value={this.state.ownerRepToNotify}
+                            value={this.state.property.owner.repToNotify || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -429,9 +494,9 @@ class NewProperty extends Component {
                             id="ownerRepStreet"
                             margin="dense"
                             label="Street"
-                            name="ownerRepStreet"
+                            name="owner.repAddress.street"
                             onChange={this.onChange}
-                            value={this.state.ownerRepStreet}
+                            value={this.state.property.owner.repAddress.street || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -442,9 +507,9 @@ class NewProperty extends Component {
                             id="ownerRepCity"
                             margin="dense"
                             label="City"
-                            name="ownerRepCity"
+                            name="owner.repAddress.city"
                             onChange={this.onChange}
-                            value={this.state.ownerRepCity}
+                            value={this.state.property.owner.repAddress.city || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -455,9 +520,9 @@ class NewProperty extends Component {
                             margin="dense"
                             id="ownerRepState"
                             label="State"
-                            name="ownerRepState"
+                            name="owner.repAddress.state"
                             onChange={this.onChange}
-                            value={this.state.ownerRepState}
+                            value={this.state.property.owner.repAddress.state || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -468,9 +533,9 @@ class NewProperty extends Component {
                             id="ownerownerRepZipCode"
                             margin="dense"
                             label="Zipcode"
-                            name="ownerownerRepZipCode"
+                            name="owner.repAddress.zipCode"
                             onChange={this.onChange}
-                            value={this.state.ownerownerRepZipCode}
+                            value={this.state.property.owner.repAddress.zipCode || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -481,9 +546,9 @@ class NewProperty extends Component {
                             id="ownerRepPhone"
                             label="Phone"
                             margin="dense"
-                            name="ownerRepPhone"
+                            name="owner.repPhone"
                             onChange={this.onChange}
-                            value={this.state.ownerRepPhone}
+                            value={this.state.property.owner.repPhone || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -494,9 +559,9 @@ class NewProperty extends Component {
                             margin="dense"
                             id="ownerRepSecondPhone"
                             label="Alternate Phone"
-                            name="ownerRepSecondPhone"
+                            name="owner.repSecondPhone"
                             onChange={this.onChange}
-                            value={this.state.ownerRepSecondPhone}
+                            value={this.state.property.owner.repSecondPhone || ''}
                             error={errors.email}
                         />
                       </Grid>
@@ -512,9 +577,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesIrrigationContact"
                             label="Irrigation Company"
-                            name="servicesIrrigationContact"
+                            name="services.irrigation.contact"
                             onChange={this.onChange}
-                            value={this.state.servicesIrrigationContact}
+                            value={this.state.property.services.irrigation.contact || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -525,9 +590,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesIrrigationPhone"
                             label="Irrigation Phone"
-                            name="servicesIrrigationPhone"
+                            name="services.irrigation.phone"
                             onChange={this.onChange}
-                            value={this.state.servicesIrrigationPhone}
+                            value={this.state.property.services.irrigation.phone || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -538,9 +603,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesPlumberContact"
                             label="Plumbing Company"
-                            name="servicesPlumberContact"
+                            name="services.plumber.contact"
                             onChange={this.onChange}
-                            value={this.state.servicesPlumberContact}
+                            value={this.state.property.services.plumber.contact || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -551,9 +616,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesPlumberPhone"
                             label="Plumbing Phone"
-                            name="servicesPlumberPhone"
+                            name="services.plumber.phone"
                             onChange={this.onChange}
-                            value={this.state.servicesPlumberPhone}
+                            value={this.state.property.services.plumber.phone || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -564,9 +629,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesElectricianContact"
                             label="Electrician Company"
-                            name="servicesElectricianContact"
+                            name="services.electrician.contact"
                             onChange={this.onChange}
-                            value={this.state.servicesElectricianContact}
+                            value={this.state.property.services.electrician.contact || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -577,9 +642,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesElectricianPhone"
                             label="Electrician Phone"
-                            name="servicesElectricianPhone"
+                            name="services.electrician.phone"
                             onChange={this.onChange}
-                            value={this.state.servicesElectricianPhone}
+                            value={this.state.property.services.electrician.phone || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -590,9 +655,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesCarpenterContact"
                             label="Carpentry Company"
-                            name="servicesCarpenterContact"
+                            name="services.carpenter.contact"
                             onChange={this.onChange}
-                            value={this.state.servicesCarpenterContact}
+                            value={this.state.property.services.carpenter.contact || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -603,9 +668,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesCarpenterPhone"
                             label="Carpentry Phone"
-                            name="servicesCarpenterPhone"
+                            name="services.carpenter.phone"
                             onChange={this.onChange}
-                            value={this.state.servicesCarpenterPhone}
+                            value={this.state.property.services.carpenter.phone || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -616,9 +681,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesApplianceContact"
                             label="Appliance Company"
-                            name="servicesApplianceContact"
+                            name="services.appliance.contact"
                             onChange={this.onChange}
-                            value={this.state.servicesApplianceContact}
+                            value={this.state.property.services.appliance.contact || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -629,9 +694,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesAppliancePhone"
                             label="Appliance Phone"
-                            name="servicesAppliancePhone"
+                            name="services.appliance.phone"
                             onChange={this.onChange}
-                            value={this.state.servicesAppliancePhone}
+                            value={this.state.property.services.appliance.phone || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -640,11 +705,11 @@ class NewProperty extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="servicesFurnanceContact"
-                            label="Furnance/HVAC Company"
-                            name="servicesFurnanceContact"
+                            id="servicesFurnaceContact"
+                            label="Furnace/HVAC Company"
+                            name="services.furnace.contact"
                             onChange={this.onChange}
-                            value={this.state.servicesFurnanceContact}
+                            value={this.state.property.services.furnace.contact || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -653,11 +718,11 @@ class NewProperty extends Component {
                             variant="outlined"
                             margin="dense"
                             fullWidth
-                            id="servicesFurnancePhone"
-                            label="Furnance/HVAC Phone"
-                            name="servicesFurnancePhone"
+                            id="servicesFurnacePhone"
+                            label="Furnace/HVAC Phone"
+                            name="services.furnace.phone"
                             onChange={this.onChange}
-                            value={this.state.servicesFurnancePhone}
+                            value={this.state.property.services.furnace.phone || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -668,9 +733,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesCleanerContact"
                             label="Cleaning Company"
-                            name="servicesCleanerContact"
+                            name="services.cleaner.contact"
                             onChange={this.onChange}
-                            value={this.state.servicesCleanerContact}
+                            value={this.state.property.services.cleaner.contact || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -681,9 +746,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesCleanerPhone"
                             label="Cleaning Phone"
-                            name="servicesCleanerPhone"
+                            name="services.cleaner.phone"
                             onChange={this.onChange}
-                            value={this.state.servicesCleanerPhone}
+                            value={this.state.property.services.cleaner.phone || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -694,9 +759,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesBoatsAndDocksContact"
                             label="Boats/Docks Company"
-                            name="servicesBoatsAndDocksContact"
+                            name="services.boatsAndDocks.contact"
                             onChange={this.onChange}
-                            value={this.state.servicesBoatsAndDocksContact}
+                            value={this.state.property.services.boatsAndDocks.contact || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -707,9 +772,9 @@ class NewProperty extends Component {
                             fullWidth
                             id="servicesBoatsAndDocksPhone"
                             label="Boats/Docks Phone"
-                            name="servicesBoatsAndDocksPhone"
+                            name="services.boatsAndDocks.phone"
                             onChange={this.onChange}
-                            value={this.state.servicesBoatsAndDocksPhone}
+                            value={this.state.property.services.boatsAndDocks.phone || ''}
                             error={errors.companyName}
                         />
                       </Grid>
@@ -722,23 +787,23 @@ class NewProperty extends Component {
                         <FormLabel component="legend">Select all that apply</FormLabel>
                         <FormGroup row>
                           <FormControlLabel
-                            control={<Checkbox checked={this.state.specialOutsideShower} 
-                            name="specialOutsideShower"
+                            control={<Checkbox checked={this.state.property.special.outsideShower || false} 
+                            name="special.outsideShower"
                             id="specialOutsideShower"
                             onChange={this.onChange} />}
                             label="Outside Shower"
                           />
                           <FormControlLabel
-                            control={<Checkbox checked={this.state.specialOutsideFaucet} 
-                            name="specialOutsideFaucet"
+                            control={<Checkbox checked={this.state.property.special.outsideFaucet || false} 
+                            name="special.outsideFaucet"
                             id="specialOutsideFaucet"
                             onChange={this.onChange} />}
                             label="Outside Faucet"
                           />
                           <FormControlLabel
                             control={
-                              <Checkbox checked={this.state.specialOutsideSpa} 
-                              name="specialOutsideSpa"
+                              <Checkbox checked={this.state.property.special.outsideSpa || false} 
+                              name="special.outsideSpa"
                               id="specialOutsideSpa"
                               onChange={this.onChange} />
                             }
@@ -753,15 +818,15 @@ class NewProperty extends Component {
                             fullWidth
                             id="specialOther"
                             label="Other"
-                            name="specialOther"
+                            name="special.other"
                             onChange={this.onChange}
-                            value={this.state.specialOther}
+                            value={this.state.property.special.other || ''}
                             error={errors.companyName}
                         />
                       </Grid>
                     </Grid>
                     <Grid container spacing={2} justify="flex-start">
-                      <Grid item xs={12}>
+                      <Grid item xs={12} s={6} lg={3}>
                         <Button
                             type="submit"
                             fullWidth
@@ -773,7 +838,10 @@ class NewProperty extends Component {
                         </Button>
                       </Grid>
                     </Grid>
-                    </form>
+                    <Fab aria-label="Save" style={{position: 'fixed', right: 50, bottom: 50}} color="primary" type="submit">
+                      <SaveIcon />
+                    </Fab>
+                  </form>
                 </div>
               </Grid>
             </Grid>

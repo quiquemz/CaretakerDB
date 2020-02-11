@@ -25,6 +25,7 @@ export default function(state = initialState, action) {
             properties: state.properties.filter(prop => prop._id !== action.payload)
         };
         case UPDATE_PROPERTY:
+            console.log("UPDATING!");
         return {
             ...state,
             properties: state.properties.filter(prop => prop._id !== action.payload)

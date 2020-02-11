@@ -24,6 +24,26 @@ export const getProperties = userData => dispatch => {
     .then(res => {
       const properties = res.data;
       dispatch(setProperties(properties));
+      for (let prop in properties) {
+        const updatedProp = properties[prop];
+        if (updatedProp.location.lon === '-1' && updatedProp.location.lat === '-1') {
+          axios
+            .get(`https://nominatim.openstreetmap.org/search?q=${updatedProp.location.street},${updatedProp.location.city},${updatedProp.location.state}+${updatedProp.location.zipCode}+USA&format=json&limit=1`)
+            .then(res => {
+              const {lat, lon} = res.data[0];
+              updatedProp.location.lat = lat;
+              updatedProp.location.lon = lon;
+              axios
+                .put("/api/properties/update/" + userData, updatedProp)
+                .then(res => {
+                  dispatch(updateProperty(updatedProp));
+                })
+                .catch(err => console.log("ERRORS: " + err)
+                );
+          })
+          .catch(err => console.log("Couldn't retrieve information: " + err));
+        }
+      }
     })
     .catch(err => console.log("Error, get properties failed with: " + err)
     );
@@ -33,6 +53,7 @@ export const deleteExistingProperty = (propertyId, userData, history) => dispatc
   axios
     .delete("/api/properties/delete/" + propertyId)
     .then(res => {
+      console.log("HERE!")
       dispatch(deleteProperty(propertyId));
       history.push("/dashboard");
     })
@@ -69,189 +90,16 @@ export const deleteProperty = property => {
 
 // Add a property
 export const addProperty = property => {
-  const newProperty = {
-    userId: property.userId,
-    season: property.season,
-    price: property.price,
-    additionalCosts: property.additionalCosts,
-    additionalCostsDetails: property.additionalCostsDetails,
-    currentOwed: property.currentOwed,
-    dateCreated: property.dateCreated,
-    owner: {
-        firstName: property.ownerFirstName,
-        lastName: property.ownerLastName,
-        plowing: property.plowing,
-        email: property.email,
-        address: {
-            street: property.ownerAddress,
-            city: property.ownerCity,
-            state: property.ownerState,
-            zipCode: property.ownerZipCode
-        },
-        homePhone: property.ownerHomePhone,
-        officePhone: property.ownerOfficePhone,
-        otherPhone: property.ownerOtherPhone,
-        cellPhone: property.ownerCellPhone,
-        repToNotify: property.ownerRepToNotify,
-        repAddress: {
-            street: property.ownerRepStreet,
-            city: property.ownerRepCity,
-            state: property.ownerRepState,
-            zipCode: property.ownerRepZipCode
-        },
-        repPhone: property.ownerRepPhone,
-        repSecondPhone: property.ownerRepSecondPhone,
-        alarmCode: property.ownerAlarmCode,
-        additional: property.ownerAdditional
-    },
-    services: {
-        irrigation: {
-            contact: property.servicesIrrigationContact,
-            phone: property.servicesIrrigationPhone
-        },
-        plumber: {
-            contact: property.servicesPlumberContact,
-            phone: property.servicesPlumberPhone
-        },
-        electrician: {
-            contact: property.servicesElectricianContact,
-            phone: property.servicesElectricianPhone
-        },
-        carpenter: {
-            contact: property.servicesCarpenterContact,
-            phone: property.servicesCarpenterPhone
-        },
-        appliance: {
-            contact: property.servicesApplianceContact,
-            phone: property.servicesAppliancePhone
-        },
-        furnace: {
-            contact: property.servicesFurnaceContact,
-            phone: property.servicesFurnacePhone
-        },
-        cleaner: {
-            contact: property.servicesCleanerContact,
-            phone: property.servicesCleanerPhone
-        },
-        boatsAndDocks: {
-            contact: property.servicesBoatsAndDocksContact,
-            phone: property.servicesBoatsAndDocksPhone
-        },
-    },
-    special: {
-        outsideShower: property.specialOutsideShower,
-        outsideFaucet: property.specialOutsideFaucet,
-        outsideSpa: property.specialOutsideSpa,
-        other: property.specialOther
-    },
-    terms: {
-        date: property.termsDate,
-        signed: property.termsSigned
-    },
-    location: {
-        street: property.locationStreet,
-        city: property.locationCity,
-        zipCode: property.locationZipCode,
-        state: property.locationState
-    }
-  };
   return {
     type: ADD_PROPERTY,
-    payload: newProperty
+    payload: property
   };
 };
 
 // Add a property
 export const updateProperty = property => {
-  const newProperty = {
-    _id: property._id,
-    userId: property.userId,
-    season: property.season,
-    price: property.price,
-    additionalCosts: property.additionalCosts,
-    additionalCostsDetails: property.additionalCostsDetails,
-    currentOwed: property.currentOwed,
-    dateCreated: property.dateCreated,
-    owner: {
-        firstName: property.ownerFirstName,
-        lastName: property.ownerLastName,
-        plowing: property.plowing,
-        email: property.email,
-        address: {
-            street: property.ownerAddress,
-            city: property.ownerCity,
-            state: property.ownerState,
-            zipCode: property.ownerZipCode
-        },
-        homePhone: property.ownerHomePhone,
-        officePhone: property.ownerOfficePhone,
-        otherPhone: property.ownerOtherPhone,
-        cellPhone: property.ownerCellPhone,
-        repToNotify: property.ownerRepToNotify,
-        repAddress: {
-            street: property.ownerRepStreet,
-            city: property.ownerRepCity,
-            state: property.ownerRepState,
-            zipCode: property.ownerRepZipCode
-        },
-        repPhone: property.ownerRepPhone,
-        repSecondPhone: property.ownerRepSecondPhone,
-        alarmCode: property.ownerAlarmCode,
-        additional: property.ownerAdditional
-    },
-    services: {
-        irrigation: {
-            contact: property.servicesIrrigationContact,
-            phone: property.servicesIrrigationPhone
-        },
-        plumber: {
-            contact: property.servicesPlumberContact,
-            phone: property.servicesPlumberPhone
-        },
-        electrician: {
-            contact: property.servicesElectricianContact,
-            phone: property.servicesElectricianPhone
-        },
-        carpenter: {
-            contact: property.servicesCarpenterContact,
-            phone: property.servicesCarpenterPhone
-        },
-        appliance: {
-            contact: property.servicesApplianceContact,
-            phone: property.servicesAppliancePhone
-        },
-        furnace: {
-            contact: property.servicesFurnaceContact,
-            phone: property.servicesFurnacePhone
-        },
-        cleaner: {
-            contact: property.servicesCleanerContact,
-            phone: property.servicesCleanerPhone
-        },
-        boatsAndDocks: {
-            contact: property.servicesBoatsAndDocksContact,
-            phone: property.servicesBoatsAndDocksPhone
-        },
-    },
-    special: {
-        outsideShower: property.specialOutsideShower,
-        outsideFaucet: property.specialOutsideFaucet,
-        outsideSpa: property.specialOutsideSpa,
-        other: property.specialOther
-    },
-    terms: {
-        date: property.termsDate,
-        signed: property.termsSigned
-    },
-    location: {
-        street: property.locationStreet,
-        city: property.locationCity,
-        zipCode: property.locationZipCode,
-        state: property.locationState
-    }
-  };
   return {
     type: UPDATE_PROPERTY,
-    payload: newProperty
+    payload: property
   };
 };

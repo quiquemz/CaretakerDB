@@ -12,8 +12,9 @@ const PropertySchema = mongoose.Schema({
         street: String,
         city: String,
         zipCode: String,
-        state: String
-
+        state: String,
+        lat: String,
+        lon: String
     },
     owner: {
         firstName: String,

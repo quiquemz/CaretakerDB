@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 import { deleteExistingProperty } from "../../actions/propertyActions";
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import { 
     Container, 
     Grid, 
@@ -26,6 +27,43 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  map: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    height: '400px',
+    width: '95%',
+    margin: '0 auto',
+  },
+  fabEdit: {
+    position: 'absolute',
+    '@media (min-width: 1px)': {
+      bottom: '5px',
+      right: '5px',
+    },
+    '@media (min-width: 600px)': {
+      bottom: '20px',
+      right: '20px',
+    },
+    '@media (min-width: 976px)': {
+      bottom: '50px',
+      right: '50px',
+    },
+  },
+  fabDelete: {
+    position: 'absolute',
+    '@media (min-width: 1px)': {
+      bottom: '5px',
+      left: '5px',
+    },
+    '@media (min-width: 600px)': {
+      bottom: '20px',
+      left: '20px',
+    },
+    '@media (min-width: 976px)': {
+      bottom: '50px',
+      left: '50px',
+    },
   },
 });
 
@@ -53,27 +91,18 @@ class PropertyView extends Component {
   render() {
     const fabEdit = {
       color: 'primary',
-      className: {
-        position: 'absolute',
-        bottom: '50px',
-        right: '50px',
-      },
       icon: <EditIcon />,
       label: 'Edit',
     };
     const fabDelete = {
       color: 'secondary',
-      className: {
-        position: 'absolute',
-        bottom: '50px',
-        left: '50px',
-      },
       icon: <TrashIcon />,
       label: 'Delete',
     };
     const { classes } = this.props;
     const propertyId = this.props.location.pathname.replace('/property/', '');
     const property = this.props.properties.properties.length > 0 ? this.props.properties.properties.find(prty => propertyId === prty._id) : null;
+    const position = property && property.location.lat ? [property.location.lat, property.location.lon] : [0, 0];
     return (
       <Container component="main" maxWidth="md">
         {property ?
@@ -90,23 +119,31 @@ class PropertyView extends Component {
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} height="100%">
-                  <Typography variant="h5" component="h5">
-                      {property.location.street}, {property.location.city}, {property.location.state} {property.location.zipCode}
-                  </Typography>
                   <Typography variant="h6" component="h6">
                       {property.owner.firstName} {property.owner.lastName}
                   </Typography>
                   <Typography component="p">
                       Welcome to the property view page where you can see all the information for a specific property!
                   </Typography>
+                  {property && property.location.lat ? 
+                  <Map center={position} zoom={13} className={ classes.map }>
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    />
+                    <Marker position={position}>
+                      <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+                    </Marker>
+                  </Map>
+                  : <div></div>}
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-          <Fab aria-label={fabEdit.label} style={fabEdit.className} color={fabEdit.color} component={Link} to={"/edit/" + property._id}>
+          <Fab aria-label={fabEdit.label} className={classes.fabEdit} color={fabEdit.color} component={Link} to={"/edit/" + property._id}>
             {fabEdit.icon}
           </Fab>
-          <Fab aria-label={fabDelete.label} style={fabDelete.className} color={fabDelete.color} onClick={this.deleteOnClick}>
+          <Fab aria-label={fabDelete.label} className={classes.fabDelete} color={fabDelete.color} onClick={this.deleteOnClick}>
             {fabDelete.icon}
           </Fab>
           <Dialog

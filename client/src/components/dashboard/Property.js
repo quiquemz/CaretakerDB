@@ -80,12 +80,12 @@ class Property extends Component {
             </CardContent>
           ) : (
             <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-            {`${property.location.street} ${property.location.city}`}
+            <Typography gutterBottom variant="h5" component="h5">
+            {`${property.location.street}`}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               {
-                `${property.owner.firstName} ${property.owner.lastName}`
+                `${property.location.city} - ${property.owner.firstName} ${property.owner.lastName}`
               }
             </Typography>
             </CardContent>

@@ -3,9 +3,9 @@ const isEmpty = require("is-empty");
 module.exports = function validateRegisterInput(data, customPass) {
     let errors = {};
     // Convert empty fields to an empty string so we can use validator functions
-    if (customPass !== 'GoodnessThatsALotOfPeople') {
-        errors.customPass = "Custom pass was incorrect therefore rejecting registration.";
-    }
+    // if (customPass !== 'GoodnessThatsALotOfPeople') {
+    //     errors.customPass = "Custom pass was incorrect therefore rejecting registration.";
+    // }
     data.name = !isEmpty(data.name) ? data.name : "";
     data.email = !isEmpty(data.email) ? data.email : "";
     data.companyName = !isEmpty(data.companyName) ? data.companyName : "";

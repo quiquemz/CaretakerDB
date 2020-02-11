@@ -17,9 +17,9 @@ const User = require("../../models/User");
 // DISABLED TEMPORARILY TO PREVENT SIGNUPS ON CARETAKERDB. CURRENTLY ONLY CREATING ACCOUNTS FOR TEST USERS.
 // *******************************************************************************************************
 // 
-router.post("/register/:customPass", (req, res) => {
+router.post("/register/", (req, res) => {
   // Form validation
-  const { errors, isValid } = validateRegisterInput(req.body, req.params.customPass);
+  const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
