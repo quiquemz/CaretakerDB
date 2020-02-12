@@ -108,6 +108,7 @@ class Login extends Component {
               onChange={this.onChange}
               value={this.state.email}
               error={errors.email}
+              helperText={errors.email}
               autoFocus
             />
             <TextField
@@ -123,6 +124,7 @@ class Login extends Component {
               onChange={this.onChange}
               value={this.state.password}
               error={errors.password}
+              helperText={errors.password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

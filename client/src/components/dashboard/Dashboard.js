@@ -136,7 +136,7 @@ class Dashboard extends Component {
                     </Grid>);
                   })
                   : <Grid item xs={12} sm={4}>
-                    <Card style={{maxWidth: 345}} margin={2} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                    <Card style={{maxWidth: 345}} margin={2}>
                       <CardHeader avatar={<Skeleton variant="circle" width={40} height={40} action={null} />}
                         title="Example property"
                         subheader="123 Apple St" />

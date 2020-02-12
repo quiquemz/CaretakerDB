@@ -6,9 +6,10 @@ const app = express();
 const passport = require("passport");
 const users = require("./server/routes/api/users");
 const properties = require("./server/routes/api/properties");
+const registrationKey = require("./server/routes/api/registrationKey");
 const path = require('path');
 
-const db = process.env.mongoURI;
+const db = process.env.mongoURI || require("./config/keys").localMongoURI;
 const port = process.env.PORT || 5000;
 
 // Bodyparser middleware
@@ -36,6 +37,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/properties", properties);
+app.use("/api/regKey", registrationKey);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files

@@ -41,6 +41,9 @@ module.exports = function validateRegisterInput(data, customPass) {
     if (!Validator.equals(data.password, data.password2)) {
         errors.password2 = "Passwords must match";
     }
+    if (Validator.isEmpty(data.regKey)) {
+        errors.regKey = "Must have a registration key"
+    }
     return {
         errors,
         isValid: isEmpty(errors)

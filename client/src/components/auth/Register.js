@@ -50,6 +50,7 @@ class Register extends Component {
       companyName: "",
       password: "",
       password2: "",
+      regKey: "",
       errors: {}
     };
   }
@@ -77,7 +78,8 @@ class Register extends Component {
       email: this.state.email,
       companyName: this.state.companyName,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      regKey: this.state.regKey
     };
     this.props.registerUser(newUser, this.props.history); 
   };
@@ -109,6 +111,7 @@ class Register extends Component {
                         onChange={this.onChange}
                         value={this.state.firstName}
                         error={errors.firstName}
+                        helperText={errors.firstName}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -123,6 +126,7 @@ class Register extends Component {
                         onChange={this.onChange}
                         value={this.state.lastName}
                         error={errors.lastName}
+                        helperText={errors.lastName}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -133,10 +137,12 @@ class Register extends Component {
                         id="email"
                         label="Email Address"
                         name="email"
+                        type="email"
                         autoComplete="email"
                         onChange={this.onChange}
                         value={this.state.email}
                         error={errors.email}
+                        helperText={errors.email}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -151,6 +157,7 @@ class Register extends Component {
                         onChange={this.onChange}
                         value={this.state.companyName}
                         error={errors.companyName}
+                        helperText={errors.companyName}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -166,6 +173,7 @@ class Register extends Component {
                         onChange={this.onChange}
                         value={this.state.password}
                         error={errors.password}
+                        helperText={errors.password}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -181,6 +189,21 @@ class Register extends Component {
                         onChange={this.onChange}
                         value={this.state.password2}
                         error={errors.password2}
+                        helperText={errors.password2}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                        variant="outlined"
+                        required
+                        fullWidth
+                        name="regKey"
+                        label="Registration Key"
+                        id="regKey"
+                        onChange={this.onChange}
+                        value={this.state.regKey}
+                        error={errors.regKey}
+                        helperText={errors.regKey}
                     />
                   </Grid>
                 </Grid>
