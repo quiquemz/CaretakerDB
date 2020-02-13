@@ -62,6 +62,8 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       hovered: false,
+      zoom: 12,
+      bounds: null,
     };
   };
   onMouseOver = () => this.setState({ hovered: true });
@@ -85,7 +87,6 @@ class Dashboard extends Component {
       flexDirection: 'column',
       justifyContent: 'center',
       height: '100%',
-      maxWidth: 345,
     }
     return (
       <Container component="main" maxWidth="lg" spacing={0}>
@@ -99,14 +100,14 @@ class Dashboard extends Component {
             spacing={3}>
               <Grid item xs={12} sm={12} height="100%">
               {propertiesLoaded ? 
-                  <Map center={[properties[0].location.lat, properties[0].location.lon]} zoom={12} className={ classes.map }>
+                  <Map ref="map" center={[properties[0].location.lat, properties[0].location.lon]} zoom={this.state.zoom} className={ classes.map }>
                     <TileLayer
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                       attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     />
                     {properties.map(function(property, i) {
                       return (<Marker position={[property.location.lat, property.location.lon]} key={i}>
-                        <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+                        <Popup>{property.location.street}</Popup>
                       </Marker>);
                     })}
                   </Map>

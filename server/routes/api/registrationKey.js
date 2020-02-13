@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const RegistrationKey = require('../../models/RegistrationKey');
 
-router.get('/:secret', (req, res, next) => {
-    console.log("Accessing registration keys ");
-    const isCorrect = req.params.secret === (process.env.REG_SECRET || require("../../../config/keys").REG_SECRET);
+router.get('/', (req, res, next) => {
+    const isCorrect = req.body.secret === (process.env.REG_SECRET || require("../../../config/keys").REG_SECRET);
     if (isCorrect) {
       RegistrationKey.find({}, (err, keys) => {
         if (err) next(err);

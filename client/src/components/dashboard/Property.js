@@ -38,7 +38,7 @@ class Property extends Component {
     const { loading = false } = this.props;
     const { imageUrl, property, classes } = this.props;
     return (
-      <Card style={{maxWidth: 345}} margin={2} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+      <Card margin={2} raised={this.state.hovered} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
         <MLink to={{
         pathname: property ? ("/property/" + property._id) : "/dashboard",
         property: property
