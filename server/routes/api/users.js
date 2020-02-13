@@ -14,7 +14,7 @@ const RegistrationKey = require("../../models/RegistrationKey");
 // @access Public
 // 
 // *******************************************************************************************************
-// DISABLED TEMPORARILY TO PREVENT SIGNUPS ON CARETAKERDB. CURRENTLY ONLY CREATING ACCOUNTS FOR TEST USERS.
+// KEYS ADDED TEMPORARILY TO PREVENT SIGNUPS ON CARETAKERDB. CURRENTLY ONLY CREATING ACCOUNTS FOR TEST USERS.
 // *******************************************************************************************************
 // 
 router.post("/register/", (req, res) => {
@@ -24,7 +24,8 @@ router.post("/register/", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-  User.findOne({ email: req.body.email }).then(user => {
+  const email = req.body.email.toLowerCase();
+  User.findOne({ email: email }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
@@ -34,7 +35,7 @@ router.post("/register/", (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             companyName: req.body.companyName,
-            email: req.body.email,
+            email: email,
             password: req.body.password,
             membership: req.body.membership
           });
@@ -67,7 +68,7 @@ router.post("/login", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-  const email = req.body.email;
+  const email = req.body.email.toLowerCase();
   const password = req.body.password;
   // Find user by email
   User.findOne({ email }).then(user => {

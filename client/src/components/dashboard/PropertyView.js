@@ -23,20 +23,30 @@ import TrashIcon from '@material-ui/icons/Delete';
 const styles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(8),
     padding: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    minHeight: '100vh',
   },
   map: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
-    height: '400px',
-    width: '95%',
+    height: '300px',
     margin: '0 auto',
+    '@media (min-width: 1px)': {
+      width: '95%',
+    },
+    '@media (min-width: 600px)': {
+      width: '85%',
+    },
+    '@media (min-width: 976px)': {
+      width: '75%',
+    },
   },
   fabEdit: {
-    position: 'absolute',
+    position: 'fixed',
     '@media (min-width: 1px)': {
       bottom: '5px',
       right: '5px',
@@ -51,7 +61,7 @@ const styles = theme => ({
     },
   },
   fabDelete: {
-    position: 'absolute',
+    position: 'fixed',
     '@media (min-width: 1px)': {
       bottom: '5px',
       left: '5px',
@@ -119,11 +129,8 @@ class PropertyView extends Component {
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} height="100%">
-                  <Typography variant="h6" component="h6">
-                      {property.owner.firstName} {property.owner.lastName}
-                  </Typography>
-                  <Typography component="p">
-                      Welcome to the property view page where you can see all the information for a specific property!
+                  <Typography gutterBottom variant="h6" component="h6">
+                      Owner &mdash; {property.owner.firstName} {property.owner.lastName}
                   </Typography>
                   {property && property.location.lat ? 
                   <Map center={position} zoom={13} className={ classes.map }>
@@ -132,7 +139,7 @@ class PropertyView extends Component {
                       attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     />
                     <Marker position={position}>
-                      <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+                      <Popup>{property.location.street}</Popup>
                     </Marker>
                   </Map>
                   : <div></div>}
