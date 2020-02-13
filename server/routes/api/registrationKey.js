@@ -14,9 +14,9 @@ router.get('/:secret', (req, res, next) => {
     }
 });
 
-router.get('/add/:secret/:key', (req, res, next) => {
-    const key = req.params.key;
-    const isCorrect = req.params.secret === (process.env.REG_SECRET || require("../../../config/keys").REG_SECRET);
+router.post('/add', (req, res, next) => {
+    const {key, secret} = req.body;
+    const isCorrect = secret === (process.env.REG_SECRET || require("../../../config/keys").REG_SECRET);
     if (isCorrect) {
       const newKey = new RegistrationKey({key: key});
       newKey.save(err => {

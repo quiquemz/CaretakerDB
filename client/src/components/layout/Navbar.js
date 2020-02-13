@@ -334,7 +334,7 @@ export function Navbar(props) {
                   <NotificationsIcon />
                 </Badge>
               </IconButton></div>
-              : <Container></Container>}
+              : <div></div>}
               <IconButton
                 edge="end"
                 aria-label="account of current user"

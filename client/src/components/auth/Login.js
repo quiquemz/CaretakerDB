@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import { loginUser } from "../../actions/authActions";
-import { getProperties } from "../../actions/propertyActions";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -63,13 +62,6 @@ class Login extends Component {
       });
     }
   }
-  componentDidMount() {
-    // If logged in and user navigates to Login page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
-      this.props.getProperties(this.props.auth.user.id);
-      this.props.history.push("/dashboard");
-    }
-  }
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -85,8 +77,7 @@ class Login extends Component {
     const { errors } = this.state;
     const { classes } = this.props;
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+      <Container maxWidth="xs">
         <Paper className={classes.paper} elevation={3}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -95,7 +86,6 @@ class Login extends Component {
             Sign in
           </Typography>
           <form className={classes.form} onSubmit={this.onSubmit} noValidate>
-              <span>{errors.password}</span>
             <TextField
               variant="outlined"
               margin="normal"
@@ -107,7 +97,7 @@ class Login extends Component {
               autoComplete="email"
               onChange={this.onChange}
               value={this.state.email}
-              error={errors.email}
+              error={errors.email ? true : false}
               helperText={errors.email}
               autoFocus
             />
@@ -123,7 +113,7 @@ class Login extends Component {
               autoComplete="current-password"
               onChange={this.onChange}
               value={this.state.password}
-              error={errors.password}
+              error={errors.password ? true : false}
               helperText={errors.password}
             />
             <FormControlLabel
@@ -158,7 +148,6 @@ class Login extends Component {
 Login.propTypes = {
     loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    getProperties: PropTypes.isRequired,
     errors: PropTypes.object.isRequired
   };
 const mapStateToProps = state => ({
@@ -168,5 +157,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
     mapStateToProps,
-    { loginUser, getProperties }
+    { loginUser }
 )(withStyles(styles)(Login));

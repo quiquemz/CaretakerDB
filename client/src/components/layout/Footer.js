@@ -6,12 +6,12 @@ import Typography from '@material-ui/core/Typography';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
-  Container
+  Grid, Container
   } from '@material-ui/core';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textSecondary" align="center" component="p">
       {'Copyright © '}
       <Link color="primary" to="/">
         CaretakerDB
@@ -36,16 +36,18 @@ function StickyFooter(props) {
   const loggedIn = props.auth.isAuthenticated;
 
   return (
-      <BottomNavigation className={classes.footer}>
-        <Container maxWidth="sm">
-          {loggedIn ? 
-          <Typography variant="body1" align="center">Welcome back, <Link to="/profile" style={{ textDecoration: 'none' }}>{props.auth.user.firstName}</Link></Typography>
-          :
-          <Typography variant="body1" align="center">Ready to join? <Link to="/register" style={{ textDecoration: 'none' }}>Sign up here.</Link></Typography>
-          }
-          <Copyright />
-        </Container>
-      </BottomNavigation>
+      <Container className={classes.footer}>
+        <Grid container spacing={0} component="div">
+          <Grid item xs>
+            {loggedIn ? 
+            <Typography variant="body1" align="center" component="p">Welcome back, <Link to="/profile" style={{ textDecoration: 'none' }}>{props.auth.user.firstName}</Link></Typography>
+            :
+            <Typography variant="body1" align="center" component="p">Ready to join? <Link to="/register" style={{ textDecoration: 'none' }}>Sign up here.</Link></Typography>
+            }
+            <Copyright />
+          </Grid>
+        </Grid>
+      </Container>
   );
 }
 
