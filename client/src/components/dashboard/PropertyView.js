@@ -144,6 +144,16 @@ class PropertyView extends Component {
                   </Map>
                   : <div></div>}
                 </Grid>
+                <Grid item xs={12} sm={12} height="100%">
+                  <Typography variant="h6" component="h6">
+                    Location
+                  </Typography>
+                </Grid> 
+                <Grid item xs={12} sm={12} height="100%">
+                  <Typography gutterBottom variant="body" component="p">
+                      {property.location.street}, {property.location.city}, {property.location.state} {property.location.zipCode}
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
