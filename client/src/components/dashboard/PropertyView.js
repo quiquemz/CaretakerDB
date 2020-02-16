@@ -154,6 +154,21 @@ class PropertyView extends Component {
                       {property.location.street}, {property.location.city}, {property.location.state} {property.location.zipCode}
                   </Typography>
                 </Grid>
+                <Grid item xs={12} sm={12} height="100%">
+                  <Typography variant="h6" component="h6">
+                    Owner
+                  </Typography>
+                </Grid> 
+                <Grid item xs={12} sm={12} height="100%">
+                  <Typography gutterBottom variant="body" component="p">
+                      {property.owner.firstName} {property.owner.lastName} &mdash; {property.owner.address.street}, {property.owner.address.city}, {property.owner.address.state} {property.owner.address.zipCode}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={12} height="100%">
+                  <Typography gutterBottom variant="body" component="p">
+                      {property.owner.email}
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
