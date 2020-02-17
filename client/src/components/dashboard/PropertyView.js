@@ -16,7 +16,14 @@ import {
     DialogTitle,
     DialogContent,
     DialogContentText,
-    DialogActions } from "@material-ui/core";
+    DialogActions,
+    Card,
+    CardContent,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow } from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import TrashIcon from '@material-ui/icons/Delete';
 
@@ -114,7 +121,7 @@ class PropertyView extends Component {
     const property = this.props.properties.properties.length > 0 ? this.props.properties.properties.find(prty => propertyId === prty._id) : null;
     const position = property && property.location.lat ? [property.location.lat, property.location.lon] : [0, 0];
     return (
-      <Container component="main" maxWidth="md">
+      <Container component="main" maxWidth="lg">
         {property ?
         <Paper className={classes.paper} elevation={3}>
             <Grid
@@ -144,30 +151,216 @@ class PropertyView extends Component {
                   </Map>
                   : <div></div>}
                 </Grid>
-                <Grid item xs={12} sm={12} height="100%">
-                  <Typography variant="h6" component="h6">
-                    Location
-                  </Typography>
+                <Grid item xs={12} height="100%">
+                  <Card className={classes.card}>
+                    <CardContent>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        Property Location
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        {property.location.street}
+                      </Typography>
+                      <Typography className={classes.pos} color="textSecondary">
+                        {property.location.city}, {property.location.state} {property.location.zipCode}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid> 
-                <Grid item xs={12} sm={12} height="100%">
-                  <Typography gutterBottom variant="body" component="p">
-                      {property.location.street}, {property.location.city}, {property.location.state} {property.location.zipCode}
-                  </Typography>
+                <Grid item xs={12} md={6} height="100%">
+                  <Card className={classes.card}>
+                    <CardContent>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        Property Owner
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        {property.owner.firstName} {property.owner.lastName}
+                      </Typography>
+                      <Typography className={classes.pos} color="textSecondary">
+                        {property.owner.address.city}, {property.owner.address.state}
+                      </Typography>
+                      <Table className={classes.table} aria-label="simple table">
+                        <TableBody>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Location</TableCell>
+                            <TableCell align="right">{property.owner.address.street}, {property.owner.address.city}, {property.owner.address.state} {property.owner.address.zipCode}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Email</TableCell>
+                            <TableCell align="right">{property.owner.email}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Cell Phone</TableCell>
+                            <TableCell align="right">{property.owner.cellPhone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Home Phone</TableCell>
+                            <TableCell align="right">{property.owner.homePhone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Office Phone</TableCell>
+                            <TableCell align="right">{property.owner.officePhone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Other Phone</TableCell>
+                            <TableCell align="right">{property.owner.otherPhone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Plowing</TableCell>
+                            <TableCell align="right">{property.owner.plowing}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Alarm code</TableCell>
+                            <TableCell align="right">{property.owner.alarmCode}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Additional</TableCell>
+                            <TableCell align="right">{property.owner.additional}</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
                 </Grid>
-                <Grid item xs={12} sm={12} height="100%">
-                  <Typography variant="h6" component="h6">
-                    Owner
-                  </Typography>
+                <Grid item xs={12} md={6} height="100%">
+                  <Card className={classes.card}>
+                    <CardContent>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        Representative to Notify
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        {property.owner.repToNotify}
+                      </Typography>
+                      <Typography className={classes.pos} color="textSecondary">
+                        {property.owner.repAddress.city}, {property.owner.repAddress.state}
+                      </Typography>
+                      <Table className={classes.table} aria-label="simple table">
+                        <TableBody>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Location</TableCell>
+                            <TableCell align="right">{property.owner.repAddress.street}, {property.owner.repAddress.city}, {property.owner.repAddress.state} {property.owner.repAddress.zipCode}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Rep Phone</TableCell>
+                            <TableCell align="right">{property.owner.repPhone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Rep Second Phone</TableCell>
+                            <TableCell align="right">{property.owner.repSecondPhone}</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
                 </Grid> 
-                <Grid item xs={12} sm={12} height="100%">
-                  <Typography gutterBottom variant="body" component="p">
-                      {property.owner.firstName} {property.owner.lastName} &mdash; {property.owner.address.street}, {property.owner.address.city}, {property.owner.address.state} {property.owner.address.zipCode}
-                  </Typography>
+                <Grid item xs={12} height="100%">
+                  <Card className={classes.card}>
+                    <CardContent>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        Property Services
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        Services
+                      </Typography>
+                      <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Service</TableCell>
+                            <TableCell align="right">Contact</TableCell>
+                            <TableCell align="right">Phone</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Irrigation</TableCell>
+                            <TableCell align="right">{property.services.irrigation.contact}</TableCell>
+                            <TableCell align="right">{property.services.irrigation.phone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Plumbing</TableCell>
+                            <TableCell align="right">{property.services.plumber.contact}</TableCell>
+                            <TableCell align="right">{property.services.plumber.phone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Electrician</TableCell>
+                            <TableCell align="right">{property.services.electrician.contact}</TableCell>
+                            <TableCell align="right">{property.services.electrician.phone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Carpentry</TableCell>
+                            <TableCell align="right">{property.services.carpenter.contact}</TableCell>
+                            <TableCell align="right">{property.services.carpenter.phone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Appliance</TableCell>
+                            <TableCell align="right">{property.services.appliance.contact}</TableCell>
+                            <TableCell align="right">{property.services.appliance.phone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Furnace</TableCell>
+                            <TableCell align="right">{property.services.furnace.contact}</TableCell>
+                            <TableCell align="right">{property.services.furnace.phone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Cleaner</TableCell>
+                            <TableCell align="right">{property.services.cleaner.contact}</TableCell>
+                            <TableCell align="right">{property.services.cleaner.phone}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Boats and Docks</TableCell>
+                            <TableCell align="right">{property.services.boatsAndDocks.contact}</TableCell>
+                            <TableCell align="right">{property.services.boatsAndDocks.phone}</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
                 </Grid>
-                <Grid item xs={12} sm={12} height="100%">
-                  <Typography gutterBottom variant="body" component="p">
-                      {property.owner.email}
-                  </Typography>
+                <Grid item xs={12} md={6} height="100%">
+                  <Card className={classes.card}>
+                    <CardContent>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        Property Special
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        Special
+                      </Typography>
+                      <Table className={classes.table} aria-label="simple table">
+                        <TableBody>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Outside Shower</TableCell>
+                            <TableCell align="right">{property.special.outsideShower}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Outside Faucet</TableCell>
+                            <TableCell align="right">{property.special.outsideFaucet}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Outside Spa</TableCell>
+                            <TableCell align="right">{property.special.outsideSpa}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell component="th" scope="row">Other</TableCell>
+                            <TableCell align="right">{property.special.other}</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={12} md={6} height="100%">
+                  <Card className={classes.card}>
+                    <CardContent>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        Property Contract
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        Contract
+                      </Typography>
+                      <Typography className={classes.pos} color="textSecondary">
+                        Coming soon!
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
               </Grid>
             </Grid>
@@ -208,7 +401,7 @@ class PropertyView extends Component {
           spacing={3}>
           <Grid item>
             <Grid container spacing={3}>
-              <Grid item xs={12} sm={12} height="100%">
+              <Grid item xs={12} md={6} height="100%">
                 <Typography variant="h5" component="h3">
                     This property is unavailable.
                 </Typography>
